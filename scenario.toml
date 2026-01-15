@@ -1,16 +1,25 @@
+# HEPEx AnalysisOps Benchmark - Leaderboard Scenario
+#
+# This configuration defines how AgentBeats runs assessments.
+# The [config] section is sent as the "config" field in the EvalRequest to the Green Agent.
+
 [green_agent]
-agentbeats_id = ""
-env = { API_KEY = "${GITHUB_SECRET_NAME}", LOG_LEVEL = "INFO" }
+agentbeats_id = "019bc3d3-cae6-7711-9696-a912bb00bd11"  # TODO: Replace with your Green Agent ID from agentbeats.dev
+env = { GOOGLE_API_KEY = "${GOOGLE_API_KEY}" }
 
+# Purple Agent (Participant) - the agent being evaluated
 [[participants]]
-agentbeats_id = ""
-name = "role_1_name"
-env = {}
+agentbeats_id = "019bc3da-00a0-7930-9e2d-e46dad026684"  # TODO: Replace with your Purple Agent ID from agentbeats.dev
+name = "white_agent"  # This name is used in EvalRequest.participants
+env = { GOOGLE_API_KEY = "${GOOGLE_API_KEY}" }
 
-[[participants]]
-agentbeats_id = ""
-name = "role_2_name"
-env = {}
-
+# Assessment configuration
+# These values are sent to the Green Agent as the "config" field in EvalRequest
 [config]
-# Add your assessment config here
+# Task directories to evaluate (relative to Green Agent's specs/ folder)
+# Available tasks: zpeak_fit, hyy, hmumu, hbb, hzz, ttbar, wz3l
+task_dirs = ["specs/zpeak_fit"]
+
+# Data directory for caching ATLAS Open Data files
+# Uses the mounted volume so results persist
+data_dir = "/home/agent/output"
