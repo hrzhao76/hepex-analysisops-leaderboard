@@ -1,0 +1,96 @@
+{
+  "participants": {
+    "white_agent": "019bc3da-00a0-7930-9e2d-e46dad026684"
+  },
+  "results": [
+    {
+      "status": "ok",
+      "hard_checks_passed": true,
+      "hard_failures": [],
+      "final": {
+        "total_score": 85.0,
+        "max_score": 120.0,
+        "normalized_score": 0.7083333333333334
+      },
+      "rule": {
+        "score": 85.0,
+        "max": 100.0
+      },
+      "llm": {
+        "score": 0.0,
+        "max": 20.0,
+        "meta": {}
+      },
+      "issues": [
+        {
+          "severity": "info",
+          "code": "THRESHOLD_MISSING",
+          "message": "Missing value/threshold; partial credit"
+        },
+        {
+          "severity": "warn",
+          "code": "REQUIRED_KEYS_MISSING",
+          "message": "Missing keys: ['initial_params']"
+        }
+      ],
+      "signals": {
+        "fit_result.mu": 91.224,
+        "fit_result.sigma": 2.299,
+        "missing_keys": [
+          "initial_params"
+        ]
+      },
+      "task_id": "t001_zpeak_fit",
+      "type": "zpeak_fit"
+    },
+    {
+      "run_id": "20260116T005959Z_ae804f37",
+      "run_dir": "/home/agent/output/runs/20260116T005959Z_ae804f37",
+      "data_dir": "/home/agent/output",
+      "tasks": [
+        {
+          "status": "ok",
+          "hard_checks_passed": true,
+          "hard_failures": [],
+          "final": {
+            "total_score": 85.0,
+            "max_score": 120.0,
+            "normalized_score": 0.7083333333333334
+          },
+          "rule": {
+            "score": 85.0,
+            "max": 100.0
+          },
+          "llm": {
+            "score": 0.0,
+            "max": 20.0,
+            "meta": {}
+          },
+          "issues": [
+            {
+              "severity": "info",
+              "code": "THRESHOLD_MISSING",
+              "message": "Missing value/threshold; partial credit"
+            },
+            {
+              "severity": "warn",
+              "code": "REQUIRED_KEYS_MISSING",
+              "message": "Missing keys: ['initial_params']"
+            }
+          ],
+          "signals": {
+            "fit_result.mu": 91.224,
+            "fit_result.sigma": 2.299,
+            "missing_keys": [
+              "initial_params"
+            ]
+          },
+          "task_id": "t001_zpeak_fit",
+          "type": "zpeak_fit"
+        }
+      ],
+      "score_total": 0.7083333333333334,
+      "score_max": 1.0
+    }
+  ]
+}
