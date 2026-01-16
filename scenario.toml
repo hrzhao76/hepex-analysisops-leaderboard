@@ -1,15 +1,10 @@
-# HEPEx AnalysisOps Benchmark - Leaderboard Scenario
-#
-# This configuration defines how AgentBeats runs assessments.
-# The [config] section is sent as the "config" field in the EvalRequest to the Green Agent.
-
 [green_agent]
-agentbeats_id = "019bc3d3-cae6-7711-9696-a912bb00bd11"  # TODO: Replace with your Green Agent ID from agentbeats.dev
+agentbeats_id = "019bc3d3-cae6-7711-9696-a912bb00bd11"  
 env = { GOOGLE_API_KEY = "${GOOGLE_API_KEY}" }
 
 # Purple Agent (Participant) - the agent being evaluated
 [[participants]]
-agentbeats_id = "019bc3da-00a0-7930-9e2d-e46dad026684"  # TODO: Replace with your Purple Agent ID from agentbeats.dev
+agentbeats_id = "019bc3da-00a0-7930-9e2d-e46dad026684" 
 name = "white_agent"  # This name is used in EvalRequest.participants
 env = { GOOGLE_API_KEY = "${GOOGLE_API_KEY}" }
 
