@@ -93,11 +93,11 @@ jobs:
       - name: Determine target repository
         id: target
         env:
-            GH_TOKEN: ${{ github.token }}
+          GH_TOKEN: ${{ github.token }}
         run: |
-            PARENT_REPO=$(gh api repos/${{ github.repository }} --jq '.parent.full_name // "${{ github.repository }}"')
-            echo "Target repository: $PARENT_REPO"
-            echo "repo=$PARENT_REPO" >> $GITHUB_OUTPUT
+          PARENT_REPO=$(gh api repos/${{ github.repository }} --jq '.parent.full_name // "${{ github.repository }}"')
+          echo "Target repository: $PARENT_REPO"
+          echo "repo=$PARENT_REPO" >> $GITHUB_OUTPUT
 
       - name: Create submission branch
         run: |

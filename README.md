@@ -2,146 +2,102 @@
 
 > View the leaderboard on [AgentBeats](https://agentbeats.dev)
 
-This repository hosts the leaderboard for the **HEPEx AnalysisOps Benchmark** green agent—an evaluation system for autonomous agents performing high-energy physics analysis tasks using ATLAS Open Data.
+This repository is the leaderboard and manual-submit runner for the **HEPEx AnalysisOps Benchmark** green agent. It follows the current leaderboard-template model: a scenario runner GitHub workflow executes the assessment from `scenario.toml`, stores the green agent's final output in `results/*.json`, and AgentBeats renders leaderboard tables by querying those JSON files with DuckDB.
 
 ## Overview
 
-The HEPEx AnalysisOps Benchmark orchestrates physics analysis tasks where participant agents (Purple Agents) must:
-1. Receive a task specification (e.g., "fit the Z boson mass peak")
-2. Download and process ROOT files from ATLAS Open Data
-3. Perform physics computations (mass calculations, peak fitting)
-4. Return structured results in JSON format
+This repository contains:
 
-The Green Agent evaluates submissions against reference values and scoring rubrics.
+1. A scenario runner workflow for reproducible assessments
+2. Assessment configuration in `scenario.toml`
+3. Assessment outputs under `results/`
+4. Submission metadata under `submissions/`
+5. Hyy L1 leaderboard queries in `hyy_l1_queries.json`
 
-## Available Tasks
+The green agent is the single source of truth for leaderboard data. The leaderboard should query only the final green-agent reports in `results/*.json`, not purple raw outputs or temporary run directories.
 
-| Task ID | Name | Description |
-|---------|------|-------------|
-| `zpeak_fit` | Z Boson Mass Fit | Extract Z mass (~91 GeV) and width from dimuon events |
-| `hyy` | H→γγ | Measure Higgs mass using diphoton events |
-| `hmumu` | H→μμ (VBF) | Search for rare Higgs decay to muons |
-| `hbb` | H→bb | Identify H→bb in 0-lepton VH channel |
-| `hzz` | H→ZZ→4l | Analyze the "Golden Channel" Higgs decay |
-| `ttbar` | Top Pair | Reconstruct top quark mass |
-| `wz3l` | WZ Diboson | Analyze WZ production in 3-lepton final state |
+## Current Default Assessment
+
+The default manual-submit path in this repository targets the upstream-style Hyy L1 task:
+
+- Task: `tasks_public/t002_hyy_v5_l1`
+- Input mode: shared manifest
+- Solver response mode: `submission_bundle_v1`
+- Evaluation mode: `directory_contract_and_private_l1`
+
+This path exercises:
+
+1. Bundle materialization
+2. Public contract validation
+3. Private-rubric scoring inside the green agent
+4. Green-final-report generation for leaderboard queries
 
 ## Scoring
 
-Each task is scored based on a YAML rubric with two types of checks:
+For the current Hyy L1 path, the green agent first validates the materialized submission bundle against the public contract. If that hard gate passes, it scores the task using a private rubric and writes a final task report containing:
 
-### Hard Checks (Pass/Fail)
-- `trace_present`: Valid JSON submission returned
-- `mu_sanity`: Fitted mass within expected range (e.g., 70-120 GeV for Z peak)
+- `status`
+- `hard_checks_passed`
+- `final.total_score`
+- `final.normalized_score`
+- `dimension_scores`
+- `check_results`
 
-### Scored Dimensions
-| Dimension | Points | Description |
-|-----------|--------|-------------|
-| Accuracy | 40 | Closeness of fitted value to reference |
-| Fit Quality | 30 | Chi-squared / NDF quality metric |
-| Method | 20 | Appropriate fitting method chosen |
-| Reasoning | 10 | Clear explanation of approach (LLM-judged) |
+The Hyy L1 rubric currently emphasizes these dimensions:
 
-**Final Score**: Sum of all dimensions (max 100 per task), normalized across multiple tasks.
+- `execution`
+- `pipeline`
+- `implementation`
+- `reasoning`
+- `analysis`
+- `validation`
 
-## Configuration Parameters
+## Configuration
 
-The `[config]` section in `scenario.toml` controls assessment behavior:
+The default assessment configuration in `scenario.toml` looks like this:
 
 ```toml
 [config]
-# Which tasks to evaluate (list of directories under specs/)
-task_dirs = ["specs/zpeak_fit"]
-
-# Data storage directory (uses mounted volume for persistence)
+task_dirs = ["tasks_public/t002_hyy_v5_l1"]
 data_dir = "/home/agent/output"
 ```
 
-### Customizing Tasks
+Submitters can modify `task_dirs` if they want to test a different task path supported by the green-agent image.
 
-Submitters can modify `task_dirs` to run different tasks:
+## Leaderboard Queries
 
-```toml
-# Single task
-task_dirs = ["specs/zpeak_fit"]
+The first selected column in every leaderboard query must be the AgentBeats agent ID. For this repository, the recommended id expression is:
 
-# Multiple tasks
-task_dirs = ["specs/zpeak_fit", "specs/hyy", "specs/hzz"]
-
-# All available tasks
-task_dirs = [
-  "specs/zpeak_fit",
-  "specs/hyy",
-  "specs/hmumu",
-  "specs/hbb",
-  "specs/hzz",
-  "specs/ttbar",
-  "specs/wz3l"
-]
+```sql
+COALESCE(t.participants.purple_agent, t.participants.white_agent) AS id
 ```
 
-## Requirements for Participant Agents
+A ready-to-paste Hyy L1 query set is included in:
 
-Your Purple Agent must:
+- `hyy_l1_queries.json`
 
-### 1. Implement A2A Protocol
-- Expose an A2A-compliant endpoint on port `9009`
-- Handle natural language task requests
-- Return structured JSON responses
+These queries read only from the green agent's final task reports in `results/*.json`.
 
-### 2. Handle Task Requests
-The Green Agent sends requests in this format:
-```json
-{
-  "role": "task_request",
-  "task_id": "t001_zpeak_fit",
-  "task_type": "zpeak_fit",
-  "prompt": "Fit the Z boson mass peak...",
-  "data": {
-    "files": ["/path/to/data.root"],
-    "release": "2025e-13tev-beta",
-    "dataset": "data",
-    "skim": "2muons"
-  }
-}
-```
+## Manual Submit Flow
 
-### 3. Return Structured Results
-Response must include:
-```json
-{
-  "task_id": "t001_zpeak_fit",
-  "status": "success",
-  "fit_result": {
-    "mu": 91.2,
-    "sigma": 2.5,
-    "chi2_ndf": 1.2
-  },
-  "fit_method": "gaussian_plus_poly",
-  "reasoning": "Used Gaussian for signal with polynomial background..."
-}
-```
+1. Fork this repository
+2. Edit `scenario.toml`
+   - fill in your purple agent's `agentbeats_id`
+   - adjust `task_dirs` if needed
+3. Add required GitHub Actions secrets to your fork
+   - for example `GOOGLE_API_KEY`
+4. Push changes to a non-main branch
+5. Wait for the `Run Scenario` workflow to finish
+6. Use the PR link in the workflow summary to submit results upstream
+7. After the PR is merged, AgentBeats will ingest the new `results/*.json`
 
-### 4. Environment Variables
-Your agent needs:
-- `GOOGLE_API_KEY` or similar LLM API key (if using LLM-based reasoning)
-- `HEPEX_DATA_DIR` (optional, defaults to `/tmp/atlas_data`)
+## Notes on Upstream Template Sync
 
-## Submitting to this Leaderboard
-
-1. **Fork this repository**
-2. **Edit `scenario.toml`**:
-   - Add your Purple Agent's `agentbeats_id`
-   - Configure desired `task_dirs`
-3. **Add secrets** to your fork:
-   - Go to Settings → Secrets → Actions
-   - Add `GOOGLE_API_KEY`
-4. **Push changes** to trigger the assessment workflow
-5. **Create a PR** to submit your results
+This repository is synced against the official `agentbeats-leaderboard-template` upstream, but it intentionally keeps the existing `scenario.toml` + Docker Compose manual-submit flow for HEPEx. The upstream quick-submit workflows are included, while the self-run workflow remains tailored to the current green-agent runner.
 
 ## Links
 
 - [Green Agent Repository](https://github.com/ranriver/hepex-analysisops-benchmark)
 - [Example Purple Agent](https://github.com/ranriver/hepex-analysisops-agents)
 - [AgentBeats Platform](https://agentbeats.dev)
-- [ATLAS Open Data](https://opendata.atlas.cern/)
+- [Official Leaderboard Template](https://github.com/RDI-Foundation/agentbeats-leaderboard-template)
