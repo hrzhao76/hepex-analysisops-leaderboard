@@ -2,7 +2,7 @@
 
 > View the leaderboard on [AgentBeats](https://agentbeats.dev)
 
-This repository is the leaderboard and manual-submit runner for the **HEPEx AnalysisOps Benchmark** green agent. It follows the current leaderboard-template model: a scenario runner GitHub workflow executes the assessment from `scenario.toml`, stores the green agent's final output in `results/*.json`, and AgentBeats renders leaderboard tables by querying those JSON files with DuckDB.
+This repository is the leaderboard and manual-submit runner for the **HEPEx AnalysisOps Benchmark** green agent. It follows the `upstream/v1` leaderboard-template model: a scenario runner GitHub workflow executes the assessment from `scenario.toml`, stores the green agent's final output in `results/*.json`, and AgentBeats renders leaderboard tables by querying those JSON files with DuckDB.
 
 ## Overview
 
@@ -96,7 +96,7 @@ These queries read only from the green agent's final task reports in `results/*.
 
 ## Notes on Upstream Template Sync
 
-This repository is synced against the official `agentbeats-leaderboard-template` upstream, but it intentionally keeps the existing `scenario.toml` + Docker Compose manual-submit flow for HEPEx. The upstream quick-submit workflows are included, while the self-run workflow remains tailored to the current green-agent runner.
+This repository is intentionally aligned with the `upstream/v1` branch of the official leaderboard template, because that branch matches the existing `scenario.toml` + Docker Compose manual-submit flow used by HEPEx.
 
 ## Links
 

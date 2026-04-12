@@ -2,14 +2,14 @@ name: Run Scenario
 
 on:
   push:
+    branches: ['**']
     paths:
       - 'scenario.toml'
-  workflow_dispatch:
 
 jobs:
   run:
     runs-on: ubuntu-latest
-    if: github.ref != 'refs/heads/main' || github.event_name == 'workflow_dispatch'
+    if: github.event.repository.fork == true || github.ref != 'refs/heads/main'
     permissions:
       contents: write
       packages: read

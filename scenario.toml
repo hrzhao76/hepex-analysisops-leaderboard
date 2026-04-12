@@ -1,12 +1,12 @@
 [green_agent]
-agentbeats_id = "019bc3d3-cae6-7711-9696-a912bb00bd11"
-env = { GOOGLE_API_KEY = "${GOOGLE_API_KEY}" }
+agentbeats_id = "hepex-green-agent-local:v1"
+env = { OPENAI_API_KEY = "${OPENAI_API_KEY}" }
 
 # Purple Agent (participant being evaluated)
 [[participants]]
-agentbeats_id = "019bc3da-00a0-7930-9e2d-e46dad026684"
+agentbeats_id = "hepex-purple-agent-local:v1"
 name = "purple_agent"  # Preferred participant role name for current AgentBeats / Green Agent flows
-env = { GOOGLE_API_KEY = "${GOOGLE_API_KEY}" }
+env = { OPENAI_API_KEY = "${OPENAI_API_KEY}" }
 
 [config]
 # Default upstream-style Hyy L1 task
