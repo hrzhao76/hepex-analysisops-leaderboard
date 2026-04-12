@@ -8,11 +8,11 @@ This repository is the leaderboard and manual-submit runner for the **HEPEx Anal
 
 This repository contains:
 
-1. A scenario runner workflow for reproducible assessments
+1. A scenario runner GitHub workflow for reproducible assessments
 2. Assessment configuration in `scenario.toml`
-3. Assessment outputs under `results/`
+3. Assessment results under `results/`
 4. Submission metadata under `submissions/`
-5. Hyy L1 leaderboard queries in `hyy_l1_queries.json`
+5. DuckDB leaderboard queries in `hyy_l1_queries.json`
 
 The green agent is the single source of truth for leaderboard data. The leaderboard should query only the final green-agent reports in `results/*.json`, not purple raw outputs or temporary run directories.
 
@@ -58,7 +58,10 @@ The default assessment configuration in `scenario.toml` looks like this:
 
 ```toml
 [config]
+# Default upstream-style Hyy L1 task
 task_dirs = ["tasks_public/t002_hyy_v5_l1"]
+
+# Data directory for caches and run outputs inside the green-agent container
 data_dir = "/home/agent/output"
 ```
 

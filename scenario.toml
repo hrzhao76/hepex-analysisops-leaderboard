@@ -5,7 +5,7 @@ env = { GOOGLE_API_KEY = "${GOOGLE_API_KEY}" }
 # Purple Agent (participant being evaluated)
 [[participants]]
 agentbeats_id = "019bc3da-00a0-7930-9e2d-e46dad026684"
-name = "purple_agent"
+name = "purple_agent"  # Preferred participant role name for current AgentBeats / Green Agent flows
 env = { GOOGLE_API_KEY = "${GOOGLE_API_KEY}" }
 
 [config]
