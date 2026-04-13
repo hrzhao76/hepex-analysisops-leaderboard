@@ -2,14 +2,14 @@ name: Run Scenario
 
 on:
   push:
-    branches: ['**']
     paths:
       - 'scenario.toml'
+  workflow_dispatch:
 
 jobs:
   run:
     runs-on: ubuntu-latest
-    if: github.event.repository.fork == true || github.ref != 'refs/heads/main'
+    if: github.ref != 'refs/heads/main' || github.event_name == 'workflow_dispatch'
     permissions:
       contents: write
       packages: read
@@ -93,11 +93,11 @@ jobs:
       - name: Determine target repository
         id: target
         env:
-          GH_TOKEN: ${{ github.token }}
+            GH_TOKEN: ${{ github.token }}
         run: |
-          PARENT_REPO=$(gh api repos/${{ github.repository }} --jq '.parent.full_name // "${{ github.repository }}"')
-          echo "Target repository: $PARENT_REPO"
-          echo "repo=$PARENT_REPO" >> $GITHUB_OUTPUT
+            PARENT_REPO=$(gh api repos/${{ github.repository }} --jq '.parent.full_name // "${{ github.repository }}"')
+            echo "Target repository: $PARENT_REPO"
+            echo "repo=$PARENT_REPO" >> $GITHUB_OUTPUT
 
       - name: Create submission branch
         run: |
