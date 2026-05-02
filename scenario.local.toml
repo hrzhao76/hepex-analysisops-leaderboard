@@ -1,10 +1,10 @@
 [green_agent]
-agentbeats_id = "019bc3d3-cae6-7711-9696-a912bb00bd11"
+image = "hepex-green-agent:local"
 env = { OPENAI_API_KEY = "${OPENAI_API_KEY}", GREEN_SECRETS_JSON = "${GREEN_SECRETS_JSON}" }
 
 # Purple Agent (participant being evaluated)
 [[participants]]
-agentbeats_id = "019bc3da-00a0-7930-9e2d-e46dad026684"
+image = "hepex-purple-agent:local"
 name = "purple_agent"  # Preferred participant role name for current AgentBeats / Green Agent flows
 env = { OPENAI_API_KEY = "${OPENAI_API_KEY}" }
 
@@ -28,16 +28,16 @@ data_dir = "/home/agent/output"
 enabled = true
 mode = "call_white"
 input_strategy = "download"
-max_files = 5
+max_files = 1
 
 [config.task_overrides.t003_hyy_v5_l2]
 enabled = true
 mode = "call_white"
 input_strategy = "download"
-max_files = 5
+max_files = 1
 
 [config.task_overrides.t004_hyy_v5_l3]
 enabled = true
 mode = "call_white"
 input_strategy = "download"
-max_files = 5
+max_files = 1

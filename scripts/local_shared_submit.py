@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Run a local shared-manifest assessment and open a leaderboard PR.
+"""Run a local shared-manifest assessment and save local-only results.
 
 This script mirrors the useful parts of .github/workflows/run-scenario.yml:
 
@@ -8,8 +8,8 @@ This script mirrors the useful parts of .github/workflows/run-scenario.yml:
 3. Add a Docker Compose override that mounts local ROOT inputs into green/purple.
 4. Run the assessment with docker compose.
 5. Record image provenance.
-6. Copy the scenario/results/provenance into submissions/ and results/.
-7. Optionally commit, push, and create a PR with gh.
+6. Copy the scenario/results/provenance into local_runs/submissions/ and
+   local_runs/results/.
 
 It intentionally does not rewrite scenario.toml or generate_compose.py.
 """
@@ -39,6 +39,7 @@ except ModuleNotFoundError:
 
 REPO_ROOT = Path(__file__).resolve().parents[1]
 LOCAL_DIR = REPO_ROOT / ".local-submit"
+LOCAL_RUNS_DIR = REPO_ROOT / "local_runs"
 GENERATED_SCENARIO = LOCAL_DIR / "scenario.local.generated.toml"
 COMPOSE_OVERRIDE = REPO_ROOT / "docker-compose.local-shared.yml"
 DEFAULT_TASK_ID = "t002_hyy_v5_l1"
@@ -258,7 +259,19 @@ def unique_submission_name(prefix: str) -> str:
     return f"{prefix}-{timestamp}"
 
 
-def copy_submission_files(name: str, scenario_path: Path) -> tuple[Path, Path, Path]:
+def display_path(path: Path) -> Path:
+    try:
+        return path.resolve().relative_to(REPO_ROOT)
+    except ValueError:
+        return path
+
+
+def copy_submission_files(
+    name: str,
+    scenario_path: Path,
+    *,
+    local_runs_dir: Path = LOCAL_RUNS_DIR,
+) -> tuple[Path, Path, Path]:
     results_src = REPO_ROOT / "output" / "results.json"
     provenance_src = REPO_ROOT / "output" / "provenance.json"
     if not results_src.exists():
@@ -266,11 +279,13 @@ def copy_submission_files(name: str, scenario_path: Path) -> tuple[Path, Path, P
     if not provenance_src.exists():
         raise SystemExit("Provenance step did not produce output/provenance.json")
 
-    submission_toml = REPO_ROOT / "submissions" / f"{name}.toml"
-    submission_provenance = REPO_ROOT / "submissions" / f"{name}.provenance.json"
-    result_json = REPO_ROOT / "results" / f"{name}.json"
-    submission_toml.parent.mkdir(exist_ok=True)
-    result_json.parent.mkdir(exist_ok=True)
+    submission_dir = local_runs_dir / "submissions"
+    results_dir = local_runs_dir / "results"
+    submission_toml = submission_dir / f"{name}.toml"
+    submission_provenance = submission_dir / f"{name}.provenance.json"
+    result_json = results_dir / f"{name}.json"
+    submission_dir.mkdir(parents=True, exist_ok=True)
+    results_dir.mkdir(parents=True, exist_ok=True)
 
     shutil.copyfile(scenario_path, submission_toml)
     shutil.copyfile(results_src, result_json)
@@ -357,11 +372,25 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--purple-repo", type=Path, default=DEFAULT_PURPLE_REPO)
     parser.add_argument("--pull", action="store_true", help="Run docker compose pull before up. Off by default for local :local images.")
     parser.add_argument("--submission-prefix", default=os.environ.get("USER", "local"))
-    parser.add_argument("--base", default="main")
-    parser.add_argument("--branch", default=None)
+    parser.add_argument("--base", default="main", help="Deprecated no-op: local runs are not pushed.")
+    parser.add_argument("--branch", default=None, help="Deprecated no-op: local runs are not pushed.")
     parser.add_argument("--skip-run", action="store_true", help="Do not run docker compose; reuse output/results.json.")
-    parser.add_argument("--no-pr", action="store_true", help="Commit and push, but do not create a PR.")
-    parser.add_argument("--no-commit", action="store_true", help="Prepare files only; do not commit, push, or create a PR.")
+    parser.add_argument(
+        "--local-runs-dir",
+        type=Path,
+        default=LOCAL_RUNS_DIR,
+        help="Directory for local-only packaged results. Default: local_runs/.",
+    )
+    parser.add_argument(
+        "--no-pr",
+        action="store_true",
+        help="Deprecated no-op: local_shared_submit.py no longer pushes PRs.",
+    )
+    parser.add_argument(
+        "--no-commit",
+        action="store_true",
+        help="Deprecated no-op: local_shared_submit.py always keeps packaged files local.",
+    )
     return parser.parse_args()
 
 
@@ -426,17 +455,15 @@ def main() -> None:
     run([sys.executable, "scripts/archive_latest_results.py"])
 
     name = unique_submission_name(args.submission_prefix)
-    paths = copy_submission_files(name, GENERATED_SCENARIO)
-    print(f"Prepared submission files for {name}:")
+    paths = copy_submission_files(
+        name,
+        GENERATED_SCENARIO,
+        local_runs_dir=args.local_runs_dir.resolve(),
+    )
+    print(f"Prepared local run files for {name}:")
     for path in paths:
-        print(f"  {path.relative_to(REPO_ROOT)}")
-
-    if args.no_commit:
-        print("Skipped commit/PR creation because --no-commit was set.")
-        return
-
-    branch = args.branch or f"submission-{name}"
-    create_commit_and_pr(name=name, paths=paths, base=args.base, branch=branch, no_pr=args.no_pr)
+        print(f"  {display_path(path)}")
+    print("Local run packaging is complete. Commit/PR creation is disabled for this wrapper.")
 
 
 if __name__ == "__main__":

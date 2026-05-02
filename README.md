@@ -18,6 +18,8 @@ This repo provides:
 - `.github/workflows/run-scenario.yml`: CI assessment runner
 - `hyy_l1_queries.json`: DuckDB queries for AgentBeats leaderboard rendering
 - `scripts/local_shared_submit.py`: local full-data/shared-manifest workflow
+- `local_runs/`: ignored local-only packaged runs from
+  `scripts/local_shared_submit.py`
 - `scripts/archive_latest_results.py`: archive root `output/results.json` into
   the timestamped Green run directory
 - `submissions/`: submitted scenario/provenance metadata
@@ -25,9 +27,9 @@ This repo provides:
 
 ## Current Assessments
 
-`scenario.toml` is still the small default CI scenario, and it runs the L1 task
-unless you edit it. For local benchmark development, this repo also includes
-ready-to-run L2 and L3 scenario templates:
+`scenario.toml` is the small CI smoke scenario. It can run the public Hyy L1,
+L2, and L3 tasks with a one-file cap. For local benchmark development, this
+repo also includes ready-to-run L2 and L3 scenario templates:
 
 | Level | Task directory | Local scenario | Typical local cap |
 | --- | --- | --- | --- |
@@ -42,7 +44,9 @@ Common runtime settings:
 - Local realistic input strategy: `local_shared_mount` plus `shared_manifest`
 - Green scoring: public contract plus optional hidden rubric from
   `GREEN_SECRETS_JSON`
-- Default solver backend used in local testing: `agent_1_oh`
+- Solver backends used in local testing: `agent_1_oh` for the baseline OH
+  executor, or `agent_2_scifi_oh` for the SciFi-OH controller over the same OH
+  executor.
 
 For full local testing, place or mount ATLAS Open Data ROOT files at:
 
@@ -161,25 +165,38 @@ After the ROOT files and `.env` are ready, `scripts/local_shared_submit.py` is
 the single command-line entry point for the whole local workflow: it patches the
 scenario, generates Compose config, optionally builds local Green/Purple images,
 runs Docker Compose, archives Green output, records provenance, and prepares
-`submissions/` plus `results/` files.
+local-only packaged files under `local_runs/submissions/` and
+`local_runs/results/`.
 
-Default collaborator smoke workflow, L2 with five ROOT files:
+Default SciFi-OH collaborator smoke workflow, L1 with one ROOT file:
 
 ```bash
 cd ../hepex-analysisops-leaderboard
+python3 scripts/local_shared_submit.py \
+  --host-input-dir ../hepex-analysisops-benchmark/shared_input/2025e-13tev-beta/data/GamGam \
+  --task-id t002_hyy_v5_l1 \
+  --max-files 1 \
+  --mode call_white \
+  --solver-backend agent_2_scifi_oh \
+  --build-local-images \
+  --submission-prefix scifi-oh-l1-local
+```
+
+SciFi-OH L2 smoke workflow with five ROOT files:
+
+```bash
 python3 scripts/local_shared_submit.py \
   --scenario .local-submit/scenario.l2.base.toml \
   --host-input-dir ../hepex-analysisops-benchmark/shared_input/2025e-13tev-beta/data/GamGam \
   --task-id t003_hyy_v5_l2 \
   --max-files 5 \
   --mode call_white \
-  --solver-backend agent_1_oh \
+  --solver-backend agent_2_scifi_oh \
   --build-local-images \
-  --submission-prefix l2-local \
-  --no-commit
+  --submission-prefix scifi-oh-l2-local
 ```
 
-L2 full local run with all 16 GamGam ROOT files:
+SciFi-OH L2 full local run with all 16 GamGam ROOT files:
 
 ```bash
 python3 scripts/local_shared_submit.py \
@@ -188,13 +205,12 @@ python3 scripts/local_shared_submit.py \
   --task-id t003_hyy_v5_l2 \
   --max-files 16 \
   --mode call_white \
-  --solver-backend agent_1_oh \
+  --solver-backend agent_2_scifi_oh \
   --build-local-images \
-  --submission-prefix l2-full \
-  --no-commit
+  --submission-prefix scifi-oh-l2-full
 ```
 
-L3 smoke run with five ROOT files:
+SciFi-OH L3 smoke run with five ROOT files:
 
 ```bash
 python3 scripts/local_shared_submit.py \
@@ -203,29 +219,16 @@ python3 scripts/local_shared_submit.py \
   --task-id t004_hyy_v5_l3 \
   --max-files 5 \
   --mode call_white \
-  --solver-backend agent_1_oh \
+  --solver-backend agent_2_scifi_oh \
   --build-local-images \
-  --submission-prefix l3-local \
-  --no-commit
-```
-
-L1/default smoke run:
-
-```bash
-python3 scripts/local_shared_submit.py \
-  --host-input-dir ../hepex-analysisops-benchmark/shared_input/2025e-13tev-beta/data/GamGam \
-  --task-id t002_hyy_v5_l1 \
-  --max-files 1 \
-  --mode call_white \
-  --solver-backend agent_1_oh \
-  --build-local-images \
-  --submission-prefix l1-local \
-  --no-commit
+  --submission-prefix scifi-oh-l3-local
 ```
 
 Use `--build-local-images` after changing `hepex-analysisops-benchmark` or
 `hepex-analysisops-agents`. You can omit it when you deliberately want to reuse
 already-built `hepex-green-agent:local` and `hepex-purple-agent:local` images.
+Replace `--solver-backend agent_2_scifi_oh` with `agent_1_oh` when you want the
+baseline OH backend.
 
 What this does:
 
@@ -237,8 +240,10 @@ What this does:
 6. Writes root `output/results.json`.
 7. Archives that file into `output/runs/<run_id>/results.json`.
 8. Records image provenance.
-9. Prepares files under `submissions/` and `results/`.
-10. Skips commit/PR creation when `--no-commit` is set.
+9. Prepares local-only files under `local_runs/submissions/` and
+   `local_runs/results/`.
+10. Never commits or opens a PR; local runs stay outside leaderboard ingestion
+    directories.
 
 `scripts/local_shared_submit.py` is the wrapper for local testing. It is
 intentionally separate from the default CI path: it writes local overrides,
@@ -323,7 +328,8 @@ python3 scripts/local_shared_submit.py \
   --task-id t003_hyy_v5_l2 \
   --max-files 16 \
   --mode call_white \
-  --no-commit
+  --solver-backend agent_2_scifi_oh \
+  --submission-prefix scifi-oh-l2-full
 
 # Run only five ROOT files for an L3 smoke pass
 python3 scripts/local_shared_submit.py \
@@ -331,14 +337,16 @@ python3 scripts/local_shared_submit.py \
   --task-id t004_hyy_v5_l3 \
   --max-files 5 \
   --mode call_white \
-  --no-commit
+  --solver-backend agent_2_scifi_oh \
+  --submission-prefix scifi-oh-l3-local
 
 # Reuse output/results.json and only package/archive it; keep the scenario/task pair matched
 python3 scripts/local_shared_submit.py \
   --scenario .local-submit/scenario.l2.base.toml \
   --task-id t003_hyy_v5_l2 \
+  --solver-backend agent_2_scifi_oh \
   --skip-run \
-  --no-commit
+  --submission-prefix scifi-oh-l2-repackage
 ```
 
 The wrapper does not run `docker compose pull` by default because the local
@@ -395,8 +403,20 @@ output/runs/<run_id>/
     └── solver_work/
 ```
 
-Leaderboard ingestion uses `results/*.json`. The timestamped run directory is
-for audit and debugging.
+Local packaged run files:
+
+```text
+local_runs/
+├── results/
+│   └── <submission-prefix>-<timestamp>.json
+└── submissions/
+    ├── <submission-prefix>-<timestamp>.toml
+    └── <submission-prefix>-<timestamp>.provenance.json
+```
+
+Leaderboard ingestion uses committed `results/*.json`. The timestamped Green
+run directory and `local_runs/` are for audit and debugging and are ignored by
+Git.
 
 ## CI Submission Flow
 
@@ -440,13 +460,16 @@ These files are local/generated and should be treated carefully:
 - `a2a-scenario.toml`
 - `docker-compose.local-shared.yml`
 - `output/`
+- `local_runs/`
 - `.local-submit/scenario.local.generated.toml`
 
 The checked-in `.local-submit/scenario.l2.base.toml` and
 `.local-submit/scenario.l3.base.toml` files are reusable local templates, not
 per-run output.
 
-Only commit generated submission/result files intentionally.
+Only commit generated submission/result files intentionally. Local wrapper
+outputs under `local_runs/` are not leaderboard submissions until you
+deliberately promote them.
 
 ## Troubleshooting
 

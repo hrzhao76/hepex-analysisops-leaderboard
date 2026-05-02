@@ -5,6 +5,7 @@ a2a-scenario.toml
 .env
 .env.example
 output/
+local_runs/
 .local-submit/*
 !.local-submit/
 !.local-submit/scenario.l2.base.toml
