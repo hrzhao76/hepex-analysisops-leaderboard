@@ -1,106 +1,361 @@
 # HEPEx AnalysisOps Leaderboard
 
-> View the leaderboard on [AgentBeats](https://agentbeats.dev)
+This repository is the AgentBeats leaderboard and scenario runner for the
+HEPEx AnalysisOps Benchmark.
 
-This repository is the leaderboard and manual-submit runner for the **HEPEx AnalysisOps Benchmark** green agent. It follows the `upstream/v1` leaderboard-template model: a scenario runner GitHub workflow executes the assessment from `scenario.toml`, stores the green agent's final output in `results/*.json`, and AgentBeats renders leaderboard tables by querying those JSON files with DuckDB.
+It does not implement benchmark logic. The Green Agent in
+`hepex-analysisops-benchmark` is the source of truth for task loading,
+submission validation, scoring, and result schema. This repository owns the
+runner configuration, generated assessment outputs, leaderboard query files,
+and contributor submission flow.
 
-## Overview
+## Repository Role
 
-This repository contains:
+This repo provides:
 
-1. A scenario runner GitHub workflow for reproducible assessments
-2. Assessment configuration in `scenario.toml`
-3. Assessment results under `results/`
-4. Submission metadata under `submissions/`
-5. DuckDB leaderboard queries in `hyy_l1_queries.json`
+- `scenario.toml`: the canonical AgentBeats assessment scenario
+- `generate_compose.py`: conversion from scenario config to Docker Compose
+- `.github/workflows/run-scenario.yml`: CI assessment runner
+- `hyy_l1_queries.json`: DuckDB queries for AgentBeats leaderboard rendering
+- `scripts/local_shared_submit.py`: local full-data/shared-manifest workflow
+- `scripts/archive_latest_results.py`: archive root `output/results.json` into
+  the timestamped Green run directory
+- `submissions/`: submitted scenario/provenance metadata
+- `results/`: final leaderboard-ingested result JSON files
 
-The green agent is the single source of truth for leaderboard data. The leaderboard should query only the final green-agent reports in `results/*.json`, not purple raw outputs or temporary run directories.
+## Current Assessment
 
-## Current Default Assessment
-
-The default manual-submit path in this repository targets the upstream-style Hyy L1 task:
+The current default task is:
 
 - Task: `tasks_public/t002_hyy_v5_l1`
-- Input mode: shared manifest
-- Solver response mode: `submission_bundle_v1`
-- Evaluation mode: `directory_contract_and_private_l1`
+- Response format: `submission_bundle_v1`
+- Input strategy in CI default: `download` with a small `max_files` setting
+- Input strategy for local full-data testing: `local_shared_mount`
+- Green scoring: public directory contract plus optional hidden L1 rubric
+- Default solver backend: `agent_1_oh`
 
-This path exercises:
+For full local testing, place or mount ATLAS Open Data ROOT files at:
 
-1. Bundle materialization
-2. Public contract validation
-3. Private-rubric scoring inside the green agent
-4. Green-final-report generation for leaderboard queries
-
-## Scoring
-
-For the current Hyy L1 path, the green agent first validates the materialized submission bundle against the public contract. If that hard gate passes, it scores the task using a private rubric and writes a final task report containing:
-
-- `status`
-- `hard_checks_passed`
-- `final.total_score`
-- `final.normalized_score`
-- `dimension_scores`
-- `check_results`
-
-The Hyy L1 rubric currently emphasizes these dimensions:
-
-- `execution`
-- `pipeline`
-- `implementation`
-- `reasoning`
-- `analysis`
-- `validation`
-
-## Configuration
-
-The default assessment configuration in `scenario.toml` looks like this:
-
-```toml
-[config]
-# Default upstream-style Hyy L1 task
-task_dirs = ["tasks_public/t002_hyy_v5_l1"]
-
-# Data directory for caches and run outputs inside the green-agent container
-data_dir = "/home/agent/output"
+```text
+../hepex-analysisops-benchmark/shared_input/2025e-13tev-beta/data/GamGam
 ```
 
-Submitters can modify `task_dirs` if they want to test a different task path supported by the green-agent image.
+## Environment
+
+Create `.env` in this repository:
+
+```bash
+OPENAI_API_KEY=...
+GREEN_SECRETS_JSON='...'
+```
+
+The easiest way to generate `GREEN_SECRETS_JSON` is from the benchmark repo:
+
+```bash
+cd ../hepex-analysisops-benchmark
+uv run python scripts/export_green_secrets.py
+```
+
+That script writes the value into both the benchmark and leaderboard `.env`
+files. Rerun it whenever the public `submission_contract.yaml` or private rubric
+changes.
+
+Do not print or commit `.env`.
+
+## Complete Local E2E Test Flow
+
+Use this flow when you want to simulate the real assessment locally with Docker
+Compose, local Green/Purple images, and local ATLAS ROOT files. It is the
+recommended collaborator workflow for debugging before CI.
+
+### 1. Check Out Repositories
+
+Place the three repositories next to each other:
+
+```text
+AgentBeats/
+├── hepex-analysisops-benchmark
+├── hepex-analysisops-agents
+└── hepex-analysisops-leaderboard
+```
+
+Initialize the Purple Agent submodules:
+
+```bash
+cd ../hepex-analysisops-agents
+git submodule update --init --recursive
+```
+
+### 2. Install Local Python Environments
+
+```bash
+cd ../hepex-analysisops-benchmark
+uv sync
+uv run pytest -q
+
+cd ../hepex-analysisops-agents
+uv sync
+uv run pytest tests/test_submission_bundle_agent.py \
+  tests/test_agent.py::test_submission_bundle_request_returns_minimal_valid_bundle \
+  tests/test_agent.py::test_submission_bundle_request_returns_error_for_missing_manifest \
+  tests/test_agent.py::test_submission_bundle_request_returns_error_for_invalid_manifest_json \
+  -q
+```
+
+### 3. Download Shared Input Data
+
+From the benchmark repository, download the GamGam ROOT files:
+
+```bash
+cd ../hepex-analysisops-benchmark
+uv run python scripts/download_root_files.py \
+  --skim GamGam \
+  --max-files -1 \
+  --json-output ./shared_input/download_manifest.json
+```
+
+The default destination is:
+
+```text
+../hepex-analysisops-benchmark/shared_input/2025e-13tev-beta/data/GamGam
+```
+
+For a quick smoke run, the local wrapper can cap the manifest with
+`--max-files 1`. For a fuller local assessment, use `--max-files 16` or omit
+the cap once the workflow is stable.
+
+### 4. Prepare Secrets
+
+Create or update `.env` files from the benchmark repo:
+
+```bash
+cd ../hepex-analysisops-benchmark
+uv run python scripts/export_green_secrets.py
+```
+
+Then confirm the leaderboard `.env` contains:
+
+```bash
+OPENAI_API_KEY=...
+GREEN_SECRETS_JSON='...'
+```
+
+Do not commit `.env`.
+
+### 5. Run The Local Compose Assessment
+
+From the leaderboard repository:
+
+```bash
+cd ../hepex-analysisops-leaderboard
+python3 scripts/local_shared_submit.py \
+  --host-input-dir ../hepex-analysisops-benchmark/shared_input/2025e-13tev-beta/data/GamGam \
+  --max-files 16 \
+  --mode call_white \
+  --solver-backend agent_1_oh \
+  --build-local-images \
+  --no-commit
+```
+
+What this does:
+
+1. Creates `.local-submit/scenario.local.generated.toml`.
+2. Generates `docker-compose.yml` and `a2a-scenario.toml`.
+3. Writes `docker-compose.local-shared.yml` to mount local ROOT files.
+4. Optionally builds `hepex-green-agent:local` and `hepex-purple-agent:local`.
+5. Runs Docker Compose with the local shared input mount.
+6. Writes root `output/results.json`.
+7. Archives that file into `output/runs/<run_id>/results.json`.
+8. Records image provenance.
+9. Prepares files under `submissions/` and `results/`.
+10. Skips commit/PR creation when `--no-commit` is set.
+
+`scripts/local_shared_submit.py` is the wrapper for local testing. It is
+intentionally separate from the default CI path: it writes local overrides,
+mounts local data, and can build local images without changing `scenario.toml`.
+
+### 6. Verify Results
+
+After a successful run, check the machine-readable result shape:
+
+```bash
+python3 - <<'PY'
+import json
+from pathlib import Path
+
+data = json.loads(Path("output/results.json").read_text())
+print("results_len =", len(data.get("results", [])))
+for result in data.get("results", []):
+    print(result["task_id"], result["status"], result["final"]["normalized_score"])
+PY
+```
+
+Expected minimal E2E shape:
+
+- `results_len = 1`
+- the only `task_id` is `t002_hyy_v5_l1`
+- `output/runs/<run_id>/results.json` exists
+- `output/runs/<run_id>/t002_hyy_v5_l1/judge_output.json` exists
+- `submission_trace.json.input_file_count` matches the local manifest cap
+- `submission_trace.json.selected_events_total` is nonzero for realistic
+  multi-file GamGam runs
+
+### 7. Inspect A Failed Run
+
+The useful debug files are:
+
+```text
+output/runs/<run_id>/eval_request.json
+output/runs/<run_id>/green_config.json
+output/runs/<run_id>/run_summary.json
+output/runs/<run_id>/t002_hyy_v5_l1/purple_request.json
+output/runs/<run_id>/t002_hyy_v5_l1/purple_response_raw.txt
+output/runs/<run_id>/t002_hyy_v5_l1/judge_output.json
+output/runs/<run_id>/t002_hyy_v5_l1/solver_work/debug_oh_output.log
+```
+
+Start with `judge_output.json` for scoring/contract failures, then inspect
+`solver_work/` for generated solver code and OpenHarness logs.
+
+### 8. Clean Up Compose
+
+The wrapper stops containers at the end of a normal run. To force cleanup:
+
+```bash
+docker compose \
+  -f docker-compose.yml \
+  -f docker-compose.local-shared.yml \
+  --env-file .env \
+  down
+```
+
+Useful variations:
+
+```bash
+# Reuse already-built local images
+python3 scripts/local_shared_submit.py --max-files 16 --mode call_white --no-commit
+
+# Run only one ROOT file for a fast smoke pass
+python3 scripts/local_shared_submit.py --max-files 1 --mode call_white --no-commit
+
+# Reuse output/results.json and only package/archive it
+python3 scripts/local_shared_submit.py --skip-run --no-commit
+```
+
+The wrapper does not run `docker compose pull` by default because the local
+workflow normally uses `:local` images. Pass `--pull` only when you explicitly
+want Compose to pull configured images.
+
+## Manual Compose Debugging
+
+For lower-level debugging:
+
+```bash
+docker build -t hepex-green-agent:local ../hepex-analysisops-benchmark
+docker build -t hepex-purple-agent:local ../hepex-analysisops-agents
+
+docker compose \
+  -f docker-compose.yml \
+  -f docker-compose.local-shared.yml \
+  --env-file .env \
+  up \
+  --timestamps \
+  --no-color \
+  --exit-code-from agentbeats-client \
+  --abort-on-container-exit
+
+python3 scripts/archive_latest_results.py
+docker compose -f docker-compose.yml -f docker-compose.local-shared.yml --env-file .env down
+```
+
+Use this manual path when you want to inspect service logs directly. Use
+`scripts/local_shared_submit.py` when preparing a shareable local run.
+
+## Result Layout
+
+Root output:
+
+```text
+output/results.json
+```
+
+Timestamped Green run:
+
+```text
+output/runs/<run_id>/
+├── eval_request.json
+├── green_config.json
+├── run_summary.json
+├── results.json
+└── t002_hyy_v5_l1/
+    ├── purple_request.json
+    ├── purple_response_raw.txt
+    ├── submission_bundle_raw.json
+    ├── submission_trace.json
+    ├── judge_output.json
+    └── solver_work/
+```
+
+Leaderboard ingestion uses `results/*.json`. The timestamped run directory is
+for audit and debugging.
+
+## CI Submission Flow
+
+For a normal AgentBeats submission:
+
+1. Fork this repository.
+2. Edit `scenario.toml` with the participant `agentbeats_id`.
+3. Configure repository secrets such as `OPENAI_API_KEY` and
+   `GREEN_SECRETS_JSON`.
+4. Push a branch.
+5. Let `.github/workflows/run-scenario.yml` run the scenario.
+6. Open the generated PR or use the workflow output to submit results.
+
+The CI flow should stay stable and minimal. Local-only compose overrides and
+large local data mounts are intentionally kept out of the default CI path.
 
 ## Leaderboard Queries
 
-The first selected column in every leaderboard query must be the AgentBeats agent ID. For this repository, the recommended id expression is:
+The query file is:
+
+```text
+hyy_l1_queries.json
+```
+
+Queries should read only final Green task reports from `results/*.json`. They
+should not depend on `output/runs/*`, Purple raw responses, or solver work
+directories.
+
+The first selected column must be the AgentBeats participant id. The current
+recommended expression is:
 
 ```sql
 COALESCE(t.participants.purple_agent, t.participants.white_agent) AS id
 ```
 
-A ready-to-paste Hyy L1 query set is included in:
+## Generated Files
 
-- `hyy_l1_queries.json`
+These files are local/generated and should be treated carefully:
 
-These queries read only from the green agent's final task reports in `results/*.json`.
+- `docker-compose.yml`
+- `a2a-scenario.toml`
+- `docker-compose.local-shared.yml`
+- `output/`
+- `.local-submit/`
 
-## Manual Submit Flow
+Only commit generated submission/result files intentionally.
 
-1. Fork this repository
-2. Edit `scenario.toml`
-   - fill in your purple agent's `agentbeats_id`
-   - adjust `task_dirs` if needed
-3. Add required GitHub Actions secrets to your fork
-   - for example `GOOGLE_API_KEY`
-4. Push changes to a non-main branch
-5. Wait for the `Run Scenario` workflow to finish
-6. Use the PR link in the workflow summary to submit results upstream
-7. After the PR is merged, AgentBeats will ingest the new `results/*.json`
+## Troubleshooting
 
-## Notes on Upstream Template Sync
+- If the private hidden score is unavailable, rerun
+  `../hepex-analysisops-benchmark/scripts/export_green_secrets.py`.
+- If local Compose cannot see ROOT files, pass `--host-input-dir` explicitly.
+- If `docker compose pull` fails for `:local` images, omit `--pull`.
+- If port `9009` is busy, stop old containers with
+  `docker compose --env-file .env down`.
 
-This repository is intentionally aligned with the `upstream/v1` branch of the official leaderboard template, because that branch matches the existing `scenario.toml` + Docker Compose manual-submit flow used by HEPEx.
+## Related Repositories
 
-## Links
-
-- [Green Agent Repository](https://github.com/ranriver/hepex-analysisops-benchmark)
-- [Example Purple Agent](https://github.com/ranriver/hepex-analysisops-agents)
-- [AgentBeats Platform](https://agentbeats.dev)
-- [Official Leaderboard Template](https://github.com/RDI-Foundation/agentbeats-leaderboard-template)
+- Green Agent: `../hepex-analysisops-benchmark`
+- Reference Purple Agent: `../hepex-analysisops-agents`
+- Private task/rubric workspace: `../hepex-analysisops-dev`

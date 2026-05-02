@@ -1,5 +1,7 @@
 """Record provenance information (image digests, timestamp, and workflow metadata) for assessment results."""
 
+from __future__ import annotations
+
 import argparse
 import json
 import os
@@ -11,14 +13,17 @@ from pathlib import Path
 try:
     import yaml
 except ImportError:
-    print("Error: pyyaml required. Install with: pip install pyyaml")
-    sys.exit(1)
+    yaml = None
 
 
 def get_image_digest(image: str) -> str:
-    """Get the RepoDigest for a docker image pulled from a registry."""
+    """Get a stable image reference.
+
+    Registry images usually have RepoDigests. Local development images do not,
+    so fall back to the Docker image id instead of failing the local workflow.
+    """
     result = subprocess.run(
-        ["docker", "image", "inspect", image, "--format", "{{index .RepoDigests 0}}"],
+        ["docker", "image", "inspect", image],
         capture_output=True,
         text=True,
     )
@@ -26,17 +31,41 @@ def get_image_digest(image: str) -> str:
         print(f"Error: Failed to inspect image '{image}': {result.stderr.strip()}")
         sys.exit(1)
 
-    digest = result.stdout.strip()
-    if not digest:
-        print(f"Error: No registry digest found for image '{image}'")
+    try:
+        inspected = json.loads(result.stdout)[0]
+    except Exception as exc:
+        print(f"Error: Could not parse docker inspect output for image '{image}': {exc}")
         sys.exit(1)
 
-    return digest
+    repo_digests = inspected.get("RepoDigests") or []
+    if repo_digests:
+        return repo_digests[0]
+
+    image_id = inspected.get("Id")
+    if image_id:
+        return f"local-image-id:{image_id}"
+
+    print(f"Error: No digest or image id found for image '{image}'")
+    sys.exit(1)
 
 
 def parse_compose(compose_path: Path) -> dict:
     """Parse docker-compose.yml."""
-    return yaml.safe_load(compose_path.read_text())
+    if yaml is not None:
+        return yaml.safe_load(compose_path.read_text())
+
+    result = subprocess.run(
+        ["docker", "compose", "-f", str(compose_path), "config", "--format", "json"],
+        capture_output=True,
+        text=True,
+    )
+    if result.returncode == 0 and result.stdout.strip():
+        return json.loads(result.stdout)
+
+    print("Error: pyyaml is not installed and docker compose config --format json failed.")
+    if result.stderr.strip():
+        print(result.stderr.strip())
+    sys.exit(1)
 
 
 def collect_image_digests(compose: dict) -> dict[str, str]:
@@ -94,6 +123,7 @@ def write_provenance(output_path: Path, image_digests: dict[str, str]) -> None:
     if github_actions:
         provenance["github_actions"] = github_actions
 
+    output_path.parent.mkdir(parents=True, exist_ok=True)
     with open(output_path, "w") as f:
         json.dump(provenance, f, indent=2)
 

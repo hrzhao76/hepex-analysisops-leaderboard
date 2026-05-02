@@ -60,7 +60,6 @@ COMPOSE_TEMPLATE = """# Auto-generated from scenario.toml
 services:
   green-agent:
     image: {green_image}
-    platform: linux/amd64
     container_name: green-agent
     command: ["--host", "0.0.0.0", "--port", "{green_port}", "--card-url", "http://green-agent:{green_port}"]
     environment:{green_env}
@@ -70,9 +69,12 @@ services:
       timeout: 3s
       retries: 10
       start_period: 30s
-    depends_on:{green_depends}
+    ports:
+      - "{green_port}:{green_port}"
     networks:
       - agent-network
+    volumes:
+      - ./output:/home/agent/output
 
 {participant_services}
   agentbeats-client:
@@ -92,11 +94,10 @@ networks:
     driver: bridge
 """
 
-PARTICIPANT_TEMPLATE = """  {name}:
+PARTICIPANT_TEMPLATE = """  {service_name}:
     image: {image}
-    platform: linux/amd64
-    container_name: {name}
-    command: ["--host", "0.0.0.0", "--port", "{port}", "--card-url", "http://{name}:{port}"]
+    container_name: {service_name}
+    command: ["--host", "0.0.0.0", "--port", "{port}", "--card-url", "http://{service_name}:{port}"]
     environment:{env}
     healthcheck:
       test: ["CMD", "curl", "-f", "http://localhost:{port}/.well-known/agent-card.json"]
@@ -106,6 +107,8 @@ PARTICIPANT_TEMPLATE = """  {name}:
       start_period: 30s
     networks:
       - agent-network
+    volumes:
+      - ./output:/home/agent/output
 """
 
 A2A_SCENARIO_TEMPLATE = """[green_agent]
@@ -121,8 +124,11 @@ def resolve_image(agent: dict, name: str) -> None:
     has_id = "agentbeats_id" in agent
 
     if has_image and has_id:
-        print(f"Error: {name} has both 'image' and 'agentbeats_id' - use one or the other")
-        sys.exit(1)
+        if os.environ.get("GITHUB_ACTIONS"):
+            print(f"Error: {name} has both 'image' and 'agentbeats_id' in GitHub Actions")
+            print("Use agentbeats_id only in CI so the runner resolves the published image.")
+            sys.exit(1)
+        print(f"Using {name} image: {agent['image']} (keeping agentbeats_id for result attribution)")
     elif has_image:
         if os.environ.get("GITHUB_ACTIONS"):
             print(f"Error: {name} requires 'agentbeats_id' for GitHub Actions (use 'image' for local testing only)")
@@ -154,6 +160,13 @@ def parse_scenario(scenario_path: Path) -> dict[str, Any]:
         print("Each participant must have a unique name.")
         sys.exit(1)
 
+    service_names = [docker_service_name(name or "") for name in names]
+    service_duplicates = [name for name in set(service_names) if service_names.count(name) > 1]
+    if service_duplicates:
+        print(f"Error: Duplicate Docker service names after normalization: {', '.join(service_duplicates)}")
+        print("Use participant names that remain unique after replacing punctuation with hyphens.")
+        sys.exit(1)
+
     for participant in participants:
         name = participant.get("name", "unknown")
         resolve_image(participant, f"participant '{name}'")
@@ -175,15 +188,20 @@ def format_depends_on(services: list) -> str:
     return "\n" + "\n".join(lines)
 
 
+def docker_service_name(name: str) -> str:
+    service_name = re.sub(r"[^A-Za-z0-9.-]+", "-", name).strip("-").lower()
+    return service_name or "participant"
+
+
 def generate_docker_compose(scenario: dict[str, Any]) -> str:
     green = scenario["green_agent"]
     participants = scenario.get("participants", [])
 
-    participant_names = [p["name"] for p in participants]
+    participant_service_names = [docker_service_name(p["name"]) for p in participants]
 
     participant_services = "\n".join([
         PARTICIPANT_TEMPLATE.format(
-            name=p["name"],
+            service_name=docker_service_name(p["name"]),
             image=p["image"],
             port=DEFAULT_PORT,
             env=format_env_vars(p.get("env", {}))
@@ -191,13 +209,12 @@ def generate_docker_compose(scenario: dict[str, Any]) -> str:
         for p in participants
     ])
 
-    all_services = ["green-agent"] + participant_names
+    all_services = ["green-agent"] + participant_service_names
 
     return COMPOSE_TEMPLATE.format(
         green_image=green["image"],
         green_port=DEFAULT_PORT,
         green_env=format_env_vars(green.get("env", {})),
-        green_depends=format_depends_on(participant_names),
         participant_services=participant_services,
         client_depends=format_depends_on(all_services)
     )
@@ -212,7 +229,7 @@ def generate_a2a_scenario(scenario: dict[str, Any]) -> str:
         lines = [
             f"[[participants]]",
             f"role = \"{p['name']}\"",
-            f"endpoint = \"http://{p['name']}:{DEFAULT_PORT}\"",
+            f"endpoint = \"http://{docker_service_name(p['name'])}:{DEFAULT_PORT}\"",
         ]
         if "agentbeats_id" in p:
             lines.append(f"agentbeats_id = \"{p['agentbeats_id']}\"")

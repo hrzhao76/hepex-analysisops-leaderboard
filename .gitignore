@@ -1,6 +1,10 @@
 .DS_Store
 docker-compose.yml
+docker-compose.local-shared.yml
 a2a-scenario.toml
 .env
 .env.example
 output/
+.local-submit/
+ouptut/
+output*/
