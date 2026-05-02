@@ -23,16 +23,26 @@ This repo provides:
 - `submissions/`: submitted scenario/provenance metadata
 - `results/`: final leaderboard-ingested result JSON files
 
-## Current Assessment
+## Current Assessments
 
-The current default task is:
+`scenario.toml` is still the small default CI scenario, and it runs the L1 task
+unless you edit it. For local benchmark development, this repo also includes
+ready-to-run L2 and L3 scenario templates:
 
-- Task: `tasks_public/t002_hyy_v5_l1`
+| Level | Task directory | Local scenario | Typical local cap |
+| --- | --- | --- | --- |
+| L1 | `tasks_public/t002_hyy_v5_l1` | `scenario.toml` | `--max-files 1` for smoke |
+| L2 | `tasks_public/t003_hyy_v5_l2` | `.local-submit/scenario.l2.base.toml` | `--max-files 5` smoke, `16` full |
+| L3 | `tasks_public/t004_hyy_v5_l3` | `.local-submit/scenario.l3.base.toml` | `--max-files 5` smoke |
+
+Common runtime settings:
+
 - Response format: `submission_bundle_v1`
-- Input strategy in CI default: `download` with a small `max_files` setting
-- Input strategy for local full-data testing: `local_shared_mount`
-- Green scoring: public directory contract plus optional hidden L1 rubric
-- Default solver backend: `agent_1_oh`
+- CI/default input strategy: `download`
+- Local realistic input strategy: `local_shared_mount` plus `shared_manifest`
+- Green scoring: public contract plus optional hidden rubric from
+  `GREEN_SECRETS_JSON`
+- Default solver backend used in local testing: `agent_1_oh`
 
 For full local testing, place or mount ATLAS Open Data ROOT files at:
 
@@ -57,8 +67,8 @@ uv run python scripts/export_green_secrets.py
 ```
 
 That script writes the value into both the benchmark and leaderboard `.env`
-files. Rerun it whenever the public `submission_contract.yaml` or private rubric
-changes.
+files. It exports the current L1, L2, and L3 hidden rubrics by default. Rerun it
+whenever a public `submission_contract.yaml` or private rubric changes.
 
 Do not print or commit `.env`.
 
@@ -120,9 +130,9 @@ The default destination is:
 ../hepex-analysisops-benchmark/shared_input/2025e-13tev-beta/data/GamGam
 ```
 
-For a quick smoke run, the local wrapper can cap the manifest with
-`--max-files 1`. For a fuller local assessment, use `--max-files 16` or omit
-the cap once the workflow is stable.
+For a quick smoke run, the local wrapper can cap the mounted manifest with
+`--max-files 1` for L1 or `--max-files 5` for L2/L3. For a fuller local Hyy
+assessment, use `--max-files 16` once the workflow is stable.
 
 ### 4. Prepare Secrets
 
@@ -144,18 +154,78 @@ Do not commit `.env`.
 
 ### 5. Run The Local Compose Assessment
 
-From the leaderboard repository:
+From the leaderboard repository, pick a matching scenario/task pair. The
+`--scenario` and `--task-id` values should point to the same level.
+
+After the ROOT files and `.env` are ready, `scripts/local_shared_submit.py` is
+the single command-line entry point for the whole local workflow: it patches the
+scenario, generates Compose config, optionally builds local Green/Purple images,
+runs Docker Compose, archives Green output, records provenance, and prepares
+`submissions/` plus `results/` files.
+
+Default collaborator smoke workflow, L2 with five ROOT files:
 
 ```bash
 cd ../hepex-analysisops-leaderboard
 python3 scripts/local_shared_submit.py \
+  --scenario .local-submit/scenario.l2.base.toml \
   --host-input-dir ../hepex-analysisops-benchmark/shared_input/2025e-13tev-beta/data/GamGam \
+  --task-id t003_hyy_v5_l2 \
+  --max-files 5 \
+  --mode call_white \
+  --solver-backend agent_1_oh \
+  --build-local-images \
+  --submission-prefix l2-local \
+  --no-commit
+```
+
+L2 full local run with all 16 GamGam ROOT files:
+
+```bash
+python3 scripts/local_shared_submit.py \
+  --scenario .local-submit/scenario.l2.base.toml \
+  --host-input-dir ../hepex-analysisops-benchmark/shared_input/2025e-13tev-beta/data/GamGam \
+  --task-id t003_hyy_v5_l2 \
   --max-files 16 \
   --mode call_white \
   --solver-backend agent_1_oh \
   --build-local-images \
+  --submission-prefix l2-full \
   --no-commit
 ```
+
+L3 smoke run with five ROOT files:
+
+```bash
+python3 scripts/local_shared_submit.py \
+  --scenario .local-submit/scenario.l3.base.toml \
+  --host-input-dir ../hepex-analysisops-benchmark/shared_input/2025e-13tev-beta/data/GamGam \
+  --task-id t004_hyy_v5_l3 \
+  --max-files 5 \
+  --mode call_white \
+  --solver-backend agent_1_oh \
+  --build-local-images \
+  --submission-prefix l3-local \
+  --no-commit
+```
+
+L1/default smoke run:
+
+```bash
+python3 scripts/local_shared_submit.py \
+  --host-input-dir ../hepex-analysisops-benchmark/shared_input/2025e-13tev-beta/data/GamGam \
+  --task-id t002_hyy_v5_l1 \
+  --max-files 1 \
+  --mode call_white \
+  --solver-backend agent_1_oh \
+  --build-local-images \
+  --submission-prefix l1-local \
+  --no-commit
+```
+
+Use `--build-local-images` after changing `hepex-analysisops-benchmark` or
+`hepex-analysisops-agents`. You can omit it when you deliberately want to reuse
+already-built `hepex-green-agent:local` and `hepex-purple-agent:local` images.
 
 What this does:
 
@@ -176,7 +246,8 @@ mounts local data, and can build local images without changing `scenario.toml`.
 
 ### 6. Verify Results
 
-After a successful run, check the machine-readable result shape:
+After a successful run, check the machine-readable result shape without assuming
+a specific level:
 
 ```bash
 python3 - <<'PY'
@@ -186,19 +257,31 @@ from pathlib import Path
 data = json.loads(Path("output/results.json").read_text())
 print("results_len =", len(data.get("results", [])))
 for result in data.get("results", []):
-    print(result["task_id"], result["status"], result["final"]["normalized_score"])
+    final = result.get("final", {})
+    print(
+        "task_id =", result.get("task_id"),
+        "status =", result.get("status"),
+        "type =", result.get("type"),
+        "score =", final.get("normalized_score"),
+        "visibility =", result.get("score_visibility"),
+    )
+
+runs = sorted(Path("output/runs").iterdir(), key=lambda path: path.stat().st_mtime)
+print("latest_run =", runs[-1] if runs else "<none>")
 PY
 ```
 
 Expected minimal E2E shape:
 
 - `results_len = 1`
-- the only `task_id` is `t002_hyy_v5_l1`
+- the only `task_id` matches the level you selected
 - `output/runs/<run_id>/results.json` exists
-- `output/runs/<run_id>/t002_hyy_v5_l1/judge_output.json` exists
+- `output/runs/<run_id>/<task_id>/judge_output.json` exists
+- `score_visibility` is `official_with_hidden` when `GREEN_SECRETS_JSON`
+  contains the selected task
 - `submission_trace.json.input_file_count` matches the local manifest cap
 - `submission_trace.json.selected_events_total` is nonzero for realistic
-  multi-file GamGam runs
+  multi-file L1/L2 GamGam runs; L3 may report broader discovery evidence instead
 
 ### 7. Inspect A Failed Run
 
@@ -208,10 +291,12 @@ The useful debug files are:
 output/runs/<run_id>/eval_request.json
 output/runs/<run_id>/green_config.json
 output/runs/<run_id>/run_summary.json
-output/runs/<run_id>/t002_hyy_v5_l1/purple_request.json
-output/runs/<run_id>/t002_hyy_v5_l1/purple_response_raw.txt
-output/runs/<run_id>/t002_hyy_v5_l1/judge_output.json
-output/runs/<run_id>/t002_hyy_v5_l1/solver_work/debug_oh_output.log
+output/runs/<run_id>/<task_id>/purple_request.json
+output/runs/<run_id>/<task_id>/purple_response_raw.txt
+output/runs/<run_id>/<task_id>/submission_bundle_raw.json
+output/runs/<run_id>/<task_id>/submission_trace.json
+output/runs/<run_id>/<task_id>/judge_output.json
+output/runs/<run_id>/<task_id>/solver_work/debug_oh_output.log
 ```
 
 Start with `judge_output.json` for scoring/contract failures, then inspect
@@ -232,14 +317,28 @@ docker compose \
 Useful variations:
 
 ```bash
-# Reuse already-built local images
-python3 scripts/local_shared_submit.py --max-files 16 --mode call_white --no-commit
+# Reuse already-built local images for an L2 full run
+python3 scripts/local_shared_submit.py \
+  --scenario .local-submit/scenario.l2.base.toml \
+  --task-id t003_hyy_v5_l2 \
+  --max-files 16 \
+  --mode call_white \
+  --no-commit
 
-# Run only one ROOT file for a fast smoke pass
-python3 scripts/local_shared_submit.py --max-files 1 --mode call_white --no-commit
+# Run only five ROOT files for an L3 smoke pass
+python3 scripts/local_shared_submit.py \
+  --scenario .local-submit/scenario.l3.base.toml \
+  --task-id t004_hyy_v5_l3 \
+  --max-files 5 \
+  --mode call_white \
+  --no-commit
 
-# Reuse output/results.json and only package/archive it
-python3 scripts/local_shared_submit.py --skip-run --no-commit
+# Reuse output/results.json and only package/archive it; keep the scenario/task pair matched
+python3 scripts/local_shared_submit.py \
+  --scenario .local-submit/scenario.l2.base.toml \
+  --task-id t003_hyy_v5_l2 \
+  --skip-run \
+  --no-commit
 ```
 
 The wrapper does not run `docker compose pull` by default because the local
@@ -287,7 +386,7 @@ output/runs/<run_id>/
 ├── green_config.json
 ├── run_summary.json
 ├── results.json
-└── t002_hyy_v5_l1/
+└── <task_id>/
     ├── purple_request.json
     ├── purple_response_raw.txt
     ├── submission_bundle_raw.json
@@ -341,7 +440,11 @@ These files are local/generated and should be treated carefully:
 - `a2a-scenario.toml`
 - `docker-compose.local-shared.yml`
 - `output/`
-- `.local-submit/`
+- `.local-submit/scenario.local.generated.toml`
+
+The checked-in `.local-submit/scenario.l2.base.toml` and
+`.local-submit/scenario.l3.base.toml` files are reusable local templates, not
+per-run output.
 
 Only commit generated submission/result files intentionally.
 
@@ -349,8 +452,14 @@ Only commit generated submission/result files intentionally.
 
 - If the private hidden score is unavailable, rerun
   `../hepex-analysisops-benchmark/scripts/export_green_secrets.py`.
+- If L2/L3 still show public-only scoring, make sure you are using the matching
+  `--scenario` and `--task-id`, then rerun the secrets export so contract and
+  rubric hashes match.
 - If local Compose cannot see ROOT files, pass `--host-input-dir` explicitly.
 - If `docker compose pull` fails for `:local` images, omit `--pull`.
+- If a full L2/L3 run times out while waiting for the Purple Agent, set
+  `A2A_CLIENT_TIMEOUT_SECONDS=900` or higher in `.env` and rebuild/restart the
+  Green container.
 - If port `9009` is busy, stop old containers with
   `docker compose --env-file .env down`.
 
