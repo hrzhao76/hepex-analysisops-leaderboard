@@ -168,6 +168,22 @@ runs Docker Compose, archives Green output, records provenance, and prepares
 local-only packaged files under `local_runs/submissions/` and
 `local_runs/results/`.
 
+The checked-in GitHub scenario uses Green-managed shared input for the SciFi-OH
+smoke run. The scenario uses the task-templated shared input path
+`/home/agent/output/shared_input/{release}/{dataset}/{skim}`. Green expands it
+per task, downloads the requested ROOT files there, writes `input_manifest.json`,
+and passes that read-only manifest to the Purple Agent.
+SciFi-OH still runs as the Purple backend/controller, with OpenHarness as its
+worker executor. The scenario sets `solver_request_timeout_seconds = 1800`,
+which is the Green-to-Purple per-task wait limit; it is not a hard timeout for
+the Green download step.
+
+For CI debugging, SciFi-OH writes
+`output/runs/<run_id>/<task_id>/solver_work/debug_scifi_oh_output.log` and also
+prints that log into the Purple container stdout near the end of each task, so
+the ordinary GitHub Actions log contains the prompt, OpenHarness stdout/stderr,
+and independent review trail without requiring a workflow artifact upload.
+
 Default SciFi-OH collaborator smoke workflow, L1 with one ROOT file:
 
 ```bash
@@ -480,9 +496,13 @@ deliberately promote them.
   rubric hashes match.
 - If local Compose cannot see ROOT files, pass `--host-input-dir` explicitly.
 - If `docker compose pull` fails for `:local` images, omit `--pull`.
-- If a full L2/L3 run times out while waiting for the Purple Agent, set
-  `A2A_CLIENT_TIMEOUT_SECONDS=900` or higher in `.env` and rebuild/restart the
-  Green container.
+- If a full L2/L3 run times out while waiting for the Purple Agent, prefer
+  increasing `solver_request_timeout_seconds` in `scenario.toml`. The
+  `A2A_CLIENT_TIMEOUT_SECONDS` environment variable remains a fallback when the
+  scenario does not set an explicit timeout.
+- If CI output is poor, search the GitHub Actions log for
+  `BEGIN debug_scifi_oh_output.log`; the backend prints the SciFi-OH debug log
+  directly to container stdout.
 - If port `9009` is busy, stop old containers with
   `docker compose --env-file .env down`.
 

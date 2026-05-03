@@ -23,21 +23,25 @@ task_dirs = [
 
 # Data directory for caches and run outputs inside the green-agent container
 data_dir = "/home/agent/output"
+input_access_mode = "scenario_shared_mount"
+shared_input_dir = "/home/agent/output/shared_input/{release}/{dataset}/{skim}"
+allow_green_download = true
+solver_request_timeout_seconds = 1800
 
 [config.task_overrides.t002_hyy_v5_l1]
 enabled = true
 mode = "call_white"
-input_strategy = "download"
-max_files = 1
+input_strategy = "shared_manifest"
+max_files = 5
 
 [config.task_overrides.t003_hyy_v5_l2]
 enabled = true
 mode = "call_white"
-input_strategy = "download"
-max_files = 1
+input_strategy = "shared_manifest"
+max_files = 5
 
 [config.task_overrides.t004_hyy_v5_l3]
 enabled = true
 mode = "call_white"
-input_strategy = "download"
-max_files = 1
+input_strategy = "shared_manifest"
+max_files = 5
