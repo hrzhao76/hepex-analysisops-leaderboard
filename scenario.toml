@@ -16,9 +16,9 @@ env = { OPENAI_API_KEY = "${OPENAI_API_KEY}" }
 # backend matrix. Switch this value to "agent_1_oh" for a baseline OH smoke.
 solver_backend = "agent_2_scifi_oh"
 task_dirs = [
-  "tasks_public/t002_hyy_v5_l1",
-  "tasks_public/t003_hyy_v5_l2",
-  "tasks_public/t004_hyy_v5_l3",
+  "tasks_public/t005_hzz4l_l1",
+  "tasks_public/t006_hzz4l_l2",
+  "tasks_public/t007_hzz4l_l3"
 ]
 
 # Data directory for caches and run outputs inside the green-agent container
@@ -28,20 +28,20 @@ shared_input_dir = "/home/agent/output/shared_input/{release}/{dataset}/{skim}"
 allow_green_download = true
 solver_request_timeout_seconds = 1800
 
-[config.task_overrides.t002_hyy_v5_l1]
+[config.task_overrides.t005_hzz4l_l1]
 enabled = true
 mode = "call_white"
 input_strategy = "shared_manifest"
-max_files = 5
+max_files = 0
 
-[config.task_overrides.t003_hyy_v5_l2]
+[config.task_overrides.t006_hzz4l_l2]
 enabled = true
 mode = "call_white"
 input_strategy = "shared_manifest"
-max_files = 5
+max_files = 0
 
-[config.task_overrides.t004_hyy_v5_l3]
+[config.task_overrides.t007_hzz4l_l3]
 enabled = true
 mode = "call_white"
 input_strategy = "shared_manifest"
-max_files = 5
+max_files = 0

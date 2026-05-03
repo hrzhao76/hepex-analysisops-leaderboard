@@ -10,5 +10,6 @@ local_runs/
 !.local-submit/
 !.local-submit/scenario.l2.base.toml
 !.local-submit/scenario.l3.base.toml
+!.local-submit/scenario.hzz4l.l1.base.toml
 ouptut/
 output*/

@@ -1,0 +1,25 @@
+[green_agent]
+agentbeats_id = "019bc3d3-cae6-7711-9696-a912bb00bd11"
+image = "hepex-green-agent:local"
+env = { OPENAI_API_KEY = "${OPENAI_API_KEY}", GREEN_SECRETS_JSON = "${GREEN_SECRETS_JSON}" }
+
+[[participants]]
+agentbeats_id = "019bc3da-00a0-7930-9e2d-e46dad026684"
+name = "purple_agent"
+image = "hepex-purple-agent:local"
+env = { OPENAI_API_KEY = "${OPENAI_API_KEY}" }
+
+[config]
+solver_backend = "agent_2_scifi_oh"
+task_dirs = ["tasks_public/t007_hzz4l_l3"]
+data_dir = "/home/agent/output"
+input_access_mode = "scenario_shared_mount"
+shared_input_dir = "/home/agent/output/shared_input/{release}/{dataset}/{skim}"
+allow_green_download = true
+solver_request_timeout_seconds = 1800
+
+[config.task_overrides.t007_hzz4l_l3]
+enabled = true
+mode = "call_white"
+input_strategy = "shared_manifest"
+max_files = 0

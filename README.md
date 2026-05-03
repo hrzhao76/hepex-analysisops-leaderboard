@@ -42,6 +42,8 @@ Common runtime settings:
 - Response format: `submission_bundle_v1`
 - CI/default input strategy: `download`
 - Local realistic input strategy: `local_shared_mount` plus `shared_manifest`
+- Final task results include `solver_backend`, `purple_agent_runtime_seconds`,
+  and a `timing` object for runtime debugging and leaderboard queries.
 - Green scoring: public contract plus optional hidden rubric from
   `GREEN_SECRETS_JSON`
 - Solver backends used in local testing: `agent_1_oh` for the baseline OH
