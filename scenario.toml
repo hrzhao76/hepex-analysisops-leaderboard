@@ -28,16 +28,16 @@ data_dir = "/home/agent/output"
 enabled = true
 mode = "call_white"
 input_strategy = "download"
-max_files = 5
+max_files = 1
 
 [config.task_overrides.t003_hyy_v5_l2]
 enabled = true
 mode = "call_white"
 input_strategy = "download"
-max_files = 5
+max_files = 1
 
 [config.task_overrides.t004_hyy_v5_l3]
 enabled = true
 mode = "call_white"
 input_strategy = "download"
-max_files = 5
+max_files = 1
