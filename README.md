@@ -83,6 +83,9 @@ ci-submit/scenario.agent03b.hzz.toml
 The matrix currently covers `agent_1_oh`, `agent_2_scifi_oh`, and
 `agent_3b_scifi_native` on the Hyy and HZZ4l public task families. Each file
 uses Green-managed shared input and `max_files = 5` for smoke testing.
+They also set `HEPEX_OPENAI_MODEL = "gpt-5.4"` for Green judge calls and
+`solver_model = "gpt-5.4"` in `[config]` so Green sends `solver_model` to the
+Purple Agent request instead of falling back to the benchmark default.
 
 These scenario files do not change Green rubrics. They only choose task
 directories, solver backend, input mode, and file caps. `GREEN_SECRETS_JSON`

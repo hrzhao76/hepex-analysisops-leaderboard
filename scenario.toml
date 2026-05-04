@@ -1,6 +1,6 @@
 [green_agent]
 agentbeats_id = "019bc3d3-cae6-7711-9696-a912bb00bd11"
-env = { OPENAI_API_KEY = "${OPENAI_API_KEY}", GREEN_SECRETS_JSON = "${GREEN_SECRETS_JSON}" }
+env = { OPENAI_API_KEY = "${OPENAI_API_KEY}", GREEN_SECRETS_JSON = "${GREEN_SECRETS_JSON}", HEPEX_OPENAI_MODEL = "gpt-5.4" }
 
 # Purple Agent (participant being evaluated)
 [[participants]]
@@ -17,6 +17,7 @@ env = { OPENAI_API_KEY = "${OPENAI_API_KEY}" }
 # backend matrix. Use ci-submit/scenario.agent01.*.toml and
 # ci-submit/scenario.agent02.*.toml for backend smoke comparisons.
 solver_backend = "agent_2_scifi_oh"
+solver_model = "gpt-5.4"
 task_dirs = [
   "tasks_public/t005_hzz4l_l1",
   "tasks_public/t006_hzz4l_l2",
