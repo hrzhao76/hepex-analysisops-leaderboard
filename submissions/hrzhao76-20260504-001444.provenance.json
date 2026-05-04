@@ -1,0 +1,17 @@
+{
+  "image_digests": {
+    "green-agent": "ghcr.io/hrzhao76/hepex-analysisops-benchmark@sha256:e566c055cf4befe9e5f477383c8b8c6ed2cbcbbd320c88ee14dc29ba4c8d49c3",
+    "purple-agent": "ghcr.io/hrzhao76/hepex-analysisops-agents@sha256:a0da4133ff3001bc59634d841f740f79ab70fa8224e25b09094cf7c29b6b8769",
+    "agentbeats-client": "ghcr.io/agentbeats/agentbeats-client@sha256:13dfe3ef4e583a80e7ce2fe3becd0ce3b879841368a7f4fa40b6ebbabeeb014e"
+  },
+  "timestamp": "2026-05-04T00:14:44Z",
+  "github_actions": {
+    "run_url": "https://github.com/hrzhao76/hepex-analysisops-leaderboard/actions/runs/25294598194",
+    "run_logs_url": "https://api.github.com/repos/hrzhao76/hepex-analysisops-leaderboard/actions/runs/25294598194/logs",
+    "ref": "refs/heads/main",
+    "sha": "6b1abbcd5c044e7374eac5b5a7d0cf15cc3ad7b8",
+    "repository_url": "https://github.com/hrzhao76/hepex-analysisops-leaderboard",
+    "workflow_ref": "hrzhao76/hepex-analysisops-leaderboard/.github/workflows/run-scenario.yml@refs/heads/main",
+    "workflow_sha": "6b1abbcd5c044e7374eac5b5a7d0cf15cc3ad7b8"
+  }
+}

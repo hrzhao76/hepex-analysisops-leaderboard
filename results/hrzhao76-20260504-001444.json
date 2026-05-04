@@ -1,0 +1,217 @@
+{
+  "participants": {
+    "purple_agent": "019bc3da-00a0-7930-9e2d-e46dad026684"
+  },
+  "results": [
+    {
+      "task_id": "t005_hzz4l_l1",
+      "type": "hzz4l_l1",
+      "status": "public_ok_hidden_unavailable",
+      "hard_checks_passed": true,
+      "contract_report": {
+        "task_id": "t005_hzz4l_l1",
+        "type": "hzz4l_l1",
+        "status": "ok",
+        "validator": "contract_validator_dir",
+        "hard_checks_passed": true,
+        "missing_files": [],
+        "schema_errors": [],
+        "final": {
+          "total_score": 1.0,
+          "max_score": 1.0,
+          "normalized_score": 1.0
+        },
+        "issues": []
+      },
+      "public_scores": {
+        "contract_pass": 1.0,
+        "public_structure_score": 1.0,
+        "public_artifact_score": 1.0
+      },
+      "hidden_scores": {
+        "hidden_quality_score": null,
+        "status": "unavailable",
+        "reason": "Task requires private-rubric scoring, but no matching private rubric was available from GREEN_SECRETS_JSON."
+      },
+      "score_visibility": "public_only",
+      "dimension_scores": {
+        "execution": null,
+        "pipeline": null,
+        "implementation": null,
+        "reasoning": null,
+        "analysis": null,
+        "validation": null
+      },
+      "check_results": [],
+      "final": {
+        "total_score": 1.0,
+        "max_score": 1.0,
+        "normalized_score": 1.0
+      },
+      "issues": [
+        {
+          "severity": "info",
+          "code": "PRIVATE_RUBRIC_UNAVAILABLE",
+          "message": "Task requires private-rubric scoring, but no matching private rubric was available from GREEN_SECRETS_JSON."
+        }
+      ],
+      "task_overrides_applied": {
+        "enabled": true,
+        "mode": "call_white",
+        "input_strategy": "shared_manifest",
+        "max_files": 0
+      },
+      "solver_backend": "agent_2_scifi_oh",
+      "purple_agent_runtime_seconds": 109.209695,
+      "timing": {
+        "task_started_at": "2026-05-04T00:02:37.255977+00:00",
+        "task_finished_at": "2026-05-04T00:09:50.738553+00:00",
+        "task_runtime_seconds": 433.482576,
+        "purple_agent_used": true,
+        "purple_agent_started_at": "2026-05-04T00:08:01.505400+00:00",
+        "purple_agent_finished_at": "2026-05-04T00:09:50.715090+00:00",
+        "purple_agent_runtime_seconds": 109.209695
+      }
+    },
+    {
+      "task_id": "t006_hzz4l_l2",
+      "type": "hzz4l_l2",
+      "status": "public_ok_hidden_unavailable",
+      "hard_checks_passed": true,
+      "contract_report": {
+        "task_id": "t006_hzz4l_l2",
+        "type": "hzz4l_l2",
+        "status": "ok",
+        "validator": "contract_validator_dir",
+        "hard_checks_passed": true,
+        "missing_files": [],
+        "schema_errors": [],
+        "final": {
+          "total_score": 1.0,
+          "max_score": 1.0,
+          "normalized_score": 1.0
+        },
+        "issues": []
+      },
+      "public_scores": {
+        "contract_pass": 1.0,
+        "public_structure_score": 1.0,
+        "public_artifact_score": 1.0
+      },
+      "hidden_scores": {
+        "hidden_quality_score": null,
+        "status": "unavailable",
+        "reason": "Task requires private-rubric scoring, but no matching private rubric was available from GREEN_SECRETS_JSON."
+      },
+      "score_visibility": "public_only",
+      "dimension_scores": {
+        "execution": null,
+        "pipeline": null,
+        "implementation": null,
+        "reasoning": null,
+        "analysis": null,
+        "validation": null
+      },
+      "check_results": [],
+      "final": {
+        "total_score": 1.0,
+        "max_score": 1.0,
+        "normalized_score": 1.0
+      },
+      "issues": [
+        {
+          "severity": "info",
+          "code": "PRIVATE_RUBRIC_UNAVAILABLE",
+          "message": "Task requires private-rubric scoring, but no matching private rubric was available from GREEN_SECRETS_JSON."
+        }
+      ],
+      "task_overrides_applied": {
+        "enabled": true,
+        "mode": "call_white",
+        "input_strategy": "shared_manifest",
+        "max_files": 0
+      },
+      "solver_backend": "agent_2_scifi_oh",
+      "purple_agent_runtime_seconds": 140.414754,
+      "timing": {
+        "task_started_at": "2026-05-04T00:09:50.739327+00:00",
+        "task_finished_at": "2026-05-04T00:12:15.267410+00:00",
+        "task_runtime_seconds": 144.528089,
+        "purple_agent_used": true,
+        "purple_agent_started_at": "2026-05-04T00:09:54.819499+00:00",
+        "purple_agent_finished_at": "2026-05-04T00:12:15.234246+00:00",
+        "purple_agent_runtime_seconds": 140.414754
+      }
+    },
+    {
+      "task_id": "t007_hzz4l_l3",
+      "type": "hzz4l_l3",
+      "status": "public_ok_hidden_unavailable",
+      "hard_checks_passed": true,
+      "contract_report": {
+        "task_id": "t007_hzz4l_l3",
+        "type": "hzz4l_l3",
+        "status": "ok",
+        "validator": "contract_validator_dir",
+        "hard_checks_passed": true,
+        "missing_files": [],
+        "schema_errors": [],
+        "final": {
+          "total_score": 1.0,
+          "max_score": 1.0,
+          "normalized_score": 1.0
+        },
+        "issues": []
+      },
+      "public_scores": {
+        "contract_pass": 1.0,
+        "public_structure_score": 1.0,
+        "public_artifact_score": 1.0
+      },
+      "hidden_scores": {
+        "hidden_quality_score": null,
+        "status": "unavailable",
+        "reason": "Task requires private-rubric scoring, but no matching private rubric was available from GREEN_SECRETS_JSON."
+      },
+      "score_visibility": "public_only",
+      "dimension_scores": {
+        "execution": null,
+        "pipeline": null,
+        "implementation": null,
+        "reasoning": null,
+        "analysis": null,
+        "validation": null
+      },
+      "check_results": [],
+      "final": {
+        "total_score": 1.0,
+        "max_score": 1.0,
+        "normalized_score": 1.0
+      },
+      "issues": [
+        {
+          "severity": "info",
+          "code": "PRIVATE_RUBRIC_UNAVAILABLE",
+          "message": "Task requires private-rubric scoring, but no matching private rubric was available from GREEN_SECRETS_JSON."
+        }
+      ],
+      "task_overrides_applied": {
+        "enabled": true,
+        "mode": "call_white",
+        "input_strategy": "shared_manifest",
+        "max_files": 0
+      },
+      "solver_backend": "agent_2_scifi_oh",
+      "purple_agent_runtime_seconds": 143.194143,
+      "timing": {
+        "task_started_at": "2026-05-04T00:12:15.268090+00:00",
+        "task_finished_at": "2026-05-04T00:14:43.557115+00:00",
+        "task_runtime_seconds": 148.289034,
+        "purple_agent_used": true,
+        "purple_agent_started_at": "2026-05-04T00:12:20.326712+00:00",
+        "purple_agent_finished_at": "2026-05-04T00:14:43.520848+00:00",
+        "purple_agent_runtime_seconds": 143.194143
+      }
+    }
+  ]
+}
