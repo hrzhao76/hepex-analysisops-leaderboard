@@ -1,0 +1,2758 @@
+{
+  "participants": {
+    "purple_agent": "019bc3da-00a0-7930-9e2d-e46dad026684"
+  },
+  "results": [
+    {
+      "task_id": "t005_hzz4l_l1",
+      "type": "hzz4l_l1",
+      "status": "ok",
+      "hard_checks_passed": true,
+      "contract_report": {
+        "task_id": "t005_hzz4l_l1",
+        "type": "hzz4l_l1",
+        "status": "ok",
+        "validator": "contract_validator_dir",
+        "hard_checks_passed": true,
+        "missing_files": [],
+        "schema_errors": [],
+        "final": {
+          "total_score": 1.0,
+          "max_score": 1.0,
+          "normalized_score": 1.0
+        },
+        "issues": []
+      },
+      "public_scores": {
+        "contract_pass": 1.0,
+        "public_structure_score": 1.0,
+        "public_artifact_score": 1.0
+      },
+      "hidden_scores": {
+        "hidden_quality_score": 0.8775,
+        "status": "ok"
+      },
+      "score_visibility": "official_with_hidden",
+      "dimension_scores": {
+        "execution": 1.0,
+        "pipeline": 1.0,
+        "implementation": 0.65,
+        "reasoning": 1.0,
+        "analysis": 1.0,
+        "validation": 1.0
+      },
+      "check_results": [
+        {
+          "dimension": "execution",
+          "id": "required_output_files_present",
+          "type": "deterministic",
+          "passed": true,
+          "score_awarded": 0.6,
+          "score_max": 0.6,
+          "evidence": {
+            "missing": []
+          }
+        },
+        {
+          "dimension": "execution",
+          "id": "required_output_files_nonempty",
+          "type": "deterministic",
+          "passed": true,
+          "score_awarded": 0.4,
+          "score_max": 0.4,
+          "evidence": {
+            "empty_or_missing": []
+          }
+        },
+        {
+          "dimension": "pipeline",
+          "id": "baseline_stages_present",
+          "type": "structural",
+          "passed": true,
+          "score_awarded": 0.35,
+          "score_max": 0.35,
+          "evidence": {
+            "present": [
+              "sample_assembly",
+              "event_selection",
+              "observable_construction",
+              "mc_weight_computation",
+              "histogramming_and_uncertainties",
+              "excess_assessment"
+            ],
+            "missing": []
+          }
+        },
+        {
+          "dimension": "pipeline",
+          "id": "baseline_stage_order_respected",
+          "type": "structural",
+          "passed": true,
+          "score_awarded": 0.35,
+          "score_max": 0.35,
+          "evidence": {
+            "present": [
+              "sample_assembly",
+              "event_selection",
+              "observable_construction",
+              "mc_weight_computation",
+              "histogramming_and_uncertainties",
+              "excess_assessment"
+            ],
+            "failed_pairs": []
+          }
+        },
+        {
+          "dimension": "pipeline",
+          "id": "baseline_trace_fields_present",
+          "type": "structural",
+          "passed": true,
+          "score_awarded": 0.3,
+          "score_max": 0.3,
+          "evidence": {
+            "missing": []
+          }
+        },
+        {
+          "dimension": "pipeline",
+          "id": "hzz_manifest_samples_used",
+          "type": "structural",
+          "passed": true,
+          "score_awarded": 0.3,
+          "score_max": 0.3,
+          "evidence": {
+            "missing_samples": [],
+            "off_manifest_root_refs": [],
+            "manifest_sample_ids": [
+              "background_z_ttbar_ttb_vvv",
+              "background_zzstar",
+              "data",
+              "signal_mh125"
+            ],
+            "manifest_sample_names": [
+              "Background $Z,t\\bar{t},t\\bar{t}+V,VVV$",
+              "Background $ZZ^{*}$",
+              "Data",
+              "Signal ($m_H$ = 125 GeV)"
+            ],
+            "trace_root_ref_count": 40
+          }
+        },
+        {
+          "dimension": "implementation",
+          "id": "baseline_selection_cuts_traceable",
+          "type": "deterministic",
+          "passed": false,
+          "score_awarded": 0.0,
+          "score_max": 0.35,
+          "evidence": {
+            "failures": [
+              {
+                "cut_id": "four_lepton_flavor_requirement",
+                "field": "variable_any_of",
+                "expected": [
+                  "sum_lep_type",
+                  "sum(lep_type[0:4])"
+                ],
+                "actual": "sum(lep_type[:4])"
+              },
+              {
+                "cut_id": "total_charge_requirement",
+                "field": "variable_any_of",
+                "expected": [
+                  "total_lepton_charge",
+                  "sum(lep_charge[0:4])"
+                ],
+                "actual": "sum(lep_charge[:4])"
+              }
+            ]
+          }
+        },
+        {
+          "dimension": "implementation",
+          "id": "observable_is_four_lepton_invariant_mass",
+          "type": "deterministic",
+          "passed": true,
+          "score_awarded": 0.25,
+          "score_max": 0.25,
+          "evidence": {
+            "missing": []
+          }
+        },
+        {
+          "dimension": "implementation",
+          "id": "baseline_template_inference_traceable",
+          "type": "structural",
+          "passed": true,
+          "score_awarded": 0.2,
+          "score_max": 0.2,
+          "evidence": {
+            "accepted_any_of": [
+              "histogram_template_comparison",
+              "stacked_mc_spectrum_excess_assessment",
+              "binned_data_vs_mc_localized_excess_metric"
+            ]
+          }
+        },
+        {
+          "dimension": "implementation",
+          "id": "mass_histogram_shape_reasonable",
+          "type": "deterministic",
+          "passed": true,
+          "score_awarded": 0.2,
+          "score_max": 0.2,
+          "evidence": {
+            "actual_range": [
+              80.0,
+              250.0
+            ],
+            "actual_bin_width": 2.5,
+            "n_bins": 68
+          }
+        },
+        {
+          "dimension": "reasoning",
+          "id": "interpretation_connects_m4l_to_hzz_signal",
+          "type": "llm_judge",
+          "passed": true,
+          "score_awarded": 1.0,
+          "score_max": 1.0,
+          "evidence": {
+            "judge_result": {
+              "pass": true,
+              "explanation": "The submission is logically consistent with the provided evidence and rubric. It discusses the four-lepton invariant mass m4l, uses the H -> ZZ* -> 4l / HZZ4l signal sample, identifies a localized excess near 125 GeV, and compares it to the background expectation. The interpretation statement ('A localized excess consistent with a Higgs-like peak is observed around m4l \u2248 124 GeV.') matches the inference summary showing excess_observed=true in the 122.5\u2013130.0 GeV ROI, with background yield 10.30 and total stacked yield 29.31, and a significance proxy of 2.88. It does not claim a different decay channel and does not ignore the submitted inference summary.",
+              "notes": [
+                "ROI 122.5\u2013130.0 GeV is consistent with the claimed excess near 124\u2013125 GeV.",
+                "Background expectation is explicitly provided and contrasted with observed/stacked excess.",
+                "Signal sample names and observable construction are consistent with an HZZ4l analysis.",
+                "No internal contradictions found between interpretation, histogram content, and inference summary."
+              ]
+            }
+          }
+        },
+        {
+          "dimension": "analysis",
+          "id": "significance_proxy_positive",
+          "type": "deterministic",
+          "passed": true,
+          "score_awarded": 0.45,
+          "score_max": 0.45,
+          "evidence": {
+            "value": 2.8807490176284523,
+            "expected_range": [
+              0.0,
+              1000000.0
+            ],
+            "field_aliases": [
+              "significance_proxy"
+            ]
+          }
+        },
+        {
+          "dimension": "analysis",
+          "id": "spectrum_and_summary_coherent",
+          "type": "heuristic",
+          "passed": true,
+          "score_awarded": 0.55,
+          "score_max": 0.55,
+          "evidence": {
+            "missing": []
+          }
+        },
+        {
+          "dimension": "validation",
+          "id": "validation_mentions_signal_region_or_binning",
+          "type": "structural",
+          "passed": true,
+          "score_awarded": 1.0,
+          "score_max": 1.0,
+          "evidence": {
+            "existing_files": [],
+            "matching_labels": [
+              "weight_sanity_check"
+            ],
+            "matched_groups": {},
+            "minimum_group_count": 0,
+            "validation_fields": [
+              "validation_checks"
+            ],
+            "generic_evidence": true,
+            "count": 2
+          }
+        }
+      ],
+      "final": {
+        "total_score": 0.8775,
+        "max_score": 1.0,
+        "normalized_score": 0.8775
+      },
+      "llm": {
+        "judge": {
+          "configured": {
+            "provider": "openai",
+            "model": "gpt-5.4"
+          },
+          "runtime": {
+            "available": true,
+            "provider": "openai",
+            "model": "gpt-5.4"
+          }
+        },
+        "solver": {
+          "configured": {
+            "backend": "agent_1_oh",
+            "model": "gpt-5",
+            "source": "default"
+          }
+        }
+      },
+      "task_overrides_applied": {
+        "enabled": true,
+        "mode": "call_white",
+        "input_strategy": "shared_manifest",
+        "max_files": 0
+      },
+      "solver_backend": "agent_1_oh",
+      "purple_agent_runtime_seconds": 1002.608494,
+      "timing": {
+        "task_started_at": "2026-05-04T06:03:57.233217+00:00",
+        "task_finished_at": "2026-05-04T06:29:53.465490+00:00",
+        "task_runtime_seconds": 1556.232279,
+        "purple_agent_used": true,
+        "purple_agent_started_at": "2026-05-04T06:13:06.399084+00:00",
+        "purple_agent_finished_at": "2026-05-04T06:29:49.007573+00:00",
+        "purple_agent_runtime_seconds": 1002.608494
+      }
+    },
+    {
+      "task_id": "t006_hzz4l_l2",
+      "type": "hzz4l_l2",
+      "status": "ok",
+      "hard_checks_passed": true,
+      "contract_report": {
+        "task_id": "t006_hzz4l_l2",
+        "type": "hzz4l_l2",
+        "status": "ok",
+        "validator": "contract_validator_dir",
+        "hard_checks_passed": true,
+        "missing_files": [],
+        "schema_errors": [],
+        "final": {
+          "total_score": 1.0,
+          "max_score": 1.0,
+          "normalized_score": 1.0
+        },
+        "issues": []
+      },
+      "public_scores": {
+        "contract_pass": 1.0,
+        "public_structure_score": 1.0,
+        "public_artifact_score": 1.0
+      },
+      "hidden_scores": {
+        "hidden_quality_score": 0.6990000000000001,
+        "status": "ok"
+      },
+      "score_visibility": "official_with_hidden",
+      "dimension_scores": {
+        "execution": 1.0,
+        "pipeline": 0.8500000000000001,
+        "implementation": 0.5,
+        "reasoning": 0.3,
+        "analysis": 0.7000000000000001,
+        "validation": 1.0
+      },
+      "check_results": [
+        {
+          "dimension": "execution",
+          "id": "required_output_files_present",
+          "type": "deterministic",
+          "passed": true,
+          "score_awarded": 0.25,
+          "score_max": 0.25,
+          "evidence": {
+            "missing": []
+          }
+        },
+        {
+          "dimension": "execution",
+          "id": "required_output_files_nonempty",
+          "type": "deterministic",
+          "passed": true,
+          "score_awarded": 0.25,
+          "score_max": 0.25,
+          "evidence": {
+            "empty_or_missing": []
+          }
+        },
+        {
+          "dimension": "execution",
+          "id": "execution_evidence_is_positive_and_manifest_consistent",
+          "type": "deterministic",
+          "passed": true,
+          "score_awarded": 0.5,
+          "score_max": 0.5,
+          "evidence": {
+            "failures": [],
+            "counters": {
+              "files_processed_count": 40.0,
+              "events_processed_total": 2102314.0,
+              "selected_events_total": 367011.0,
+              "candidates_built_total": 367011.0,
+              "histogram_filled_entries": 354799.0
+            },
+            "manifest_file_count": 40,
+            "series": {}
+          }
+        },
+        {
+          "dimension": "pipeline",
+          "id": "trace_stage_families_present",
+          "type": "structural",
+          "passed": true,
+          "score_awarded": 0.45,
+          "score_max": 0.45,
+          "evidence": {
+            "families": [
+              "data_access",
+              "data_access",
+              "object_or_event_selection",
+              "spectrum_or_summary_construction",
+              "inference_or_signal_localization",
+              "event_weighting",
+              "validation",
+              "event_weighting",
+              "object_or_event_selection",
+              "observable_construction",
+              "spectrum_or_summary_construction",
+              "inference_or_signal_localization",
+              "validation",
+              "object_or_event_selection",
+              "observable_construction",
+              "observable_construction",
+              "inference_or_signal_localization",
+              "data_access",
+              "event_weighting",
+              "observable_construction",
+              "spectrum_or_summary_construction",
+              "inference_or_signal_localization",
+              "interpretation",
+              "validation",
+              "data_access",
+              "object_or_event_selection",
+              "observable_construction",
+              "spectrum_or_summary_construction",
+              "inference_or_signal_localization",
+              "interpretation"
+            ],
+            "missing": [],
+            "matched": 7,
+            "required": 7,
+            "match_fraction": 1.0
+          }
+        },
+        {
+          "dimension": "pipeline",
+          "id": "trace_stage_family_order_is_coherent",
+          "type": "structural",
+          "passed": false,
+          "score_awarded": 0.0,
+          "score_max": 0.15,
+          "evidence": {
+            "families": [
+              "data_access",
+              "data_access",
+              "object_or_event_selection",
+              "spectrum_or_summary_construction",
+              "inference_or_signal_localization",
+              "event_weighting",
+              "validation"
+            ],
+            "failed_orders": [
+              {
+                "before": "event_weighting",
+                "after": "spectrum_or_summary_construction"
+              }
+            ],
+            "skipped_orders": [
+              {
+                "before": "object_or_event_selection",
+                "after": "observable_construction",
+                "reason": "missing_family"
+              },
+              {
+                "before": "observable_construction",
+                "after": "spectrum_or_summary_construction",
+                "reason": "missing_family"
+              },
+              {
+                "before": "inference_or_signal_localization",
+                "after": "interpretation",
+                "reason": "missing_family"
+              }
+            ]
+          }
+        },
+        {
+          "dimension": "pipeline",
+          "id": "trace_data_assembly_and_sample_roles_are_appropriate",
+          "type": "structural",
+          "passed": true,
+          "score_awarded": 0.4,
+          "score_max": 0.4,
+          "evidence": {
+            "missing": [],
+            "manifest_roles": [
+              "background",
+              "data",
+              "signal"
+            ]
+          }
+        },
+        {
+          "dimension": "implementation",
+          "id": "observable_is_four_lepton_invariant_mass",
+          "type": "deterministic",
+          "passed": false,
+          "score_awarded": 0.0,
+          "score_max": 0.3,
+          "evidence": {
+            "missing": [
+              "inputs"
+            ]
+          }
+        },
+        {
+          "dimension": "implementation",
+          "id": "selection_is_scientifically_valid_for_clean_four_lepton_events",
+          "type": "structural",
+          "passed": true,
+          "score_awarded": 0.3,
+          "score_max": 0.3,
+          "evidence": {
+            "present": [
+              "trigger",
+              "kinematic",
+              "object_quality",
+              "isolation",
+              "topology",
+              "charge"
+            ],
+            "missing": [],
+            "minimum_groups": 5
+          }
+        },
+        {
+          "dimension": "implementation",
+          "id": "mc_weighting_matches_task_intent",
+          "type": "structural",
+          "passed": false,
+          "score_awarded": 0.0,
+          "score_max": 0.2,
+          "evidence": {
+            "missing": [
+              "data_policy:unweighted"
+            ],
+            "present_factor_groups": [
+              "event_weight",
+              "cross_section",
+              "filter_efficiency",
+              "k_factor",
+              "sum_of_weights",
+              "scale_factors",
+              "luminosity"
+            ],
+            "missing_factor_groups": [],
+            "structured_evidence_field": null,
+            "structured_evidence_present": false
+          }
+        },
+        {
+          "dimension": "implementation",
+          "id": "inference_method_is_counting_style_against_stacked_mc",
+          "type": "structural",
+          "passed": true,
+          "score_awarded": 0.2,
+          "score_max": 0.2,
+          "evidence": {
+            "accepted_any_of": []
+          }
+        },
+        {
+          "dimension": "reasoning",
+          "id": "interpretation_addresses_core_scientific_claim",
+          "type": "llm_judge",
+          "passed": false,
+          "score_awarded": 0.0,
+          "score_max": 0.7,
+          "evidence": {
+            "judge_result": {
+              "pass": false,
+              "explanation": "The submission is mostly internally consistent and the interpretation satisfies the semantic requirements, but there is a notable logical inconsistency in the reported counting-window summary. In the 120\u2013130 GeV window, the observed yield is 57.0 and the background expectation is 17.3674, so the excess over background should be 57.0 - 17.3674 = 39.6326, not the reported 'window_numerator_yield' of 49.8963. The reported numerator also does not match signal+background (which would be 32.5288 + 17.3674 = 49.8963), indicating the numerator field is actually S+B while the significance formula labels it as the numerator for the excess significance. Thus the stated proxy significance 4.8045 is computed from S+B over the denominator, not from the excess over background or another clearly justified quantity. This is a material logical inconsistency in the benchmark evidence.",
+              "notes": [
+                "interpretation.md is under 300 words and explicitly mentions a localized excess near 125 GeV, comparison to background, and consistency with H->ZZ*->4l",
+                "Window bookkeeping is inconsistent: observed=57.0, background=17.3674, signal=32.5288, but numerator=49.8963 equals signal+background rather than observed-background",
+                "The significance formula uses 'window_numerator_yield / sqrt(window_background_yield + 0.3 * window_background_yield^2)', but the numerator is not defined consistently with the interpretation of an excess",
+                "Mass spectrum and window sums appear otherwise coherent: the [120,130] GeV bins sum to 57 data events and 17.3674 background events",
+                "A negative background bin exists in the spectrum, which is unphysical, though it does not directly contradict the stated window result"
+              ]
+            }
+          }
+        },
+        {
+          "dimension": "reasoning",
+          "id": "interpretation_is_reasonably_calibrated",
+          "type": "llm_judge",
+          "passed": true,
+          "score_awarded": 0.3,
+          "score_max": 0.3,
+          "evidence": {
+            "judge_result": {
+              "pass": true,
+              "explanation": "The submission is logically consistent with its artifacts and follows the claim-calibration rubric. The interpretation states an observed localized excess near 125 GeV and says it is 'consistent with Higgs-boson production,' which matches the preferred qualified claim style. The quoted numbers in the interpretation agree with four_lepton_excess_summary.json: window [120,130] GeV, observed 57.0, background 17.37, signal template 32.53, numerator 49.90, and proxy significance 4.80. No disallowed definitive discovery or proof-style claims are made.",
+              "notes": [
+                "Interpretation is appropriately qualified ('localized excess', 'consistent with') rather than claiming discovery.",
+                "Numerical values in interpretation match the summary artifact within rounding.",
+                "Method description is consistent across trace and summary: counting in a 120-130 GeV mass window.",
+                "One artifact contains a negative background bin at 172-174 GeV, which is odd physically but does not create an internal contradiction with the stated window-based conclusion.",
+                "The reported 'data_mc_scale_sanity' ratio of 1.52 being marked 'ok' may be methodologically questionable, but it is not a logical inconsistency in the submission's stated conclusion."
+              ]
+            }
+          }
+        },
+        {
+          "dimension": "analysis",
+          "id": "mass_spectrum_series_are_nonzero",
+          "type": "deterministic",
+          "passed": true,
+          "score_awarded": 0.05,
+          "score_max": 0.05,
+          "evidence": {
+            "failures": [],
+            "count": 85,
+            "sum": 1098.0,
+            "max": 72.0
+          }
+        },
+        {
+          "dimension": "analysis",
+          "id": "background_spectrum_series_is_nonzero",
+          "type": "deterministic",
+          "passed": false,
+          "score_awarded": 0.0,
+          "score_max": 0.05,
+          "evidence": {
+            "failures": [
+              "nonnegative_values"
+            ],
+            "count": 85,
+            "sum": 724.4724536113936,
+            "max": 67.26973226771224
+          }
+        },
+        {
+          "dimension": "analysis",
+          "id": "signal_spectrum_series_is_nonzero",
+          "type": "deterministic",
+          "passed": true,
+          "score_awarded": 0.05,
+          "score_max": 0.05,
+          "evidence": {
+            "failures": [],
+            "count": 85,
+            "sum": 42.49557836641907,
+            "max": 11.535736717516556
+          }
+        },
+        {
+          "dimension": "analysis",
+          "id": "excess_summary_window_and_significance_are_consistent",
+          "type": "deterministic",
+          "passed": true,
+          "score_awarded": 0.2,
+          "score_max": 0.2,
+          "evidence": {
+            "failures": [],
+            "window": [
+              120.0,
+              130.0
+            ],
+            "derived_data_yield": 57.0,
+            "derived_background_yield": 17.367441183771007,
+            "derived_background_variance": 8.627885433730171,
+            "derived_signal_yield": 32.52882040804252,
+            "summary_background_yield": 17.367441183771007,
+            "summary_data_yield": 57.0,
+            "summary_signal_yield": 32.52882040804252,
+            "summary_numerator_yield": 49.89626159181353,
+            "expected_numerator_yield": 49.89626159181353,
+            "summary_significance_formula": "window_numerator_yield / sqrt(window_background_yield + 0.3 * window_background_yield^2)",
+            "normalized_significance_formula": "numerator_over_sqrt_background_plus_fractional_systematic",
+            "summary_significance": 4.804477509925931,
+            "expected_significance": 4.804477509925931,
+            "validation_evidence_present": true
+          }
+        },
+        {
+          "dimension": "analysis",
+          "id": "mc_normalization_scale_plausibility",
+          "type": "deterministic",
+          "passed": true,
+          "score_awarded": 0.25,
+          "score_max": 0.25,
+          "evidence": {
+            "failures": [],
+            "checks": [
+              {
+                "region": "full_spectrum",
+                "interval": [
+                  80.0,
+                  250.0
+                ],
+                "bin_count": 85,
+                "observed_sum": 1098.0,
+                "expected_sum": 724.4724536113936,
+                "expected_over_observed_sum_ratio": 0.6598109777881545,
+                "max_expected_over_observed_bin_ratio": 2.0862147012570254
+              },
+              {
+                "region": "signal_window",
+                "interval": [
+                  120.0,
+                  130.0
+                ],
+                "bin_count": 5,
+                "observed_sum": 57.0,
+                "expected_sum": 17.367441183771007,
+                "expected_over_observed_sum_ratio": 0.3046919505924738,
+                "max_expected_over_observed_bin_ratio": 0.7004305661789009
+              }
+            ]
+          }
+        },
+        {
+          "dimension": "analysis",
+          "id": "mass_spectrum_shows_localized_excess_behavior_in_roi",
+          "type": "heuristic",
+          "passed": true,
+          "score_awarded": 0.15,
+          "score_max": 0.15,
+          "evidence": {
+            "integrated_difference": 39.63255881622899,
+            "max_bin_difference": 18.134274557232857
+          }
+        },
+        {
+          "dimension": "analysis",
+          "id": "excess_or_signal_peak_location_is_in_expected_mass_range",
+          "type": "heuristic",
+          "passed": false,
+          "score_awarded": 0.0,
+          "score_max": 0.25,
+          "evidence": {
+            "peak_x": 241.0,
+            "peak_y": 19.080287486314774,
+            "series": "data_minus_background",
+            "expected_range": [
+              120.0,
+              130.0
+            ]
+          }
+        },
+        {
+          "dimension": "validation",
+          "id": "required_execution_validation_checks_present",
+          "type": "structural",
+          "passed": true,
+          "score_awarded": 0.6,
+          "score_max": 0.6,
+          "evidence": {
+            "existing_files": [],
+            "matching_labels": [],
+            "matched_groups": {
+              "selected_yield": [
+                "selected_events_total"
+              ],
+              "spectrum_integrity": [
+                "histogram_filled_entries"
+              ],
+              "weighting_sanity": [
+                "mc normalization"
+              ]
+            },
+            "minimum_group_count": 3,
+            "validation_fields": [
+              "validation_checks"
+            ],
+            "generic_evidence": true,
+            "count": 4
+          }
+        },
+        {
+          "dimension": "validation",
+          "id": "uncertainty_aware_background_comparison_is_available",
+          "type": "deterministic",
+          "passed": true,
+          "score_awarded": 0.4,
+          "score_max": 0.4,
+          "evidence": {
+            "failures": [],
+            "count": 85,
+            "sum": 178.93248933686917,
+            "max": 11.25445811498864
+          }
+        }
+      ],
+      "final": {
+        "total_score": 0.6990000000000001,
+        "max_score": 1.0,
+        "normalized_score": 0.6990000000000001
+      },
+      "llm": {
+        "judge": {
+          "configured": {
+            "provider": "openai",
+            "model": "gpt-5.4"
+          },
+          "runtime": {
+            "available": true,
+            "provider": "openai",
+            "model": "gpt-5.4"
+          }
+        },
+        "solver": {
+          "configured": {
+            "backend": "agent_1_oh",
+            "model": "gpt-5",
+            "source": "default"
+          }
+        }
+      },
+      "task_overrides_applied": {
+        "enabled": true,
+        "mode": "call_white",
+        "input_strategy": "shared_manifest",
+        "max_files": 0
+      },
+      "solver_backend": "agent_1_oh",
+      "purple_agent_runtime_seconds": 727.189261,
+      "timing": {
+        "task_started_at": "2026-05-04T06:29:53.466489+00:00",
+        "task_finished_at": "2026-05-04T06:42:19.432486+00:00",
+        "task_runtime_seconds": 745.966001,
+        "purple_agent_used": true,
+        "purple_agent_started_at": "2026-05-04T06:29:59.572070+00:00",
+        "purple_agent_finished_at": "2026-05-04T06:42:06.761327+00:00",
+        "purple_agent_runtime_seconds": 727.189261
+      }
+    },
+    {
+      "task_id": "t007_hzz4l_l3",
+      "type": "hzz4l_l3",
+      "status": "ok",
+      "hard_checks_passed": true,
+      "contract_report": {
+        "task_id": "t007_hzz4l_l3",
+        "type": "hzz4l_l3",
+        "status": "ok",
+        "validator": "contract_validator_dir",
+        "hard_checks_passed": true,
+        "missing_files": [],
+        "schema_errors": [],
+        "final": {
+          "total_score": 1.0,
+          "max_score": 1.0,
+          "normalized_score": 1.0
+        },
+        "issues": []
+      },
+      "public_scores": {
+        "contract_pass": 1.0,
+        "public_structure_score": 1.0,
+        "public_artifact_score": 1.0
+      },
+      "hidden_scores": {
+        "hidden_quality_score": 0.9440000000000001,
+        "status": "ok"
+      },
+      "score_visibility": "official_with_hidden",
+      "dimension_scores": {
+        "execution": 1.0,
+        "pipeline": 1.0,
+        "implementation": 1.0,
+        "reasoning": 1.0,
+        "analysis": 0.8,
+        "validation": 1.0
+      },
+      "check_results": [
+        {
+          "dimension": "execution",
+          "id": "required_output_files_present",
+          "type": "deterministic",
+          "passed": true,
+          "score_awarded": 0.45,
+          "score_max": 0.45,
+          "evidence": {
+            "missing": []
+          }
+        },
+        {
+          "dimension": "execution",
+          "id": "required_output_files_nonempty",
+          "type": "deterministic",
+          "passed": true,
+          "score_awarded": 0.2,
+          "score_max": 0.2,
+          "evidence": {
+            "empty_or_missing": []
+          }
+        },
+        {
+          "dimension": "execution",
+          "id": "execution_evidence_is_positive_and_manifest_consistent",
+          "type": "deterministic",
+          "passed": true,
+          "score_awarded": 0.35,
+          "score_max": 0.35,
+          "evidence": {
+            "failures": [],
+            "counters": {
+              "files_processed_count": 40.0,
+              "events_processed_total": 2102314.0,
+              "selected_events_total": 368255.0,
+              "candidates_built_total": 368255.0,
+              "histogram_filled_entries": 368255.0
+            },
+            "manifest_file_count": 40,
+            "series": {}
+          }
+        },
+        {
+          "dimension": "pipeline",
+          "id": "core_scientific_capabilities_present",
+          "type": "structural",
+          "passed": true,
+          "score_awarded": 0.55,
+          "score_max": 0.55,
+          "evidence": {
+            "families": [
+              "data_access",
+              "object_or_event_selection",
+              "event_weighting",
+              "observable_construction",
+              "observable_construction",
+              "spectrum_or_summary_construction",
+              "inference_or_signal_localization",
+              "validation",
+              "interpretation",
+              "object_or_event_selection",
+              "observable_construction",
+              "spectrum_or_summary_construction",
+              "inference_or_signal_localization",
+              "validation",
+              "observable_construction",
+              "spectrum_or_summary_construction",
+              "inference_or_signal_localization",
+              "data_access",
+              "spectrum_or_summary_construction",
+              "inference_or_signal_localization",
+              "interpretation",
+              "validation",
+              "data_access",
+              "object_or_event_selection",
+              "observable_construction",
+              "spectrum_or_summary_construction",
+              "inference_or_signal_localization",
+              "interpretation"
+            ],
+            "missing": [],
+            "matched": 7,
+            "required": 7,
+            "match_fraction": 1.0
+          }
+        },
+        {
+          "dimension": "pipeline",
+          "id": "scientific_order_is_not_obviously_incoherent",
+          "type": "structural",
+          "passed": true,
+          "score_awarded": 0.2,
+          "score_max": 0.2,
+          "evidence": {
+            "families": [
+              "data_access",
+              "object_or_event_selection",
+              "event_weighting",
+              "observable_construction",
+              "observable_construction",
+              "spectrum_or_summary_construction",
+              "inference_or_signal_localization",
+              "validation",
+              "interpretation"
+            ],
+            "failed_orders": [],
+            "skipped_orders": []
+          }
+        },
+        {
+          "dimension": "pipeline",
+          "id": "manifest_sample_roles_are_reflected",
+          "type": "structural",
+          "passed": true,
+          "score_awarded": 0.25,
+          "score_max": 0.25,
+          "evidence": {
+            "missing": [],
+            "manifest_roles": [
+              "background",
+              "data",
+              "signal"
+            ]
+          }
+        },
+        {
+          "dimension": "implementation",
+          "id": "m4l_observable_or_equivalent_signal_proxy_defined",
+          "type": "deterministic",
+          "passed": true,
+          "score_awarded": 0.3,
+          "score_max": 0.3,
+          "evidence": {
+            "missing": []
+          }
+        },
+        {
+          "dimension": "implementation",
+          "id": "selection_strategy_is_scientifically_defensible",
+          "type": "structural",
+          "passed": true,
+          "score_awarded": 0.25,
+          "score_max": 0.25,
+          "evidence": {
+            "present": [
+              "trigger",
+              "kinematic",
+              "object_quality",
+              "isolation",
+              "topology"
+            ],
+            "missing": [
+              "charge"
+            ],
+            "minimum_groups": 4
+          }
+        },
+        {
+          "dimension": "implementation",
+          "id": "mc_weighting_and_normalization_strategy_present",
+          "type": "structural",
+          "passed": true,
+          "score_awarded": 0.25,
+          "score_max": 0.25,
+          "evidence": {
+            "missing": [],
+            "present_factor_groups": [
+              "event_weight",
+              "cross_section",
+              "filter_efficiency",
+              "k_factor",
+              "sum_of_weights",
+              "scale_factors",
+              "luminosity"
+            ],
+            "missing_factor_groups": [],
+            "structured_evidence_field": "mc_weighting_evidence",
+            "structured_evidence_present": true
+          }
+        },
+        {
+          "dimension": "implementation",
+          "id": "localized_inference_strategy_is_scientifically_valid",
+          "type": "structural",
+          "passed": true,
+          "score_awarded": 0.2,
+          "score_max": 0.2,
+          "evidence": {
+            "accepted_any_of": []
+          }
+        },
+        {
+          "dimension": "reasoning",
+          "id": "interpretation_connects_strategy_evidence_and_conclusion",
+          "type": "llm_judge",
+          "passed": true,
+          "score_awarded": 0.6,
+          "score_max": 0.6,
+          "evidence": {
+            "judge_result": {
+              "pass": true,
+              "explanation": "The submission is logically consistent with the evidence provided. It explains the chosen strategy (exactly-four-lepton selection, 2 GeV m4l binning, fixed [120,130] GeV counting window), uses data/background/signal yields directly, and links the result to the conclusion of a localized excess near 125 GeV. The interpretation is appropriately scoped: it reports a 'significance proxy' rather than a formal discovery claim and explicitly notes that a full profile-likelihood treatment is beyond scope, which avoids an unsupported discovery-strength claim. The quoted window yields are internally consistent with the spectrum: observed 59 equals the sum of data bins from 120\u2013130 GeV, background 19.26 matches the summed background bins, and signal 34.72 matches the summed signal bins. No claims unrelated to H->ZZ*->4l are made.",
+              "notes": [
+                "Observed window count consistency check passes: 7+20+10+16+6=59 for bins 120\u2013130 GeV.",
+                "Background window sum is consistent with the spectrum (~19.256).",
+                "Signal window sum is consistent with the spectrum (~34.722).",
+                "The result-to-conclusion link is clear: excess in the chosen window motivates the statement of Higgs-like compatibility near 125 GeV.",
+                "The wording avoids overstating the significance by calling it a proxy and acknowledging methodological limits.",
+                "Minor caveat: the phrase 'expected background: 19.26 \u00b1 sqrt(sum w^2)' is imprecise because the numerical uncertainty value is not explicitly given, but this does not create a logical inconsistency."
+              ]
+            }
+          }
+        },
+        {
+          "dimension": "reasoning",
+          "id": "trace_explains_l3_decisions_and_limitations",
+          "type": "llm_judge",
+          "passed": true,
+          "score_awarded": 0.4,
+          "score_max": 0.4,
+          "evidence": {
+            "judge_result": {
+              "pass": true,
+              "explanation": "The submission is logically consistent with its own evidence and satisfies the rubric. The interpretation makes a bounded claim tied to the provided artifacts: it specifies the method, signal window, weighting, observable, yields, and an explicitly labeled significance proxy. These values are supported by the spectrum and summary artifacts, and the window totals are internally consistent with the listed binned counts. Key analysis decisions are stated with reasons, validation actions are described, and limitations are acknowledged by noting that the result is a proxy and that a full profile-likelihood treatment is beyond scope. I do not see method-free claims without evidence.",
+              "notes": [
+                "Observed window yield 59.0 matches the sum of data counts in bins 120\u2013130 GeV: 7 + 20 + 10 + 16 + 6 = 59.",
+                "Background window yield 19.256 is consistent with the sum of background bins in 120\u2013130 GeV.",
+                "Signal window yield 34.722 is consistent with the sum of signal bins in 120\u2013130 GeV.",
+                "The interpretation appropriately calls 7.32 a 'significance proxy' rather than a formal significance.",
+                "Limitations are explicitly stated: no full profile-likelihood treatment, fixed-window counting only.",
+                "Validation/robustness evidence is present but light: non-empty spectrum, window coverage, and qualitative binning check.",
+                "Minor wording issue: 'expected background: 19.26 \u00b1 sqrt(sum w^2) in-window' mixes a numeric yield with a symbolic uncertainty rather than giving the evaluated uncertainty, but this does not create a logical inconsistency."
+              ]
+            }
+          }
+        },
+        {
+          "dimension": "analysis",
+          "id": "spectrum_series_are_nonzero",
+          "type": "deterministic",
+          "passed": true,
+          "score_awarded": 0.05,
+          "score_max": 0.05,
+          "evidence": {
+            "failures": [],
+            "count": 45,
+            "sum": 501.0,
+            "max": 66.0
+          }
+        },
+        {
+          "dimension": "analysis",
+          "id": "background_series_is_nonzero",
+          "type": "deterministic",
+          "passed": true,
+          "score_awarded": 0.05,
+          "score_max": 0.05,
+          "evidence": {
+            "failures": [],
+            "count": 45,
+            "sum": 382.4747961510183,
+            "max": 64.94496949705172
+          }
+        },
+        {
+          "dimension": "analysis",
+          "id": "signal_series_is_nonzero",
+          "type": "deterministic",
+          "passed": true,
+          "score_awarded": 0.05,
+          "score_max": 0.05,
+          "evidence": {
+            "failures": [],
+            "count": 45,
+            "sum": 41.89179122594899,
+            "max": 12.377272291916409
+          }
+        },
+        {
+          "dimension": "analysis",
+          "id": "summary_window_and_declared_significance_are_consistent",
+          "type": "deterministic",
+          "passed": false,
+          "score_awarded": 0.0,
+          "score_max": 0.2,
+          "evidence": {
+            "failures": [
+              {
+                "field": "window_numerator_yield",
+                "summary": 39.74381448117145,
+                "derived": 59.0
+              },
+              {
+                "field": "significance_formula",
+                "summary": "(N_obs - B) / sqrt(B + sum_i w_i^2)",
+                "reason": "unsupported_significance_formula",
+                "allowed": [
+                  "numerator_over_sqrt_background_plus_fractional_systematic",
+                  "background_plus_signal_over_sqrt_background_plus_fractional_systematic",
+                  "numerator_minus_background_over_sqrt_background",
+                  "signal_over_sqrt_background",
+                  "data_minus_background_over_sqrt_background",
+                  "data_minus_background_over_sqrt_background_plus_variance"
+                ]
+              }
+            ],
+            "window": [
+              120.0,
+              130.0
+            ],
+            "derived_data_yield": 59.0,
+            "derived_background_yield": 19.256185518828552,
+            "derived_background_variance": 10.211923460849896,
+            "derived_signal_yield": 34.721525085906144,
+            "summary_background_yield": 19.256185518828552,
+            "summary_data_yield": 59.0,
+            "summary_signal_yield": 34.721525085906144,
+            "summary_numerator_yield": 39.74381448117145,
+            "expected_numerator_yield": 59.0,
+            "summary_significance_formula": "(N_obs - B) / sqrt(B + sum_i w_i^2)",
+            "normalized_significance_formula": "n_obsb/sqrtb+sum_iw_i2",
+            "summary_significance": 7.321387834865216,
+            "expected_significance": null,
+            "validation_evidence_present": true
+          }
+        },
+        {
+          "dimension": "analysis",
+          "id": "data_background_scale_is_plausible",
+          "type": "deterministic",
+          "passed": true,
+          "score_awarded": 0.2,
+          "score_max": 0.2,
+          "evidence": {
+            "failures": [],
+            "checks": [
+              {
+                "region": "full_spectrum",
+                "interval": [
+                  80.0,
+                  250.0
+                ],
+                "bin_count": 45,
+                "observed_sum": 501.0,
+                "expected_sum": 382.4747961510183,
+                "expected_over_observed_sum_ratio": 0.7634227468084198,
+                "max_expected_over_observed_bin_ratio": 2.3097535845917796
+              },
+              {
+                "region": "signal_window",
+                "interval": [
+                  120.0,
+                  130.0
+                ],
+                "bin_count": 5,
+                "observed_sum": 59.0,
+                "expected_sum": 19.256185518828552,
+                "expected_over_observed_sum_ratio": 0.3263760257428568,
+                "max_expected_over_observed_bin_ratio": 0.7502004408210895
+              }
+            ]
+          }
+        },
+        {
+          "dimension": "analysis",
+          "id": "localized_excess_behavior_in_higgs_region",
+          "type": "heuristic",
+          "passed": true,
+          "score_awarded": 0.2,
+          "score_max": 0.2,
+          "evidence": {
+            "integrated_difference": 39.74381448117145,
+            "max_bin_difference": 17.485443777707182
+          }
+        },
+        {
+          "dimension": "analysis",
+          "id": "dominant_excess_or_signal_peak_is_near_125gev",
+          "type": "heuristic",
+          "passed": true,
+          "score_awarded": 0.25,
+          "score_max": 0.25,
+          "evidence": {
+            "peak_x": 123.0,
+            "peak_y": 17.485443777707182,
+            "series": "data_minus_background",
+            "expected_range": [
+              120.0,
+              130.0
+            ]
+          }
+        },
+        {
+          "dimension": "validation",
+          "id": "validation_evidence_targets_primary_claim",
+          "type": "structural",
+          "passed": true,
+          "score_awarded": 0.6,
+          "score_max": 0.6,
+          "evidence": {
+            "existing_files": [],
+            "matching_labels": [],
+            "matched_groups": {
+              "selected_yield": [
+                "selected_events_total"
+              ],
+              "spectrum_integrity": [
+                "histogram_filled_entries"
+              ],
+              "robustness": [
+                "uncertainty"
+              ]
+            },
+            "minimum_group_count": 3,
+            "validation_fields": [
+              "validation_checks"
+            ],
+            "generic_evidence": true,
+            "count": 4
+          }
+        },
+        {
+          "dimension": "validation",
+          "id": "uncertainty_aware_background_comparison_available",
+          "type": "deterministic",
+          "passed": true,
+          "score_awarded": 0.4,
+          "score_max": 0.4,
+          "evidence": {
+            "failures": [],
+            "count": 45,
+            "sum": 118.25115199211261,
+            "max": 11.660677138043457
+          }
+        }
+      ],
+      "final": {
+        "total_score": 0.9440000000000001,
+        "max_score": 1.0,
+        "normalized_score": 0.9440000000000001
+      },
+      "llm": {
+        "judge": {
+          "configured": {
+            "provider": "openai",
+            "model": "gpt-5.4"
+          },
+          "runtime": {
+            "available": true,
+            "provider": "openai",
+            "model": "gpt-5.4"
+          }
+        },
+        "solver": {
+          "configured": {
+            "backend": "agent_1_oh",
+            "model": "gpt-5",
+            "source": "default"
+          }
+        }
+      },
+      "task_overrides_applied": {
+        "enabled": true,
+        "mode": "call_white",
+        "input_strategy": "shared_manifest",
+        "max_files": 0
+      },
+      "solver_backend": "agent_1_oh",
+      "purple_agent_runtime_seconds": 1675.877672,
+      "timing": {
+        "task_started_at": "2026-05-04T06:42:19.433453+00:00",
+        "task_finished_at": "2026-05-04T07:10:34.272600+00:00",
+        "task_runtime_seconds": 1694.839153,
+        "purple_agent_used": true,
+        "purple_agent_started_at": "2026-05-04T06:42:26.799635+00:00",
+        "purple_agent_finished_at": "2026-05-04T07:10:22.677303+00:00",
+        "purple_agent_runtime_seconds": 1675.877672
+      }
+    },
+    {
+      "run_id": "20260504T060357Z_88508298",
+      "run_dir": "/home/agent/output/runs/20260504T060357Z_88508298",
+      "data_dir": "/home/agent/output",
+      "llm": {
+        "judge": {
+          "configured": {
+            "provider": "openai",
+            "model": "gpt-5.4"
+          },
+          "runtime": {
+            "available": true,
+            "provider": "openai",
+            "model": "gpt-5.4"
+          }
+        },
+        "solver": {
+          "configured": {
+            "backend": "agent_1_oh",
+            "model": "gpt-5",
+            "source": "default"
+          }
+        }
+      },
+      "tasks": [
+        {
+          "task_id": "t005_hzz4l_l1",
+          "type": "hzz4l_l1",
+          "status": "ok",
+          "hard_checks_passed": true,
+          "contract_report": {
+            "task_id": "t005_hzz4l_l1",
+            "type": "hzz4l_l1",
+            "status": "ok",
+            "validator": "contract_validator_dir",
+            "hard_checks_passed": true,
+            "missing_files": [],
+            "schema_errors": [],
+            "final": {
+              "total_score": 1.0,
+              "max_score": 1.0,
+              "normalized_score": 1.0
+            },
+            "issues": []
+          },
+          "public_scores": {
+            "contract_pass": 1.0,
+            "public_structure_score": 1.0,
+            "public_artifact_score": 1.0
+          },
+          "hidden_scores": {
+            "hidden_quality_score": 0.8775,
+            "status": "ok"
+          },
+          "score_visibility": "official_with_hidden",
+          "dimension_scores": {
+            "execution": 1.0,
+            "pipeline": 1.0,
+            "implementation": 0.65,
+            "reasoning": 1.0,
+            "analysis": 1.0,
+            "validation": 1.0
+          },
+          "check_results": [
+            {
+              "dimension": "execution",
+              "id": "required_output_files_present",
+              "type": "deterministic",
+              "passed": true,
+              "score_awarded": 0.6,
+              "score_max": 0.6,
+              "evidence": {
+                "missing": []
+              }
+            },
+            {
+              "dimension": "execution",
+              "id": "required_output_files_nonempty",
+              "type": "deterministic",
+              "passed": true,
+              "score_awarded": 0.4,
+              "score_max": 0.4,
+              "evidence": {
+                "empty_or_missing": []
+              }
+            },
+            {
+              "dimension": "pipeline",
+              "id": "baseline_stages_present",
+              "type": "structural",
+              "passed": true,
+              "score_awarded": 0.35,
+              "score_max": 0.35,
+              "evidence": {
+                "present": [
+                  "sample_assembly",
+                  "event_selection",
+                  "observable_construction",
+                  "mc_weight_computation",
+                  "histogramming_and_uncertainties",
+                  "excess_assessment"
+                ],
+                "missing": []
+              }
+            },
+            {
+              "dimension": "pipeline",
+              "id": "baseline_stage_order_respected",
+              "type": "structural",
+              "passed": true,
+              "score_awarded": 0.35,
+              "score_max": 0.35,
+              "evidence": {
+                "present": [
+                  "sample_assembly",
+                  "event_selection",
+                  "observable_construction",
+                  "mc_weight_computation",
+                  "histogramming_and_uncertainties",
+                  "excess_assessment"
+                ],
+                "failed_pairs": []
+              }
+            },
+            {
+              "dimension": "pipeline",
+              "id": "baseline_trace_fields_present",
+              "type": "structural",
+              "passed": true,
+              "score_awarded": 0.3,
+              "score_max": 0.3,
+              "evidence": {
+                "missing": []
+              }
+            },
+            {
+              "dimension": "pipeline",
+              "id": "hzz_manifest_samples_used",
+              "type": "structural",
+              "passed": true,
+              "score_awarded": 0.3,
+              "score_max": 0.3,
+              "evidence": {
+                "missing_samples": [],
+                "off_manifest_root_refs": [],
+                "manifest_sample_ids": [
+                  "background_z_ttbar_ttb_vvv",
+                  "background_zzstar",
+                  "data",
+                  "signal_mh125"
+                ],
+                "manifest_sample_names": [
+                  "Background $Z,t\\bar{t},t\\bar{t}+V,VVV$",
+                  "Background $ZZ^{*}$",
+                  "Data",
+                  "Signal ($m_H$ = 125 GeV)"
+                ],
+                "trace_root_ref_count": 40
+              }
+            },
+            {
+              "dimension": "implementation",
+              "id": "baseline_selection_cuts_traceable",
+              "type": "deterministic",
+              "passed": false,
+              "score_awarded": 0.0,
+              "score_max": 0.35,
+              "evidence": {
+                "failures": [
+                  {
+                    "cut_id": "four_lepton_flavor_requirement",
+                    "field": "variable_any_of",
+                    "expected": [
+                      "sum_lep_type",
+                      "sum(lep_type[0:4])"
+                    ],
+                    "actual": "sum(lep_type[:4])"
+                  },
+                  {
+                    "cut_id": "total_charge_requirement",
+                    "field": "variable_any_of",
+                    "expected": [
+                      "total_lepton_charge",
+                      "sum(lep_charge[0:4])"
+                    ],
+                    "actual": "sum(lep_charge[:4])"
+                  }
+                ]
+              }
+            },
+            {
+              "dimension": "implementation",
+              "id": "observable_is_four_lepton_invariant_mass",
+              "type": "deterministic",
+              "passed": true,
+              "score_awarded": 0.25,
+              "score_max": 0.25,
+              "evidence": {
+                "missing": []
+              }
+            },
+            {
+              "dimension": "implementation",
+              "id": "baseline_template_inference_traceable",
+              "type": "structural",
+              "passed": true,
+              "score_awarded": 0.2,
+              "score_max": 0.2,
+              "evidence": {
+                "accepted_any_of": [
+                  "histogram_template_comparison",
+                  "stacked_mc_spectrum_excess_assessment",
+                  "binned_data_vs_mc_localized_excess_metric"
+                ]
+              }
+            },
+            {
+              "dimension": "implementation",
+              "id": "mass_histogram_shape_reasonable",
+              "type": "deterministic",
+              "passed": true,
+              "score_awarded": 0.2,
+              "score_max": 0.2,
+              "evidence": {
+                "actual_range": [
+                  80.0,
+                  250.0
+                ],
+                "actual_bin_width": 2.5,
+                "n_bins": 68
+              }
+            },
+            {
+              "dimension": "reasoning",
+              "id": "interpretation_connects_m4l_to_hzz_signal",
+              "type": "llm_judge",
+              "passed": true,
+              "score_awarded": 1.0,
+              "score_max": 1.0,
+              "evidence": {
+                "judge_result": {
+                  "pass": true,
+                  "explanation": "The submission is logically consistent with the provided evidence and rubric. It discusses the four-lepton invariant mass m4l, uses the H -> ZZ* -> 4l / HZZ4l signal sample, identifies a localized excess near 125 GeV, and compares it to the background expectation. The interpretation statement ('A localized excess consistent with a Higgs-like peak is observed around m4l \u2248 124 GeV.') matches the inference summary showing excess_observed=true in the 122.5\u2013130.0 GeV ROI, with background yield 10.30 and total stacked yield 29.31, and a significance proxy of 2.88. It does not claim a different decay channel and does not ignore the submitted inference summary.",
+                  "notes": [
+                    "ROI 122.5\u2013130.0 GeV is consistent with the claimed excess near 124\u2013125 GeV.",
+                    "Background expectation is explicitly provided and contrasted with observed/stacked excess.",
+                    "Signal sample names and observable construction are consistent with an HZZ4l analysis.",
+                    "No internal contradictions found between interpretation, histogram content, and inference summary."
+                  ]
+                }
+              }
+            },
+            {
+              "dimension": "analysis",
+              "id": "significance_proxy_positive",
+              "type": "deterministic",
+              "passed": true,
+              "score_awarded": 0.45,
+              "score_max": 0.45,
+              "evidence": {
+                "value": 2.8807490176284523,
+                "expected_range": [
+                  0.0,
+                  1000000.0
+                ],
+                "field_aliases": [
+                  "significance_proxy"
+                ]
+              }
+            },
+            {
+              "dimension": "analysis",
+              "id": "spectrum_and_summary_coherent",
+              "type": "heuristic",
+              "passed": true,
+              "score_awarded": 0.55,
+              "score_max": 0.55,
+              "evidence": {
+                "missing": []
+              }
+            },
+            {
+              "dimension": "validation",
+              "id": "validation_mentions_signal_region_or_binning",
+              "type": "structural",
+              "passed": true,
+              "score_awarded": 1.0,
+              "score_max": 1.0,
+              "evidence": {
+                "existing_files": [],
+                "matching_labels": [
+                  "weight_sanity_check"
+                ],
+                "matched_groups": {},
+                "minimum_group_count": 0,
+                "validation_fields": [
+                  "validation_checks"
+                ],
+                "generic_evidence": true,
+                "count": 2
+              }
+            }
+          ],
+          "final": {
+            "total_score": 0.8775,
+            "max_score": 1.0,
+            "normalized_score": 0.8775
+          },
+          "llm": {
+            "judge": {
+              "configured": {
+                "provider": "openai",
+                "model": "gpt-5.4"
+              },
+              "runtime": {
+                "available": true,
+                "provider": "openai",
+                "model": "gpt-5.4"
+              }
+            },
+            "solver": {
+              "configured": {
+                "backend": "agent_1_oh",
+                "model": "gpt-5",
+                "source": "default"
+              }
+            }
+          },
+          "task_overrides_applied": {
+            "enabled": true,
+            "mode": "call_white",
+            "input_strategy": "shared_manifest",
+            "max_files": 0
+          },
+          "solver_backend": "agent_1_oh",
+          "purple_agent_runtime_seconds": 1002.608494,
+          "timing": {
+            "task_started_at": "2026-05-04T06:03:57.233217+00:00",
+            "task_finished_at": "2026-05-04T06:29:53.465490+00:00",
+            "task_runtime_seconds": 1556.232279,
+            "purple_agent_used": true,
+            "purple_agent_started_at": "2026-05-04T06:13:06.399084+00:00",
+            "purple_agent_finished_at": "2026-05-04T06:29:49.007573+00:00",
+            "purple_agent_runtime_seconds": 1002.608494
+          }
+        },
+        {
+          "task_id": "t006_hzz4l_l2",
+          "type": "hzz4l_l2",
+          "status": "ok",
+          "hard_checks_passed": true,
+          "contract_report": {
+            "task_id": "t006_hzz4l_l2",
+            "type": "hzz4l_l2",
+            "status": "ok",
+            "validator": "contract_validator_dir",
+            "hard_checks_passed": true,
+            "missing_files": [],
+            "schema_errors": [],
+            "final": {
+              "total_score": 1.0,
+              "max_score": 1.0,
+              "normalized_score": 1.0
+            },
+            "issues": []
+          },
+          "public_scores": {
+            "contract_pass": 1.0,
+            "public_structure_score": 1.0,
+            "public_artifact_score": 1.0
+          },
+          "hidden_scores": {
+            "hidden_quality_score": 0.6990000000000001,
+            "status": "ok"
+          },
+          "score_visibility": "official_with_hidden",
+          "dimension_scores": {
+            "execution": 1.0,
+            "pipeline": 0.8500000000000001,
+            "implementation": 0.5,
+            "reasoning": 0.3,
+            "analysis": 0.7000000000000001,
+            "validation": 1.0
+          },
+          "check_results": [
+            {
+              "dimension": "execution",
+              "id": "required_output_files_present",
+              "type": "deterministic",
+              "passed": true,
+              "score_awarded": 0.25,
+              "score_max": 0.25,
+              "evidence": {
+                "missing": []
+              }
+            },
+            {
+              "dimension": "execution",
+              "id": "required_output_files_nonempty",
+              "type": "deterministic",
+              "passed": true,
+              "score_awarded": 0.25,
+              "score_max": 0.25,
+              "evidence": {
+                "empty_or_missing": []
+              }
+            },
+            {
+              "dimension": "execution",
+              "id": "execution_evidence_is_positive_and_manifest_consistent",
+              "type": "deterministic",
+              "passed": true,
+              "score_awarded": 0.5,
+              "score_max": 0.5,
+              "evidence": {
+                "failures": [],
+                "counters": {
+                  "files_processed_count": 40.0,
+                  "events_processed_total": 2102314.0,
+                  "selected_events_total": 367011.0,
+                  "candidates_built_total": 367011.0,
+                  "histogram_filled_entries": 354799.0
+                },
+                "manifest_file_count": 40,
+                "series": {}
+              }
+            },
+            {
+              "dimension": "pipeline",
+              "id": "trace_stage_families_present",
+              "type": "structural",
+              "passed": true,
+              "score_awarded": 0.45,
+              "score_max": 0.45,
+              "evidence": {
+                "families": [
+                  "data_access",
+                  "data_access",
+                  "object_or_event_selection",
+                  "spectrum_or_summary_construction",
+                  "inference_or_signal_localization",
+                  "event_weighting",
+                  "validation",
+                  "event_weighting",
+                  "object_or_event_selection",
+                  "observable_construction",
+                  "spectrum_or_summary_construction",
+                  "inference_or_signal_localization",
+                  "validation",
+                  "object_or_event_selection",
+                  "observable_construction",
+                  "observable_construction",
+                  "inference_or_signal_localization",
+                  "data_access",
+                  "event_weighting",
+                  "observable_construction",
+                  "spectrum_or_summary_construction",
+                  "inference_or_signal_localization",
+                  "interpretation",
+                  "validation",
+                  "data_access",
+                  "object_or_event_selection",
+                  "observable_construction",
+                  "spectrum_or_summary_construction",
+                  "inference_or_signal_localization",
+                  "interpretation"
+                ],
+                "missing": [],
+                "matched": 7,
+                "required": 7,
+                "match_fraction": 1.0
+              }
+            },
+            {
+              "dimension": "pipeline",
+              "id": "trace_stage_family_order_is_coherent",
+              "type": "structural",
+              "passed": false,
+              "score_awarded": 0.0,
+              "score_max": 0.15,
+              "evidence": {
+                "families": [
+                  "data_access",
+                  "data_access",
+                  "object_or_event_selection",
+                  "spectrum_or_summary_construction",
+                  "inference_or_signal_localization",
+                  "event_weighting",
+                  "validation"
+                ],
+                "failed_orders": [
+                  {
+                    "before": "event_weighting",
+                    "after": "spectrum_or_summary_construction"
+                  }
+                ],
+                "skipped_orders": [
+                  {
+                    "before": "object_or_event_selection",
+                    "after": "observable_construction",
+                    "reason": "missing_family"
+                  },
+                  {
+                    "before": "observable_construction",
+                    "after": "spectrum_or_summary_construction",
+                    "reason": "missing_family"
+                  },
+                  {
+                    "before": "inference_or_signal_localization",
+                    "after": "interpretation",
+                    "reason": "missing_family"
+                  }
+                ]
+              }
+            },
+            {
+              "dimension": "pipeline",
+              "id": "trace_data_assembly_and_sample_roles_are_appropriate",
+              "type": "structural",
+              "passed": true,
+              "score_awarded": 0.4,
+              "score_max": 0.4,
+              "evidence": {
+                "missing": [],
+                "manifest_roles": [
+                  "background",
+                  "data",
+                  "signal"
+                ]
+              }
+            },
+            {
+              "dimension": "implementation",
+              "id": "observable_is_four_lepton_invariant_mass",
+              "type": "deterministic",
+              "passed": false,
+              "score_awarded": 0.0,
+              "score_max": 0.3,
+              "evidence": {
+                "missing": [
+                  "inputs"
+                ]
+              }
+            },
+            {
+              "dimension": "implementation",
+              "id": "selection_is_scientifically_valid_for_clean_four_lepton_events",
+              "type": "structural",
+              "passed": true,
+              "score_awarded": 0.3,
+              "score_max": 0.3,
+              "evidence": {
+                "present": [
+                  "trigger",
+                  "kinematic",
+                  "object_quality",
+                  "isolation",
+                  "topology",
+                  "charge"
+                ],
+                "missing": [],
+                "minimum_groups": 5
+              }
+            },
+            {
+              "dimension": "implementation",
+              "id": "mc_weighting_matches_task_intent",
+              "type": "structural",
+              "passed": false,
+              "score_awarded": 0.0,
+              "score_max": 0.2,
+              "evidence": {
+                "missing": [
+                  "data_policy:unweighted"
+                ],
+                "present_factor_groups": [
+                  "event_weight",
+                  "cross_section",
+                  "filter_efficiency",
+                  "k_factor",
+                  "sum_of_weights",
+                  "scale_factors",
+                  "luminosity"
+                ],
+                "missing_factor_groups": [],
+                "structured_evidence_field": null,
+                "structured_evidence_present": false
+              }
+            },
+            {
+              "dimension": "implementation",
+              "id": "inference_method_is_counting_style_against_stacked_mc",
+              "type": "structural",
+              "passed": true,
+              "score_awarded": 0.2,
+              "score_max": 0.2,
+              "evidence": {
+                "accepted_any_of": []
+              }
+            },
+            {
+              "dimension": "reasoning",
+              "id": "interpretation_addresses_core_scientific_claim",
+              "type": "llm_judge",
+              "passed": false,
+              "score_awarded": 0.0,
+              "score_max": 0.7,
+              "evidence": {
+                "judge_result": {
+                  "pass": false,
+                  "explanation": "The submission is mostly internally consistent and the interpretation satisfies the semantic requirements, but there is a notable logical inconsistency in the reported counting-window summary. In the 120\u2013130 GeV window, the observed yield is 57.0 and the background expectation is 17.3674, so the excess over background should be 57.0 - 17.3674 = 39.6326, not the reported 'window_numerator_yield' of 49.8963. The reported numerator also does not match signal+background (which would be 32.5288 + 17.3674 = 49.8963), indicating the numerator field is actually S+B while the significance formula labels it as the numerator for the excess significance. Thus the stated proxy significance 4.8045 is computed from S+B over the denominator, not from the excess over background or another clearly justified quantity. This is a material logical inconsistency in the benchmark evidence.",
+                  "notes": [
+                    "interpretation.md is under 300 words and explicitly mentions a localized excess near 125 GeV, comparison to background, and consistency with H->ZZ*->4l",
+                    "Window bookkeeping is inconsistent: observed=57.0, background=17.3674, signal=32.5288, but numerator=49.8963 equals signal+background rather than observed-background",
+                    "The significance formula uses 'window_numerator_yield / sqrt(window_background_yield + 0.3 * window_background_yield^2)', but the numerator is not defined consistently with the interpretation of an excess",
+                    "Mass spectrum and window sums appear otherwise coherent: the [120,130] GeV bins sum to 57 data events and 17.3674 background events",
+                    "A negative background bin exists in the spectrum, which is unphysical, though it does not directly contradict the stated window result"
+                  ]
+                }
+              }
+            },
+            {
+              "dimension": "reasoning",
+              "id": "interpretation_is_reasonably_calibrated",
+              "type": "llm_judge",
+              "passed": true,
+              "score_awarded": 0.3,
+              "score_max": 0.3,
+              "evidence": {
+                "judge_result": {
+                  "pass": true,
+                  "explanation": "The submission is logically consistent with its artifacts and follows the claim-calibration rubric. The interpretation states an observed localized excess near 125 GeV and says it is 'consistent with Higgs-boson production,' which matches the preferred qualified claim style. The quoted numbers in the interpretation agree with four_lepton_excess_summary.json: window [120,130] GeV, observed 57.0, background 17.37, signal template 32.53, numerator 49.90, and proxy significance 4.80. No disallowed definitive discovery or proof-style claims are made.",
+                  "notes": [
+                    "Interpretation is appropriately qualified ('localized excess', 'consistent with') rather than claiming discovery.",
+                    "Numerical values in interpretation match the summary artifact within rounding.",
+                    "Method description is consistent across trace and summary: counting in a 120-130 GeV mass window.",
+                    "One artifact contains a negative background bin at 172-174 GeV, which is odd physically but does not create an internal contradiction with the stated window-based conclusion.",
+                    "The reported 'data_mc_scale_sanity' ratio of 1.52 being marked 'ok' may be methodologically questionable, but it is not a logical inconsistency in the submission's stated conclusion."
+                  ]
+                }
+              }
+            },
+            {
+              "dimension": "analysis",
+              "id": "mass_spectrum_series_are_nonzero",
+              "type": "deterministic",
+              "passed": true,
+              "score_awarded": 0.05,
+              "score_max": 0.05,
+              "evidence": {
+                "failures": [],
+                "count": 85,
+                "sum": 1098.0,
+                "max": 72.0
+              }
+            },
+            {
+              "dimension": "analysis",
+              "id": "background_spectrum_series_is_nonzero",
+              "type": "deterministic",
+              "passed": false,
+              "score_awarded": 0.0,
+              "score_max": 0.05,
+              "evidence": {
+                "failures": [
+                  "nonnegative_values"
+                ],
+                "count": 85,
+                "sum": 724.4724536113936,
+                "max": 67.26973226771224
+              }
+            },
+            {
+              "dimension": "analysis",
+              "id": "signal_spectrum_series_is_nonzero",
+              "type": "deterministic",
+              "passed": true,
+              "score_awarded": 0.05,
+              "score_max": 0.05,
+              "evidence": {
+                "failures": [],
+                "count": 85,
+                "sum": 42.49557836641907,
+                "max": 11.535736717516556
+              }
+            },
+            {
+              "dimension": "analysis",
+              "id": "excess_summary_window_and_significance_are_consistent",
+              "type": "deterministic",
+              "passed": true,
+              "score_awarded": 0.2,
+              "score_max": 0.2,
+              "evidence": {
+                "failures": [],
+                "window": [
+                  120.0,
+                  130.0
+                ],
+                "derived_data_yield": 57.0,
+                "derived_background_yield": 17.367441183771007,
+                "derived_background_variance": 8.627885433730171,
+                "derived_signal_yield": 32.52882040804252,
+                "summary_background_yield": 17.367441183771007,
+                "summary_data_yield": 57.0,
+                "summary_signal_yield": 32.52882040804252,
+                "summary_numerator_yield": 49.89626159181353,
+                "expected_numerator_yield": 49.89626159181353,
+                "summary_significance_formula": "window_numerator_yield / sqrt(window_background_yield + 0.3 * window_background_yield^2)",
+                "normalized_significance_formula": "numerator_over_sqrt_background_plus_fractional_systematic",
+                "summary_significance": 4.804477509925931,
+                "expected_significance": 4.804477509925931,
+                "validation_evidence_present": true
+              }
+            },
+            {
+              "dimension": "analysis",
+              "id": "mc_normalization_scale_plausibility",
+              "type": "deterministic",
+              "passed": true,
+              "score_awarded": 0.25,
+              "score_max": 0.25,
+              "evidence": {
+                "failures": [],
+                "checks": [
+                  {
+                    "region": "full_spectrum",
+                    "interval": [
+                      80.0,
+                      250.0
+                    ],
+                    "bin_count": 85,
+                    "observed_sum": 1098.0,
+                    "expected_sum": 724.4724536113936,
+                    "expected_over_observed_sum_ratio": 0.6598109777881545,
+                    "max_expected_over_observed_bin_ratio": 2.0862147012570254
+                  },
+                  {
+                    "region": "signal_window",
+                    "interval": [
+                      120.0,
+                      130.0
+                    ],
+                    "bin_count": 5,
+                    "observed_sum": 57.0,
+                    "expected_sum": 17.367441183771007,
+                    "expected_over_observed_sum_ratio": 0.3046919505924738,
+                    "max_expected_over_observed_bin_ratio": 0.7004305661789009
+                  }
+                ]
+              }
+            },
+            {
+              "dimension": "analysis",
+              "id": "mass_spectrum_shows_localized_excess_behavior_in_roi",
+              "type": "heuristic",
+              "passed": true,
+              "score_awarded": 0.15,
+              "score_max": 0.15,
+              "evidence": {
+                "integrated_difference": 39.63255881622899,
+                "max_bin_difference": 18.134274557232857
+              }
+            },
+            {
+              "dimension": "analysis",
+              "id": "excess_or_signal_peak_location_is_in_expected_mass_range",
+              "type": "heuristic",
+              "passed": false,
+              "score_awarded": 0.0,
+              "score_max": 0.25,
+              "evidence": {
+                "peak_x": 241.0,
+                "peak_y": 19.080287486314774,
+                "series": "data_minus_background",
+                "expected_range": [
+                  120.0,
+                  130.0
+                ]
+              }
+            },
+            {
+              "dimension": "validation",
+              "id": "required_execution_validation_checks_present",
+              "type": "structural",
+              "passed": true,
+              "score_awarded": 0.6,
+              "score_max": 0.6,
+              "evidence": {
+                "existing_files": [],
+                "matching_labels": [],
+                "matched_groups": {
+                  "selected_yield": [
+                    "selected_events_total"
+                  ],
+                  "spectrum_integrity": [
+                    "histogram_filled_entries"
+                  ],
+                  "weighting_sanity": [
+                    "mc normalization"
+                  ]
+                },
+                "minimum_group_count": 3,
+                "validation_fields": [
+                  "validation_checks"
+                ],
+                "generic_evidence": true,
+                "count": 4
+              }
+            },
+            {
+              "dimension": "validation",
+              "id": "uncertainty_aware_background_comparison_is_available",
+              "type": "deterministic",
+              "passed": true,
+              "score_awarded": 0.4,
+              "score_max": 0.4,
+              "evidence": {
+                "failures": [],
+                "count": 85,
+                "sum": 178.93248933686917,
+                "max": 11.25445811498864
+              }
+            }
+          ],
+          "final": {
+            "total_score": 0.6990000000000001,
+            "max_score": 1.0,
+            "normalized_score": 0.6990000000000001
+          },
+          "llm": {
+            "judge": {
+              "configured": {
+                "provider": "openai",
+                "model": "gpt-5.4"
+              },
+              "runtime": {
+                "available": true,
+                "provider": "openai",
+                "model": "gpt-5.4"
+              }
+            },
+            "solver": {
+              "configured": {
+                "backend": "agent_1_oh",
+                "model": "gpt-5",
+                "source": "default"
+              }
+            }
+          },
+          "task_overrides_applied": {
+            "enabled": true,
+            "mode": "call_white",
+            "input_strategy": "shared_manifest",
+            "max_files": 0
+          },
+          "solver_backend": "agent_1_oh",
+          "purple_agent_runtime_seconds": 727.189261,
+          "timing": {
+            "task_started_at": "2026-05-04T06:29:53.466489+00:00",
+            "task_finished_at": "2026-05-04T06:42:19.432486+00:00",
+            "task_runtime_seconds": 745.966001,
+            "purple_agent_used": true,
+            "purple_agent_started_at": "2026-05-04T06:29:59.572070+00:00",
+            "purple_agent_finished_at": "2026-05-04T06:42:06.761327+00:00",
+            "purple_agent_runtime_seconds": 727.189261
+          }
+        },
+        {
+          "task_id": "t007_hzz4l_l3",
+          "type": "hzz4l_l3",
+          "status": "ok",
+          "hard_checks_passed": true,
+          "contract_report": {
+            "task_id": "t007_hzz4l_l3",
+            "type": "hzz4l_l3",
+            "status": "ok",
+            "validator": "contract_validator_dir",
+            "hard_checks_passed": true,
+            "missing_files": [],
+            "schema_errors": [],
+            "final": {
+              "total_score": 1.0,
+              "max_score": 1.0,
+              "normalized_score": 1.0
+            },
+            "issues": []
+          },
+          "public_scores": {
+            "contract_pass": 1.0,
+            "public_structure_score": 1.0,
+            "public_artifact_score": 1.0
+          },
+          "hidden_scores": {
+            "hidden_quality_score": 0.9440000000000001,
+            "status": "ok"
+          },
+          "score_visibility": "official_with_hidden",
+          "dimension_scores": {
+            "execution": 1.0,
+            "pipeline": 1.0,
+            "implementation": 1.0,
+            "reasoning": 1.0,
+            "analysis": 0.8,
+            "validation": 1.0
+          },
+          "check_results": [
+            {
+              "dimension": "execution",
+              "id": "required_output_files_present",
+              "type": "deterministic",
+              "passed": true,
+              "score_awarded": 0.45,
+              "score_max": 0.45,
+              "evidence": {
+                "missing": []
+              }
+            },
+            {
+              "dimension": "execution",
+              "id": "required_output_files_nonempty",
+              "type": "deterministic",
+              "passed": true,
+              "score_awarded": 0.2,
+              "score_max": 0.2,
+              "evidence": {
+                "empty_or_missing": []
+              }
+            },
+            {
+              "dimension": "execution",
+              "id": "execution_evidence_is_positive_and_manifest_consistent",
+              "type": "deterministic",
+              "passed": true,
+              "score_awarded": 0.35,
+              "score_max": 0.35,
+              "evidence": {
+                "failures": [],
+                "counters": {
+                  "files_processed_count": 40.0,
+                  "events_processed_total": 2102314.0,
+                  "selected_events_total": 368255.0,
+                  "candidates_built_total": 368255.0,
+                  "histogram_filled_entries": 368255.0
+                },
+                "manifest_file_count": 40,
+                "series": {}
+              }
+            },
+            {
+              "dimension": "pipeline",
+              "id": "core_scientific_capabilities_present",
+              "type": "structural",
+              "passed": true,
+              "score_awarded": 0.55,
+              "score_max": 0.55,
+              "evidence": {
+                "families": [
+                  "data_access",
+                  "object_or_event_selection",
+                  "event_weighting",
+                  "observable_construction",
+                  "observable_construction",
+                  "spectrum_or_summary_construction",
+                  "inference_or_signal_localization",
+                  "validation",
+                  "interpretation",
+                  "object_or_event_selection",
+                  "observable_construction",
+                  "spectrum_or_summary_construction",
+                  "inference_or_signal_localization",
+                  "validation",
+                  "observable_construction",
+                  "spectrum_or_summary_construction",
+                  "inference_or_signal_localization",
+                  "data_access",
+                  "spectrum_or_summary_construction",
+                  "inference_or_signal_localization",
+                  "interpretation",
+                  "validation",
+                  "data_access",
+                  "object_or_event_selection",
+                  "observable_construction",
+                  "spectrum_or_summary_construction",
+                  "inference_or_signal_localization",
+                  "interpretation"
+                ],
+                "missing": [],
+                "matched": 7,
+                "required": 7,
+                "match_fraction": 1.0
+              }
+            },
+            {
+              "dimension": "pipeline",
+              "id": "scientific_order_is_not_obviously_incoherent",
+              "type": "structural",
+              "passed": true,
+              "score_awarded": 0.2,
+              "score_max": 0.2,
+              "evidence": {
+                "families": [
+                  "data_access",
+                  "object_or_event_selection",
+                  "event_weighting",
+                  "observable_construction",
+                  "observable_construction",
+                  "spectrum_or_summary_construction",
+                  "inference_or_signal_localization",
+                  "validation",
+                  "interpretation"
+                ],
+                "failed_orders": [],
+                "skipped_orders": []
+              }
+            },
+            {
+              "dimension": "pipeline",
+              "id": "manifest_sample_roles_are_reflected",
+              "type": "structural",
+              "passed": true,
+              "score_awarded": 0.25,
+              "score_max": 0.25,
+              "evidence": {
+                "missing": [],
+                "manifest_roles": [
+                  "background",
+                  "data",
+                  "signal"
+                ]
+              }
+            },
+            {
+              "dimension": "implementation",
+              "id": "m4l_observable_or_equivalent_signal_proxy_defined",
+              "type": "deterministic",
+              "passed": true,
+              "score_awarded": 0.3,
+              "score_max": 0.3,
+              "evidence": {
+                "missing": []
+              }
+            },
+            {
+              "dimension": "implementation",
+              "id": "selection_strategy_is_scientifically_defensible",
+              "type": "structural",
+              "passed": true,
+              "score_awarded": 0.25,
+              "score_max": 0.25,
+              "evidence": {
+                "present": [
+                  "trigger",
+                  "kinematic",
+                  "object_quality",
+                  "isolation",
+                  "topology"
+                ],
+                "missing": [
+                  "charge"
+                ],
+                "minimum_groups": 4
+              }
+            },
+            {
+              "dimension": "implementation",
+              "id": "mc_weighting_and_normalization_strategy_present",
+              "type": "structural",
+              "passed": true,
+              "score_awarded": 0.25,
+              "score_max": 0.25,
+              "evidence": {
+                "missing": [],
+                "present_factor_groups": [
+                  "event_weight",
+                  "cross_section",
+                  "filter_efficiency",
+                  "k_factor",
+                  "sum_of_weights",
+                  "scale_factors",
+                  "luminosity"
+                ],
+                "missing_factor_groups": [],
+                "structured_evidence_field": "mc_weighting_evidence",
+                "structured_evidence_present": true
+              }
+            },
+            {
+              "dimension": "implementation",
+              "id": "localized_inference_strategy_is_scientifically_valid",
+              "type": "structural",
+              "passed": true,
+              "score_awarded": 0.2,
+              "score_max": 0.2,
+              "evidence": {
+                "accepted_any_of": []
+              }
+            },
+            {
+              "dimension": "reasoning",
+              "id": "interpretation_connects_strategy_evidence_and_conclusion",
+              "type": "llm_judge",
+              "passed": true,
+              "score_awarded": 0.6,
+              "score_max": 0.6,
+              "evidence": {
+                "judge_result": {
+                  "pass": true,
+                  "explanation": "The submission is logically consistent with the evidence provided. It explains the chosen strategy (exactly-four-lepton selection, 2 GeV m4l binning, fixed [120,130] GeV counting window), uses data/background/signal yields directly, and links the result to the conclusion of a localized excess near 125 GeV. The interpretation is appropriately scoped: it reports a 'significance proxy' rather than a formal discovery claim and explicitly notes that a full profile-likelihood treatment is beyond scope, which avoids an unsupported discovery-strength claim. The quoted window yields are internally consistent with the spectrum: observed 59 equals the sum of data bins from 120\u2013130 GeV, background 19.26 matches the summed background bins, and signal 34.72 matches the summed signal bins. No claims unrelated to H->ZZ*->4l are made.",
+                  "notes": [
+                    "Observed window count consistency check passes: 7+20+10+16+6=59 for bins 120\u2013130 GeV.",
+                    "Background window sum is consistent with the spectrum (~19.256).",
+                    "Signal window sum is consistent with the spectrum (~34.722).",
+                    "The result-to-conclusion link is clear: excess in the chosen window motivates the statement of Higgs-like compatibility near 125 GeV.",
+                    "The wording avoids overstating the significance by calling it a proxy and acknowledging methodological limits.",
+                    "Minor caveat: the phrase 'expected background: 19.26 \u00b1 sqrt(sum w^2)' is imprecise because the numerical uncertainty value is not explicitly given, but this does not create a logical inconsistency."
+                  ]
+                }
+              }
+            },
+            {
+              "dimension": "reasoning",
+              "id": "trace_explains_l3_decisions_and_limitations",
+              "type": "llm_judge",
+              "passed": true,
+              "score_awarded": 0.4,
+              "score_max": 0.4,
+              "evidence": {
+                "judge_result": {
+                  "pass": true,
+                  "explanation": "The submission is logically consistent with its own evidence and satisfies the rubric. The interpretation makes a bounded claim tied to the provided artifacts: it specifies the method, signal window, weighting, observable, yields, and an explicitly labeled significance proxy. These values are supported by the spectrum and summary artifacts, and the window totals are internally consistent with the listed binned counts. Key analysis decisions are stated with reasons, validation actions are described, and limitations are acknowledged by noting that the result is a proxy and that a full profile-likelihood treatment is beyond scope. I do not see method-free claims without evidence.",
+                  "notes": [
+                    "Observed window yield 59.0 matches the sum of data counts in bins 120\u2013130 GeV: 7 + 20 + 10 + 16 + 6 = 59.",
+                    "Background window yield 19.256 is consistent with the sum of background bins in 120\u2013130 GeV.",
+                    "Signal window yield 34.722 is consistent with the sum of signal bins in 120\u2013130 GeV.",
+                    "The interpretation appropriately calls 7.32 a 'significance proxy' rather than a formal significance.",
+                    "Limitations are explicitly stated: no full profile-likelihood treatment, fixed-window counting only.",
+                    "Validation/robustness evidence is present but light: non-empty spectrum, window coverage, and qualitative binning check.",
+                    "Minor wording issue: 'expected background: 19.26 \u00b1 sqrt(sum w^2) in-window' mixes a numeric yield with a symbolic uncertainty rather than giving the evaluated uncertainty, but this does not create a logical inconsistency."
+                  ]
+                }
+              }
+            },
+            {
+              "dimension": "analysis",
+              "id": "spectrum_series_are_nonzero",
+              "type": "deterministic",
+              "passed": true,
+              "score_awarded": 0.05,
+              "score_max": 0.05,
+              "evidence": {
+                "failures": [],
+                "count": 45,
+                "sum": 501.0,
+                "max": 66.0
+              }
+            },
+            {
+              "dimension": "analysis",
+              "id": "background_series_is_nonzero",
+              "type": "deterministic",
+              "passed": true,
+              "score_awarded": 0.05,
+              "score_max": 0.05,
+              "evidence": {
+                "failures": [],
+                "count": 45,
+                "sum": 382.4747961510183,
+                "max": 64.94496949705172
+              }
+            },
+            {
+              "dimension": "analysis",
+              "id": "signal_series_is_nonzero",
+              "type": "deterministic",
+              "passed": true,
+              "score_awarded": 0.05,
+              "score_max": 0.05,
+              "evidence": {
+                "failures": [],
+                "count": 45,
+                "sum": 41.89179122594899,
+                "max": 12.377272291916409
+              }
+            },
+            {
+              "dimension": "analysis",
+              "id": "summary_window_and_declared_significance_are_consistent",
+              "type": "deterministic",
+              "passed": false,
+              "score_awarded": 0.0,
+              "score_max": 0.2,
+              "evidence": {
+                "failures": [
+                  {
+                    "field": "window_numerator_yield",
+                    "summary": 39.74381448117145,
+                    "derived": 59.0
+                  },
+                  {
+                    "field": "significance_formula",
+                    "summary": "(N_obs - B) / sqrt(B + sum_i w_i^2)",
+                    "reason": "unsupported_significance_formula",
+                    "allowed": [
+                      "numerator_over_sqrt_background_plus_fractional_systematic",
+                      "background_plus_signal_over_sqrt_background_plus_fractional_systematic",
+                      "numerator_minus_background_over_sqrt_background",
+                      "signal_over_sqrt_background",
+                      "data_minus_background_over_sqrt_background",
+                      "data_minus_background_over_sqrt_background_plus_variance"
+                    ]
+                  }
+                ],
+                "window": [
+                  120.0,
+                  130.0
+                ],
+                "derived_data_yield": 59.0,
+                "derived_background_yield": 19.256185518828552,
+                "derived_background_variance": 10.211923460849896,
+                "derived_signal_yield": 34.721525085906144,
+                "summary_background_yield": 19.256185518828552,
+                "summary_data_yield": 59.0,
+                "summary_signal_yield": 34.721525085906144,
+                "summary_numerator_yield": 39.74381448117145,
+                "expected_numerator_yield": 59.0,
+                "summary_significance_formula": "(N_obs - B) / sqrt(B + sum_i w_i^2)",
+                "normalized_significance_formula": "n_obsb/sqrtb+sum_iw_i2",
+                "summary_significance": 7.321387834865216,
+                "expected_significance": null,
+                "validation_evidence_present": true
+              }
+            },
+            {
+              "dimension": "analysis",
+              "id": "data_background_scale_is_plausible",
+              "type": "deterministic",
+              "passed": true,
+              "score_awarded": 0.2,
+              "score_max": 0.2,
+              "evidence": {
+                "failures": [],
+                "checks": [
+                  {
+                    "region": "full_spectrum",
+                    "interval": [
+                      80.0,
+                      250.0
+                    ],
+                    "bin_count": 45,
+                    "observed_sum": 501.0,
+                    "expected_sum": 382.4747961510183,
+                    "expected_over_observed_sum_ratio": 0.7634227468084198,
+                    "max_expected_over_observed_bin_ratio": 2.3097535845917796
+                  },
+                  {
+                    "region": "signal_window",
+                    "interval": [
+                      120.0,
+                      130.0
+                    ],
+                    "bin_count": 5,
+                    "observed_sum": 59.0,
+                    "expected_sum": 19.256185518828552,
+                    "expected_over_observed_sum_ratio": 0.3263760257428568,
+                    "max_expected_over_observed_bin_ratio": 0.7502004408210895
+                  }
+                ]
+              }
+            },
+            {
+              "dimension": "analysis",
+              "id": "localized_excess_behavior_in_higgs_region",
+              "type": "heuristic",
+              "passed": true,
+              "score_awarded": 0.2,
+              "score_max": 0.2,
+              "evidence": {
+                "integrated_difference": 39.74381448117145,
+                "max_bin_difference": 17.485443777707182
+              }
+            },
+            {
+              "dimension": "analysis",
+              "id": "dominant_excess_or_signal_peak_is_near_125gev",
+              "type": "heuristic",
+              "passed": true,
+              "score_awarded": 0.25,
+              "score_max": 0.25,
+              "evidence": {
+                "peak_x": 123.0,
+                "peak_y": 17.485443777707182,
+                "series": "data_minus_background",
+                "expected_range": [
+                  120.0,
+                  130.0
+                ]
+              }
+            },
+            {
+              "dimension": "validation",
+              "id": "validation_evidence_targets_primary_claim",
+              "type": "structural",
+              "passed": true,
+              "score_awarded": 0.6,
+              "score_max": 0.6,
+              "evidence": {
+                "existing_files": [],
+                "matching_labels": [],
+                "matched_groups": {
+                  "selected_yield": [
+                    "selected_events_total"
+                  ],
+                  "spectrum_integrity": [
+                    "histogram_filled_entries"
+                  ],
+                  "robustness": [
+                    "uncertainty"
+                  ]
+                },
+                "minimum_group_count": 3,
+                "validation_fields": [
+                  "validation_checks"
+                ],
+                "generic_evidence": true,
+                "count": 4
+              }
+            },
+            {
+              "dimension": "validation",
+              "id": "uncertainty_aware_background_comparison_available",
+              "type": "deterministic",
+              "passed": true,
+              "score_awarded": 0.4,
+              "score_max": 0.4,
+              "evidence": {
+                "failures": [],
+                "count": 45,
+                "sum": 118.25115199211261,
+                "max": 11.660677138043457
+              }
+            }
+          ],
+          "final": {
+            "total_score": 0.9440000000000001,
+            "max_score": 1.0,
+            "normalized_score": 0.9440000000000001
+          },
+          "llm": {
+            "judge": {
+              "configured": {
+                "provider": "openai",
+                "model": "gpt-5.4"
+              },
+              "runtime": {
+                "available": true,
+                "provider": "openai",
+                "model": "gpt-5.4"
+              }
+            },
+            "solver": {
+              "configured": {
+                "backend": "agent_1_oh",
+                "model": "gpt-5",
+                "source": "default"
+              }
+            }
+          },
+          "task_overrides_applied": {
+            "enabled": true,
+            "mode": "call_white",
+            "input_strategy": "shared_manifest",
+            "max_files": 0
+          },
+          "solver_backend": "agent_1_oh",
+          "purple_agent_runtime_seconds": 1675.877672,
+          "timing": {
+            "task_started_at": "2026-05-04T06:42:19.433453+00:00",
+            "task_finished_at": "2026-05-04T07:10:34.272600+00:00",
+            "task_runtime_seconds": 1694.839153,
+            "purple_agent_used": true,
+            "purple_agent_started_at": "2026-05-04T06:42:26.799635+00:00",
+            "purple_agent_finished_at": "2026-05-04T07:10:22.677303+00:00",
+            "purple_agent_runtime_seconds": 1675.877672
+          }
+        }
+      ],
+      "score_total": 2.5205,
+      "score_max": 3.0
+    }
+  ]
+}
