@@ -5,6 +5,20 @@ on:
     paths:
       - 'scenario.toml'
   workflow_dispatch:
+    inputs:
+      scenario_path:
+        description: 'Scenario file to run'
+        required: true
+        default: 'scenario.toml'
+        type: choice
+        options:
+          - scenario.toml
+          - ci-submit/scenario.agent01.hyy.toml
+          - ci-submit/scenario.agent02.hyy.toml
+          - ci-submit/scenario.agent03b.hyy.toml
+          - ci-submit/scenario.agent01.hzz.toml
+          - ci-submit/scenario.agent02.hzz.toml
+          - ci-submit/scenario.agent03b.hzz.toml
 
 jobs:
   run:
@@ -26,8 +40,19 @@ jobs:
       - name: Install dependencies
         run: pip install tomli tomli-w pyyaml requests
 
+      - name: Select scenario
+        id: scenario
+        run: |
+          SCENARIO_PATH="${{ github.event.inputs.scenario_path || 'scenario.toml' }}"
+          if [ ! -f "$SCENARIO_PATH" ]; then
+            echo "Scenario file not found: $SCENARIO_PATH"
+            exit 1
+          fi
+          echo "Using scenario: $SCENARIO_PATH"
+          echo "path=$SCENARIO_PATH" >> "$GITHUB_OUTPUT"
+
       - name: Generate docker-compose.yml
-        run: python generate_compose.py --scenario scenario.toml
+        run: python generate_compose.py --scenario "${{ steps.scenario.outputs.path }}"
 
       - name: Pull images
         run: |
@@ -86,7 +111,7 @@ jobs:
 
       - name: Copy files to submission directory
         run: |
-          cp scenario.toml submissions/${{ steps.metadata.outputs.unique_name }}.toml
+          cp "${{ steps.scenario.outputs.path }}" submissions/${{ steps.metadata.outputs.unique_name }}.toml
           cp output/results.json results/${{ steps.metadata.outputs.unique_name }}.json
           cp output/provenance.json submissions/${{ steps.metadata.outputs.unique_name }}.provenance.json
 

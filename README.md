@@ -27,21 +27,34 @@ This repo provides:
 
 ## Current Assessments
 
-`scenario.toml` is the small CI smoke scenario. It can run the public Hyy L1,
-L2, and L3 tasks with a one-file cap. For local benchmark development, this
-repo also includes ready-to-run L2 and L3 scenario templates:
+The benchmark now has two public analysis families, each with L1/L2/L3 tasks:
+Hyy diphoton and HZZ4l. This leaderboard repo does not own those task packages;
+it selects them through scenario files and records the resulting assessment
+outputs.
 
-| Level | Task directory | Local scenario | Typical local cap |
-| --- | --- | --- | --- |
-| L1 | `tasks_public/t002_hyy_v5_l1` | `scenario.toml` | `--max-files 1` for smoke |
-| L2 | `tasks_public/t003_hyy_v5_l2` | `.local-submit/scenario.l2.base.toml` | `--max-files 5` smoke, `16` full |
-| L3 | `tasks_public/t004_hyy_v5_l3` | `.local-submit/scenario.l3.base.toml` | `--max-files 5` smoke |
+| Family | Level | Task directory | CI submit scenarios | Typical cap |
+| --- | --- | --- | --- | --- |
+| Hyy | L1 | `tasks_public/t002_hyy_v5_l1` | `ci-submit/scenario.agent01.hyy.toml`, `ci-submit/scenario.agent02.hyy.toml`, `ci-submit/scenario.agent03b.hyy.toml` | `max_files = 5` smoke |
+| Hyy | L2 | `tasks_public/t003_hyy_v5_l2` | `ci-submit/scenario.agent01.hyy.toml`, `ci-submit/scenario.agent02.hyy.toml`, `ci-submit/scenario.agent03b.hyy.toml` | `max_files = 5` smoke |
+| Hyy | L3 | `tasks_public/t004_hyy_v5_l3` | `ci-submit/scenario.agent01.hyy.toml`, `ci-submit/scenario.agent02.hyy.toml`, `ci-submit/scenario.agent03b.hyy.toml` | `max_files = 5` smoke |
+| HZZ4l | L1 | `tasks_public/t005_hzz4l_l1` | `ci-submit/scenario.agent01.hzz.toml`, `ci-submit/scenario.agent02.hzz.toml`, `ci-submit/scenario.agent03b.hzz.toml` | `max_files = 5` per sample group smoke |
+| HZZ4l | L2 | `tasks_public/t006_hzz4l_l2` | `ci-submit/scenario.agent01.hzz.toml`, `ci-submit/scenario.agent02.hzz.toml`, `ci-submit/scenario.agent03b.hzz.toml` | `max_files = 5` per sample group smoke |
+| HZZ4l | L3 | `tasks_public/t007_hzz4l_l3` | `ci-submit/scenario.agent01.hzz.toml`, `ci-submit/scenario.agent02.hzz.toml`, `ci-submit/scenario.agent03b.hzz.toml` | `max_files = 5` per sample group smoke |
+
+`scenario.toml` is the root default scenario used when no CI submit scenario is
+selected. At the moment it runs the HZZ4l L1/L2/L3 suite with
+`agent_2_scifi_oh` and `max_files = 0`, which means full Green-managed input.
+Use the files under `ci-submit/` for controlled GitHub smoke comparisons.
+
+For local benchmark development, this repo also includes ready-to-run templates
+under `.local-submit/`, including Hyy L2/L3 and HZZ4l L1/L2/L3 workflows.
 
 Common runtime settings:
 
 - Response format: `submission_bundle_v1`
-- CI/default input strategy: `download`
-- Local realistic input strategy: `local_shared_mount` plus `shared_manifest`
+- CI/default input strategy: Green-managed shared input via
+  `scenario_shared_mount` plus `shared_manifest`
+- Local realistic input strategy: local shared mount plus `shared_manifest`
 - Final task results include `solver_backend`, `purple_agent_runtime_seconds`,
   and a `timing` object for runtime debugging and leaderboard queries.
 - Green scoring: public contract plus optional hidden rubric from
@@ -49,6 +62,48 @@ Common runtime settings:
 - Solver backends used in local testing: `agent_1_oh` for the baseline OH
   executor, or `agent_2_scifi_oh` for the SciFi-OH controller over the same OH
   executor.
+
+## CI Submit Scenarios
+
+Reusable GitHub CI smoke scenarios live under `ci-submit/`. To run one, open
+GitHub Actions, choose the `Run Scenario` workflow, click `Run workflow`, and
+pick a file from the `scenario_path` dropdown. This lets you run the CI matrix
+without overwriting root `scenario.toml`.
+
+```text
+scenario.toml
+ci-submit/scenario.agent01.hyy.toml
+ci-submit/scenario.agent02.hyy.toml
+ci-submit/scenario.agent03b.hyy.toml
+ci-submit/scenario.agent01.hzz.toml
+ci-submit/scenario.agent02.hzz.toml
+ci-submit/scenario.agent03b.hzz.toml
+```
+
+The matrix currently covers `agent_1_oh`, `agent_2_scifi_oh`, and
+`agent_3b_scifi_native` on the Hyy and HZZ4l public task families. Each file
+uses Green-managed shared input and `max_files = 5` for smoke testing.
+
+These scenario files do not change Green rubrics. They only choose task
+directories, solver backend, input mode, and file caps. `GREEN_SECRETS_JSON`
+only needs to be regenerated when a public `submission_contract.yaml` or a
+private rubric changes.
+
+If the repository secret is too long for all tasks, export only the task family
+you are about to run and manually copy that value into the GitHub repository
+secret:
+
+```bash
+cd ../hepex-analysisops-benchmark
+uv run python scripts/export_green_secrets.py --suite hyy
+# or
+uv run python scripts/export_green_secrets.py --suite hzz
+```
+
+Use the Hyy secret for `scenario.agent01.hyy.toml`,
+`scenario.agent02.hyy.toml`, and `scenario.agent03b.hyy.toml`; use the HZZ
+secret for `scenario.agent01.hzz.toml`, `scenario.agent02.hzz.toml`, and
+`scenario.agent03b.hzz.toml`.
 
 For full local testing, place or mount ATLAS Open Data ROOT files at:
 
@@ -73,8 +128,10 @@ uv run python scripts/export_green_secrets.py
 ```
 
 That script writes the value into both the benchmark and leaderboard `.env`
-files. It exports the current L1, L2, and L3 hidden rubrics by default. Rerun it
-whenever a public `submission_contract.yaml` or private rubric changes.
+files. It exports both Hyy and HZZ hidden rubrics by default. Rerun it whenever
+a public `submission_contract.yaml` or private rubric changes. For GitHub
+repository secrets with stricter length limits, use `--suite hyy` or
+`--suite hzz` and copy the smaller value manually.
 
 Do not print or commit `.env`.
 
