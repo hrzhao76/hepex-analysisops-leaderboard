@@ -21,6 +21,11 @@ run. `agent03b` scenarios use the native SciFi backend
 `agent_3b_scifi_native`; in local smoke testing it successfully ran Hyy L1 with
 5 ROOT files.
 
+All CI submit scenarios pin Green judge and Purple solver routing to
+`gpt-5.4`. The important solver field is `[config].solver_model`; participant
+environment variables alone are not enough because Green includes
+`solver_model` in the Purple request payload.
+
 The workflow still defaults to the root `scenario.toml`, so existing behavior is
 unchanged unless `scenario_path` is provided.
 

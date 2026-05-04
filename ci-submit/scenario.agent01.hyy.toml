@@ -9,6 +9,7 @@ env = { OPENAI_API_KEY = "${OPENAI_API_KEY}", HEPEX_AGENT_MODEL = "gpt-5.4", HEP
 
 [config]
 solver_backend = "agent_1_oh"
+solver_model = "gpt-5.4"
 task_dirs = [
   "tasks_public/t002_hyy_v5_l1",
   "tasks_public/t003_hyy_v5_l2",
