@@ -1,0 +1,40 @@
+[green_agent]
+agentbeats_id = "019bc3d3-cae6-7711-9696-a912bb00bd11"
+env = { OPENAI_API_KEY = "${OPENAI_API_KEY}", GREEN_SECRETS_JSON = "${GREEN_SECRETS_JSON}", HEPEX_OPENAI_MODEL = "gpt-5.4" }
+
+[[participants]]
+agentbeats_id = "019bc3da-00a0-7930-9e2d-e46dad026684"
+name = "purple_agent"
+env = { OPENAI_API_KEY = "${OPENAI_API_KEY}", HEPEX_AGENT_MODEL = "gpt-5.4", HEPEX_OPENAI_MODEL = "gpt-5.4", SCIFI_NATIVE_MODEL = "gpt-5.4" }
+
+[config]
+solver_backend = "agent_3b_scifi_native"
+solver_model = "gpt-5.4"
+task_dirs = [
+  "tasks_public/t005_hzz4l_l1",
+  "tasks_public/t006_hzz4l_l2",
+  "tasks_public/t007_hzz4l_l3",
+]
+data_dir = "/home/agent/output"
+input_access_mode = "scenario_shared_mount"
+shared_input_dir = "/home/agent/output/shared_input/{release}/{dataset}/{skim}"
+allow_green_download = true
+solver_request_timeout_seconds = 1800
+
+[config.task_overrides.t005_hzz4l_l1]
+enabled = true
+mode = "call_white"
+input_strategy = "shared_manifest"
+max_files = 0  # means all files
+
+[config.task_overrides.t006_hzz4l_l2]
+enabled = true
+mode = "call_white"
+input_strategy = "shared_manifest"
+max_files = 0  # means all files
+
+[config.task_overrides.t007_hzz4l_l3]
+enabled = true
+mode = "call_white"
+input_strategy = "shared_manifest"
+max_files = 0  # means all files
