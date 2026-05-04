@@ -9,13 +9,17 @@ Use the `Run Scenario` GitHub Actions workflow and choose one of these from the
 
 - `ci-submit/scenario.agent01.hyy.toml`
 - `ci-submit/scenario.agent02.hyy.toml`
+- `ci-submit/scenario.agent03b.hyy.toml`
 - `ci-submit/scenario.agent01.hzz.toml`
 - `ci-submit/scenario.agent02.hzz.toml`
+- `ci-submit/scenario.agent03b.hzz.toml`
 
 Each scenario uses Green-managed shared input and caps inputs at
 `max_files = 5` for smoke testing. For HZZ4l this cap is applied per sample
 group. Change `max_files` to `0` only when you deliberately want a full-data
-run.
+run. `agent03b` scenarios use the native SciFi backend
+`agent_3b_scifi_native`; in local smoke testing it successfully ran Hyy L1 with
+5 ROOT files.
 
 The workflow still defaults to the root `scenario.toml`, so existing behavior is
 unchanged unless `scenario_path` is provided.

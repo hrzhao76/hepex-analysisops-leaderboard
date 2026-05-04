@@ -34,12 +34,12 @@ outputs.
 
 | Family | Level | Task directory | CI submit scenarios | Typical cap |
 | --- | --- | --- | --- | --- |
-| Hyy | L1 | `tasks_public/t002_hyy_v5_l1` | `ci-submit/scenario.agent01.hyy.toml`, `ci-submit/scenario.agent02.hyy.toml` | `max_files = 5` smoke |
-| Hyy | L2 | `tasks_public/t003_hyy_v5_l2` | `ci-submit/scenario.agent01.hyy.toml`, `ci-submit/scenario.agent02.hyy.toml` | `max_files = 5` smoke |
-| Hyy | L3 | `tasks_public/t004_hyy_v5_l3` | `ci-submit/scenario.agent01.hyy.toml`, `ci-submit/scenario.agent02.hyy.toml` | `max_files = 5` smoke |
-| HZZ4l | L1 | `tasks_public/t005_hzz4l_l1` | `ci-submit/scenario.agent01.hzz.toml`, `ci-submit/scenario.agent02.hzz.toml` | `max_files = 5` per sample group smoke |
-| HZZ4l | L2 | `tasks_public/t006_hzz4l_l2` | `ci-submit/scenario.agent01.hzz.toml`, `ci-submit/scenario.agent02.hzz.toml` | `max_files = 5` per sample group smoke |
-| HZZ4l | L3 | `tasks_public/t007_hzz4l_l3` | `ci-submit/scenario.agent01.hzz.toml`, `ci-submit/scenario.agent02.hzz.toml` | `max_files = 5` per sample group smoke |
+| Hyy | L1 | `tasks_public/t002_hyy_v5_l1` | `ci-submit/scenario.agent01.hyy.toml`, `ci-submit/scenario.agent02.hyy.toml`, `ci-submit/scenario.agent03b.hyy.toml` | `max_files = 5` smoke |
+| Hyy | L2 | `tasks_public/t003_hyy_v5_l2` | `ci-submit/scenario.agent01.hyy.toml`, `ci-submit/scenario.agent02.hyy.toml`, `ci-submit/scenario.agent03b.hyy.toml` | `max_files = 5` smoke |
+| Hyy | L3 | `tasks_public/t004_hyy_v5_l3` | `ci-submit/scenario.agent01.hyy.toml`, `ci-submit/scenario.agent02.hyy.toml`, `ci-submit/scenario.agent03b.hyy.toml` | `max_files = 5` smoke |
+| HZZ4l | L1 | `tasks_public/t005_hzz4l_l1` | `ci-submit/scenario.agent01.hzz.toml`, `ci-submit/scenario.agent02.hzz.toml`, `ci-submit/scenario.agent03b.hzz.toml` | `max_files = 5` per sample group smoke |
+| HZZ4l | L2 | `tasks_public/t006_hzz4l_l2` | `ci-submit/scenario.agent01.hzz.toml`, `ci-submit/scenario.agent02.hzz.toml`, `ci-submit/scenario.agent03b.hzz.toml` | `max_files = 5` per sample group smoke |
+| HZZ4l | L3 | `tasks_public/t007_hzz4l_l3` | `ci-submit/scenario.agent01.hzz.toml`, `ci-submit/scenario.agent02.hzz.toml`, `ci-submit/scenario.agent03b.hzz.toml` | `max_files = 5` per sample group smoke |
 
 `scenario.toml` is the root default scenario used when no CI submit scenario is
 selected. At the moment it runs the HZZ4l L1/L2/L3 suite with
@@ -74,13 +74,15 @@ without overwriting root `scenario.toml`.
 scenario.toml
 ci-submit/scenario.agent01.hyy.toml
 ci-submit/scenario.agent02.hyy.toml
+ci-submit/scenario.agent03b.hyy.toml
 ci-submit/scenario.agent01.hzz.toml
 ci-submit/scenario.agent02.hzz.toml
+ci-submit/scenario.agent03b.hzz.toml
 ```
 
-The matrix is `agent_1_oh` vs `agent_2_scifi_oh` on the Hyy and HZZ4l public
-task families. Each file uses Green-managed shared input and `max_files = 5`
-for smoke testing.
+The matrix currently covers `agent_1_oh`, `agent_2_scifi_oh`, and
+`agent_3b_scifi_native` on the Hyy and HZZ4l public task families. Each file
+uses Green-managed shared input and `max_files = 5` for smoke testing.
 
 These scenario files do not change Green rubrics. They only choose task
 directories, solver backend, input mode, and file caps. `GREEN_SECRETS_JSON`
@@ -98,9 +100,10 @@ uv run python scripts/export_green_secrets.py --suite hyy
 uv run python scripts/export_green_secrets.py --suite hzz
 ```
 
-Use the Hyy secret for `scenario.agent01.hyy.toml` and
-`scenario.agent02.hyy.toml`; use the HZZ secret for `scenario.agent01.hzz.toml`
-and `scenario.agent02.hzz.toml`.
+Use the Hyy secret for `scenario.agent01.hyy.toml`,
+`scenario.agent02.hyy.toml`, and `scenario.agent03b.hyy.toml`; use the HZZ
+secret for `scenario.agent01.hzz.toml`, `scenario.agent02.hzz.toml`, and
+`scenario.agent03b.hzz.toml`.
 
 For full local testing, place or mount ATLAS Open Data ROOT files at:
 

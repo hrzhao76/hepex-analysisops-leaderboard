@@ -15,8 +15,10 @@ on:
           - scenario.toml
           - ci-submit/scenario.agent01.hyy.toml
           - ci-submit/scenario.agent02.hyy.toml
+          - ci-submit/scenario.agent03b.hyy.toml
           - ci-submit/scenario.agent01.hzz.toml
           - ci-submit/scenario.agent02.hzz.toml
+          - ci-submit/scenario.agent03b.hzz.toml
 
 jobs:
   run:

@@ -24,16 +24,16 @@ solver_request_timeout_seconds = 1800
 enabled = true
 mode = "call_white"
 input_strategy = "shared_manifest"
-max_files = 5
+max_files = 0  # means all files
 
 [config.task_overrides.t006_hzz4l_l2]
 enabled = true
 mode = "call_white"
 input_strategy = "shared_manifest"
-max_files = 5
+max_files = 0  # means all files
 
 [config.task_overrides.t007_hzz4l_l3]
 enabled = true
 mode = "call_white"
 input_strategy = "shared_manifest"
-max_files = 5
+max_files = 0  # means all files
