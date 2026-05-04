@@ -1,0 +1,1572 @@
+{
+  "participants": {
+    "purple_agent": "019bc3da-00a0-7930-9e2d-e46dad026684"
+  },
+  "results": [
+    {
+      "task_id": "t005_hzz4l_l1",
+      "type": "hzz4l_l1",
+      "status": "contract_fail",
+      "validator": "contract_validator_dir",
+      "hard_checks_passed": false,
+      "missing_files": [
+        "four_lepton_mass_spectrum.json",
+        "four_lepton_inference_summary.json",
+        "interpretation.md"
+      ],
+      "schema_errors": [
+        "workflow_stages: missing",
+        "baseline_assumptions_used: missing",
+        "input_samples_used: missing",
+        "cuts_applied: missing",
+        "observable_constructed: missing",
+        "fit_model_family_used: missing",
+        "validation_checks: missing",
+        "output_files_generated: missing"
+      ],
+      "final": {
+        "total_score": 0.0,
+        "max_score": 1.0,
+        "normalized_score": 0.0
+      },
+      "issues": [
+        {
+          "severity": "error",
+          "code": "MISSING_FILE",
+          "message": "four_lepton_mass_spectrum.json"
+        },
+        {
+          "severity": "error",
+          "code": "MISSING_FILE",
+          "message": "four_lepton_inference_summary.json"
+        },
+        {
+          "severity": "error",
+          "code": "MISSING_FILE",
+          "message": "interpretation.md"
+        },
+        {
+          "severity": "error",
+          "code": "SCHEMA_ERROR",
+          "message": "workflow_stages: missing"
+        },
+        {
+          "severity": "error",
+          "code": "SCHEMA_ERROR",
+          "message": "baseline_assumptions_used: missing"
+        },
+        {
+          "severity": "error",
+          "code": "SCHEMA_ERROR",
+          "message": "input_samples_used: missing"
+        },
+        {
+          "severity": "error",
+          "code": "SCHEMA_ERROR",
+          "message": "cuts_applied: missing"
+        },
+        {
+          "severity": "error",
+          "code": "SCHEMA_ERROR",
+          "message": "observable_constructed: missing"
+        },
+        {
+          "severity": "error",
+          "code": "SCHEMA_ERROR",
+          "message": "fit_model_family_used: missing"
+        },
+        {
+          "severity": "error",
+          "code": "SCHEMA_ERROR",
+          "message": "validation_checks: missing"
+        },
+        {
+          "severity": "error",
+          "code": "SCHEMA_ERROR",
+          "message": "output_files_generated: missing"
+        }
+      ],
+      "llm": {
+        "judge": {
+          "configured": {
+            "provider": "openai",
+            "model": "gpt-5"
+          },
+          "runtime": {
+            "available": true,
+            "provider": "openai",
+            "model": "gpt-5"
+          }
+        },
+        "solver": {
+          "configured": {
+            "backend": "agent_2_scifi_oh",
+            "model": "gpt-5",
+            "source": "default"
+          }
+        }
+      },
+      "task_overrides_applied": {
+        "enabled": true,
+        "mode": "call_white",
+        "input_strategy": "shared_manifest",
+        "max_files": 0
+      },
+      "solver_backend": "agent_2_scifi_oh",
+      "purple_agent_runtime_seconds": 449.80978,
+      "timing": {
+        "task_started_at": "2026-05-04T05:34:43.360260+00:00",
+        "task_finished_at": "2026-05-04T05:46:49.439206+00:00",
+        "task_runtime_seconds": 726.078952,
+        "purple_agent_used": true,
+        "purple_agent_started_at": "2026-05-04T05:39:19.615854+00:00",
+        "purple_agent_finished_at": "2026-05-04T05:46:49.425632+00:00",
+        "purple_agent_runtime_seconds": 449.80978
+      }
+    },
+    {
+      "task_id": "t006_hzz4l_l2",
+      "type": "hzz4l_l2",
+      "status": "contract_fail",
+      "validator": "contract_validator_dir",
+      "hard_checks_passed": false,
+      "missing_files": [
+        "four_lepton_mass_spectrum.json",
+        "four_lepton_excess_summary.json",
+        "interpretation.md"
+      ],
+      "schema_errors": [
+        "workflow_stages: missing",
+        "execution_evidence: missing",
+        "scientific_decisions: missing",
+        "input_samples_used: missing",
+        "validation_checks: missing",
+        "observable_constructed: missing",
+        "inference_strategy: missing",
+        "output_files_generated: missing"
+      ],
+      "final": {
+        "total_score": 0.0,
+        "max_score": 1.0,
+        "normalized_score": 0.0
+      },
+      "issues": [
+        {
+          "severity": "error",
+          "code": "MISSING_FILE",
+          "message": "four_lepton_mass_spectrum.json"
+        },
+        {
+          "severity": "error",
+          "code": "MISSING_FILE",
+          "message": "four_lepton_excess_summary.json"
+        },
+        {
+          "severity": "error",
+          "code": "MISSING_FILE",
+          "message": "interpretation.md"
+        },
+        {
+          "severity": "error",
+          "code": "SCHEMA_ERROR",
+          "message": "workflow_stages: missing"
+        },
+        {
+          "severity": "error",
+          "code": "SCHEMA_ERROR",
+          "message": "execution_evidence: missing"
+        },
+        {
+          "severity": "error",
+          "code": "SCHEMA_ERROR",
+          "message": "scientific_decisions: missing"
+        },
+        {
+          "severity": "error",
+          "code": "SCHEMA_ERROR",
+          "message": "input_samples_used: missing"
+        },
+        {
+          "severity": "error",
+          "code": "SCHEMA_ERROR",
+          "message": "validation_checks: missing"
+        },
+        {
+          "severity": "error",
+          "code": "SCHEMA_ERROR",
+          "message": "observable_constructed: missing"
+        },
+        {
+          "severity": "error",
+          "code": "SCHEMA_ERROR",
+          "message": "inference_strategy: missing"
+        },
+        {
+          "severity": "error",
+          "code": "SCHEMA_ERROR",
+          "message": "output_files_generated: missing"
+        }
+      ],
+      "llm": {
+        "judge": {
+          "configured": {
+            "provider": "openai",
+            "model": "gpt-5"
+          },
+          "runtime": {
+            "available": true,
+            "provider": "openai",
+            "model": "gpt-5"
+          }
+        },
+        "solver": {
+          "configured": {
+            "backend": "agent_2_scifi_oh",
+            "model": "gpt-5",
+            "source": "default"
+          }
+        }
+      },
+      "task_overrides_applied": {
+        "enabled": true,
+        "mode": "call_white",
+        "input_strategy": "shared_manifest",
+        "max_files": 0
+      },
+      "solver_backend": "agent_2_scifi_oh",
+      "purple_agent_runtime_seconds": 267.337096,
+      "timing": {
+        "task_started_at": "2026-05-04T05:46:49.440337+00:00",
+        "task_finished_at": "2026-05-04T05:51:21.029656+00:00",
+        "task_runtime_seconds": 271.589332,
+        "purple_agent_used": true,
+        "purple_agent_started_at": "2026-05-04T05:46:53.670431+00:00",
+        "purple_agent_finished_at": "2026-05-04T05:51:21.007523+00:00",
+        "purple_agent_runtime_seconds": 267.337096
+      }
+    },
+    {
+      "task_id": "t007_hzz4l_l3",
+      "type": "hzz4l_l3",
+      "status": "ok",
+      "hard_checks_passed": true,
+      "contract_report": {
+        "task_id": "t007_hzz4l_l3",
+        "type": "hzz4l_l3",
+        "status": "ok",
+        "validator": "contract_validator_dir",
+        "hard_checks_passed": true,
+        "missing_files": [],
+        "schema_errors": [],
+        "final": {
+          "total_score": 1.0,
+          "max_score": 1.0,
+          "normalized_score": 1.0
+        },
+        "issues": []
+      },
+      "public_scores": {
+        "contract_pass": 1.0,
+        "public_structure_score": 1.0,
+        "public_artifact_score": 1.0
+      },
+      "hidden_scores": {
+        "hidden_quality_score": 0.874,
+        "status": "ok"
+      },
+      "score_visibility": "official_with_hidden",
+      "dimension_scores": {
+        "execution": 1.0,
+        "pipeline": 1.0,
+        "implementation": 1.0,
+        "reasoning": 1.0,
+        "analysis": 0.55,
+        "validation": 1.0
+      },
+      "check_results": [
+        {
+          "dimension": "execution",
+          "id": "required_output_files_present",
+          "type": "deterministic",
+          "passed": true,
+          "score_awarded": 0.45,
+          "score_max": 0.45,
+          "evidence": {
+            "missing": []
+          }
+        },
+        {
+          "dimension": "execution",
+          "id": "required_output_files_nonempty",
+          "type": "deterministic",
+          "passed": true,
+          "score_awarded": 0.2,
+          "score_max": 0.2,
+          "evidence": {
+            "empty_or_missing": []
+          }
+        },
+        {
+          "dimension": "execution",
+          "id": "execution_evidence_is_positive_and_manifest_consistent",
+          "type": "deterministic",
+          "passed": true,
+          "score_awarded": 0.35,
+          "score_max": 0.35,
+          "evidence": {
+            "failures": [],
+            "counters": {
+              "files_processed_count": 40.0,
+              "events_processed_total": 2102314.0,
+              "selected_events_total": 636240.0,
+              "candidates_built_total": 636240.0,
+              "histogram_filled_entries": 636240.0
+            },
+            "manifest_file_count": 40,
+            "series": {}
+          }
+        },
+        {
+          "dimension": "pipeline",
+          "id": "core_scientific_capabilities_present",
+          "type": "structural",
+          "passed": true,
+          "score_awarded": 0.55,
+          "score_max": 0.55,
+          "evidence": {
+            "families": [
+              "data_access",
+              "object_or_event_selection",
+              "event_weighting",
+              "observable_construction",
+              "observable_construction",
+              "spectrum_or_summary_construction",
+              "inference_or_signal_localization",
+              "validation",
+              "interpretation",
+              "data_access",
+              "event_weighting",
+              "object_or_event_selection",
+              "observable_construction",
+              "spectrum_or_summary_construction",
+              "inference_or_signal_localization",
+              "validation",
+              "object_or_event_selection",
+              "observable_construction",
+              "event_weighting",
+              "observable_construction",
+              "inference_or_signal_localization",
+              "data_access",
+              "event_weighting",
+              "spectrum_or_summary_construction",
+              "inference_or_signal_localization",
+              "interpretation",
+              "validation",
+              "data_access",
+              "object_or_event_selection",
+              "observable_construction",
+              "spectrum_or_summary_construction",
+              "inference_or_signal_localization",
+              "interpretation"
+            ],
+            "missing": [],
+            "matched": 7,
+            "required": 7,
+            "match_fraction": 1.0
+          }
+        },
+        {
+          "dimension": "pipeline",
+          "id": "scientific_order_is_not_obviously_incoherent",
+          "type": "structural",
+          "passed": true,
+          "score_awarded": 0.2,
+          "score_max": 0.2,
+          "evidence": {
+            "families": [
+              "data_access",
+              "object_or_event_selection",
+              "event_weighting",
+              "observable_construction",
+              "observable_construction",
+              "spectrum_or_summary_construction",
+              "inference_or_signal_localization",
+              "validation",
+              "interpretation"
+            ],
+            "failed_orders": [],
+            "skipped_orders": []
+          }
+        },
+        {
+          "dimension": "pipeline",
+          "id": "manifest_sample_roles_are_reflected",
+          "type": "structural",
+          "passed": true,
+          "score_awarded": 0.25,
+          "score_max": 0.25,
+          "evidence": {
+            "missing": [],
+            "manifest_roles": [
+              "background",
+              "data",
+              "signal"
+            ]
+          }
+        },
+        {
+          "dimension": "implementation",
+          "id": "m4l_observable_or_equivalent_signal_proxy_defined",
+          "type": "deterministic",
+          "passed": true,
+          "score_awarded": 0.3,
+          "score_max": 0.3,
+          "evidence": {
+            "missing": []
+          }
+        },
+        {
+          "dimension": "implementation",
+          "id": "selection_strategy_is_scientifically_defensible",
+          "type": "structural",
+          "passed": true,
+          "score_awarded": 0.25,
+          "score_max": 0.25,
+          "evidence": {
+            "present": [
+              "trigger",
+              "kinematic",
+              "object_quality",
+              "isolation",
+              "topology"
+            ],
+            "missing": [
+              "charge"
+            ],
+            "minimum_groups": 4
+          }
+        },
+        {
+          "dimension": "implementation",
+          "id": "mc_weighting_and_normalization_strategy_present",
+          "type": "structural",
+          "passed": true,
+          "score_awarded": 0.25,
+          "score_max": 0.25,
+          "evidence": {
+            "missing": [],
+            "present_factor_groups": [
+              "event_weight",
+              "cross_section",
+              "filter_efficiency",
+              "k_factor",
+              "sum_of_weights",
+              "scale_factors",
+              "luminosity"
+            ],
+            "missing_factor_groups": [],
+            "structured_evidence_field": "mc_weighting_evidence",
+            "structured_evidence_present": true
+          }
+        },
+        {
+          "dimension": "implementation",
+          "id": "localized_inference_strategy_is_scientifically_valid",
+          "type": "structural",
+          "passed": true,
+          "score_awarded": 0.2,
+          "score_max": 0.2,
+          "evidence": {
+            "accepted_any_of": []
+          }
+        },
+        {
+          "dimension": "reasoning",
+          "id": "interpretation_connects_strategy_evidence_and_conclusion",
+          "type": "llm_judge",
+          "passed": true,
+          "score_awarded": 0.6,
+          "score_max": 0.6,
+          "evidence": {
+            "judge_result": {
+              "pass": true,
+              "explanation": "The submission is logically consistent and meets the rubric. It clearly explains the chosen strategy (exactly-4-lepton SFOS selection, m4l spectrum, 120\u2013130 GeV window counting, luminosity-normalized MC with stated weights and uncertainties). It uses concrete data/background/signal yields from the provided artifacts and computes a significance proxy consistent with the listed inputs. The localized region near 125 GeV is explicitly addressed, and the very large excess is cautiously interpreted as a normalization/selection-modeling mismatch rather than a physics claim, thus avoiding unsupported discovery statements.",
+              "notes": [
+                "The reported window yields (data, background, signal) match the histogram contents and combine to the stated excess and significance proxy; internal arithmetic is consistent.",
+                "The conclusion correctly links the method\u2019s result (huge data/MC discrepancy) to a plausible explanation (inclusive selection and modeling/normalization limitations), without over-claiming.",
+                "Consider clarifying candidate uniqueness in 4e/4\u03bc channels (possible multiple SFOS pairings per event) to ensure one entry per event in the spectrum.",
+                "Given the very large data rate, note explicitly whether reducible backgrounds (e.g., Z+jets with nonprompt or mis-ID leptons) are modeled; this can explain data>MC if not included.",
+                "Providing the summed MC weight-squared used in the significance denominator would improve transparency.",
+                "As a cross-check, a shape-only comparison (MC rescaled to data) or tighter lepton/ZZ selection could test whether the 125 GeV peak becomes visible at the expected relative level."
+              ]
+            }
+          }
+        },
+        {
+          "dimension": "reasoning",
+          "id": "trace_explains_l3_decisions_and_limitations",
+          "type": "llm_judge",
+          "passed": true,
+          "score_awarded": 0.4,
+          "score_max": 0.4,
+          "evidence": {
+            "judge_result": {
+              "pass": true,
+              "explanation": "The submission is logically consistent with the provided evidence and meets the rubric: it documents key analysis decisions with reasons, describes validation checks, and clearly states limitations and uncertainties. The numerical results (yields in the 120\u2013130 GeV window, background sums, and the large significance proxy) are traceable to the shared histograms and summaries. The interpretation appropriately cautions against physics claims given the clear data/MC scale mismatch and frames the significance as a proxy.",
+              "notes": [
+                "Key decisions are explicitly listed with motivations (SFOS selection, luminosity-normalized MC, binning, and window-counting).",
+                "Validation/robustness actions are described and evidenced (spectrum non-empty, weighting fields present, and a window-yield sanity summary).",
+                "Limitations are clearly stated: the large data/MC discrepancy makes the counting result nonphysical and undermines any excess claim.",
+                "Potential logical gap: the extremely large data yields (e.g., 6,763 in 10 GeV window; 86k events total) and the reported candidates_built_total suggest possible candidate multiplicity or double counting. The interpretation attributes the mismatch to selection inclusiveness but does not explicitly check for per-event vs per-candidate filling, which could be a dominant effect.",
+                "It would strengthen consistency to clarify whether one quadruplet per event is enforced, to report the number of unique events vs candidates in data and MC, and to verify that triggers/lepton quality and isolation match between data and MC.",
+                "Significance is correctly framed as a proxy, but reporting the explicit \u03a3w^2 used in the window would improve transparency.",
+                "Uncertainties are statistical-only (sqrt(sum w^2)), which is fine for a proxy, and this is stated."
+              ]
+            }
+          }
+        },
+        {
+          "dimension": "analysis",
+          "id": "spectrum_series_are_nonzero",
+          "type": "deterministic",
+          "passed": true,
+          "score_awarded": 0.05,
+          "score_max": 0.05,
+          "evidence": {
+            "failures": [],
+            "count": 55,
+            "sum": 86324.0,
+            "max": 3919.0
+          }
+        },
+        {
+          "dimension": "analysis",
+          "id": "background_series_is_nonzero",
+          "type": "deterministic",
+          "passed": true,
+          "score_awarded": 0.05,
+          "score_max": 0.05,
+          "evidence": {
+            "failures": [],
+            "count": 55,
+            "sum": 8172.757077603719,
+            "max": 1017.1962511278616
+          }
+        },
+        {
+          "dimension": "analysis",
+          "id": "signal_series_is_nonzero",
+          "type": "deterministic",
+          "passed": true,
+          "score_awarded": 0.05,
+          "score_max": 0.05,
+          "evidence": {
+            "failures": [],
+            "count": 55,
+            "sum": 63.894155579181096,
+            "max": 17.150330556008974
+          }
+        },
+        {
+          "dimension": "analysis",
+          "id": "summary_window_and_declared_significance_are_consistent",
+          "type": "deterministic",
+          "passed": false,
+          "score_awarded": 0.0,
+          "score_max": 0.2,
+          "evidence": {
+            "failures": [
+              {
+                "field": "window_numerator_yield",
+                "summary": 6144.763456769078,
+                "derived": 6763.0
+              },
+              {
+                "field": "significance_formula",
+                "summary": "(Nobs - B) / sqrt(B + sum_mc_weights_squared)",
+                "reason": "unsupported_significance_formula",
+                "allowed": [
+                  "numerator_over_sqrt_background_plus_fractional_systematic",
+                  "background_plus_signal_over_sqrt_background_plus_fractional_systematic",
+                  "numerator_minus_background_over_sqrt_background",
+                  "signal_over_sqrt_background",
+                  "data_minus_background_over_sqrt_background",
+                  "data_minus_background_over_sqrt_background_plus_variance"
+                ]
+              }
+            ],
+            "window": [
+              120.0,
+              130.0
+            ],
+            "derived_data_yield": 6763.0,
+            "derived_background_yield": 618.2365432309214,
+            "derived_background_variance": 1126.5832738533654,
+            "derived_signal_yield": 49.695387566969984,
+            "summary_background_yield": 618.2365432309214,
+            "summary_data_yield": 6763.0,
+            "summary_signal_yield": 49.695387566969984,
+            "summary_numerator_yield": 6144.763456769078,
+            "expected_numerator_yield": 6763.0,
+            "summary_significance_formula": "(Nobs - B) / sqrt(B + sum_mc_weights_squared)",
+            "normalized_significance_formula": "nobsb/sqrtb+sum_mc_weights_squared",
+            "summary_significance": 147.10582729543714,
+            "expected_significance": null,
+            "validation_evidence_present": true
+          }
+        },
+        {
+          "dimension": "analysis",
+          "id": "data_background_scale_is_plausible",
+          "type": "deterministic",
+          "passed": true,
+          "score_awarded": 0.2,
+          "score_max": 0.2,
+          "evidence": {
+            "failures": [],
+            "checks": [
+              {
+                "region": "full_spectrum",
+                "interval": [
+                  80.0,
+                  250.0
+                ],
+                "bin_count": 50,
+                "observed_sum": 72205.0,
+                "expected_sum": 7869.034388195469,
+                "expected_over_observed_sum_ratio": 0.10898184873894423,
+                "max_expected_over_observed_bin_ratio": 0.2595550525970558
+              },
+              {
+                "region": "signal_window",
+                "interval": [
+                  120.0,
+                  130.0
+                ],
+                "bin_count": 5,
+                "observed_sum": 6763.0,
+                "expected_sum": 618.2365432309214,
+                "expected_over_observed_sum_ratio": 0.09141454136195791,
+                "max_expected_over_observed_bin_ratio": 0.09474138813997104
+              }
+            ]
+          }
+        },
+        {
+          "dimension": "analysis",
+          "id": "localized_excess_behavior_in_higgs_region",
+          "type": "heuristic",
+          "passed": true,
+          "score_awarded": 0.2,
+          "score_max": 0.2,
+          "evidence": {
+            "integrated_difference": 6144.763456769078,
+            "max_bin_difference": 1266.5345280532522
+          }
+        },
+        {
+          "dimension": "analysis",
+          "id": "dominant_excess_or_signal_peak_is_near_125gev",
+          "type": "heuristic",
+          "passed": false,
+          "score_awarded": 0.0,
+          "score_max": 0.25,
+          "evidence": {
+            "peak_x": 71.0,
+            "peak_y": 3016.613653975618,
+            "series": "data_minus_background",
+            "expected_range": [
+              120.0,
+              130.0
+            ]
+          }
+        },
+        {
+          "dimension": "validation",
+          "id": "validation_evidence_targets_primary_claim",
+          "type": "structural",
+          "passed": true,
+          "score_awarded": 0.6,
+          "score_max": 0.6,
+          "evidence": {
+            "existing_files": [],
+            "matching_labels": [],
+            "matched_groups": {
+              "selected_yield": [
+                "selected_events_total"
+              ],
+              "spectrum_integrity": [
+                "histogram_filled_entries"
+              ],
+              "signal_window_sanity": [
+                "signal_window_sanity"
+              ],
+              "robustness": [
+                "uncertainty"
+              ]
+            },
+            "minimum_group_count": 3,
+            "validation_fields": [
+              "validation_checks"
+            ],
+            "generic_evidence": true,
+            "count": 5
+          }
+        },
+        {
+          "dimension": "validation",
+          "id": "uncertainty_aware_background_comparison_available",
+          "type": "deterministic",
+          "passed": true,
+          "score_awarded": 0.4,
+          "score_max": 0.4,
+          "evidence": {
+            "failures": [],
+            "count": 55,
+            "sum": 985.9951657673558,
+            "max": 66.25676632455105
+          }
+        }
+      ],
+      "final": {
+        "total_score": 0.874,
+        "max_score": 1.0,
+        "normalized_score": 0.874
+      },
+      "llm": {
+        "judge": {
+          "configured": {
+            "provider": "openai",
+            "model": "gpt-5"
+          },
+          "runtime": {
+            "available": true,
+            "provider": "openai",
+            "model": "gpt-5"
+          }
+        },
+        "solver": {
+          "configured": {
+            "backend": "agent_2_scifi_oh",
+            "model": "gpt-5",
+            "source": "default"
+          }
+        }
+      },
+      "task_overrides_applied": {
+        "enabled": true,
+        "mode": "call_white",
+        "input_strategy": "shared_manifest",
+        "max_files": 0
+      },
+      "solver_backend": "agent_2_scifi_oh",
+      "purple_agent_runtime_seconds": 1053.212388,
+      "timing": {
+        "task_started_at": "2026-05-04T05:51:21.030720+00:00",
+        "task_finished_at": "2026-05-04T06:10:27.151203+00:00",
+        "task_runtime_seconds": 1146.120486,
+        "purple_agent_used": true,
+        "purple_agent_started_at": "2026-05-04T05:51:25.489187+00:00",
+        "purple_agent_finished_at": "2026-05-04T06:08:58.701570+00:00",
+        "purple_agent_runtime_seconds": 1053.212388
+      }
+    },
+    {
+      "run_id": "20260504T053443Z_c8d9fa07",
+      "run_dir": "/home/agent/output/runs/20260504T053443Z_c8d9fa07",
+      "data_dir": "/home/agent/output",
+      "llm": {
+        "judge": {
+          "configured": {
+            "provider": "openai",
+            "model": "gpt-5"
+          },
+          "runtime": {
+            "available": true,
+            "provider": "openai",
+            "model": "gpt-5"
+          }
+        },
+        "solver": {
+          "configured": {
+            "backend": "agent_2_scifi_oh",
+            "model": "gpt-5",
+            "source": "default"
+          }
+        }
+      },
+      "tasks": [
+        {
+          "task_id": "t005_hzz4l_l1",
+          "type": "hzz4l_l1",
+          "status": "contract_fail",
+          "validator": "contract_validator_dir",
+          "hard_checks_passed": false,
+          "missing_files": [
+            "four_lepton_mass_spectrum.json",
+            "four_lepton_inference_summary.json",
+            "interpretation.md"
+          ],
+          "schema_errors": [
+            "workflow_stages: missing",
+            "baseline_assumptions_used: missing",
+            "input_samples_used: missing",
+            "cuts_applied: missing",
+            "observable_constructed: missing",
+            "fit_model_family_used: missing",
+            "validation_checks: missing",
+            "output_files_generated: missing"
+          ],
+          "final": {
+            "total_score": 0.0,
+            "max_score": 1.0,
+            "normalized_score": 0.0
+          },
+          "issues": [
+            {
+              "severity": "error",
+              "code": "MISSING_FILE",
+              "message": "four_lepton_mass_spectrum.json"
+            },
+            {
+              "severity": "error",
+              "code": "MISSING_FILE",
+              "message": "four_lepton_inference_summary.json"
+            },
+            {
+              "severity": "error",
+              "code": "MISSING_FILE",
+              "message": "interpretation.md"
+            },
+            {
+              "severity": "error",
+              "code": "SCHEMA_ERROR",
+              "message": "workflow_stages: missing"
+            },
+            {
+              "severity": "error",
+              "code": "SCHEMA_ERROR",
+              "message": "baseline_assumptions_used: missing"
+            },
+            {
+              "severity": "error",
+              "code": "SCHEMA_ERROR",
+              "message": "input_samples_used: missing"
+            },
+            {
+              "severity": "error",
+              "code": "SCHEMA_ERROR",
+              "message": "cuts_applied: missing"
+            },
+            {
+              "severity": "error",
+              "code": "SCHEMA_ERROR",
+              "message": "observable_constructed: missing"
+            },
+            {
+              "severity": "error",
+              "code": "SCHEMA_ERROR",
+              "message": "fit_model_family_used: missing"
+            },
+            {
+              "severity": "error",
+              "code": "SCHEMA_ERROR",
+              "message": "validation_checks: missing"
+            },
+            {
+              "severity": "error",
+              "code": "SCHEMA_ERROR",
+              "message": "output_files_generated: missing"
+            }
+          ],
+          "llm": {
+            "judge": {
+              "configured": {
+                "provider": "openai",
+                "model": "gpt-5"
+              },
+              "runtime": {
+                "available": true,
+                "provider": "openai",
+                "model": "gpt-5"
+              }
+            },
+            "solver": {
+              "configured": {
+                "backend": "agent_2_scifi_oh",
+                "model": "gpt-5",
+                "source": "default"
+              }
+            }
+          },
+          "task_overrides_applied": {
+            "enabled": true,
+            "mode": "call_white",
+            "input_strategy": "shared_manifest",
+            "max_files": 0
+          },
+          "solver_backend": "agent_2_scifi_oh",
+          "purple_agent_runtime_seconds": 449.80978,
+          "timing": {
+            "task_started_at": "2026-05-04T05:34:43.360260+00:00",
+            "task_finished_at": "2026-05-04T05:46:49.439206+00:00",
+            "task_runtime_seconds": 726.078952,
+            "purple_agent_used": true,
+            "purple_agent_started_at": "2026-05-04T05:39:19.615854+00:00",
+            "purple_agent_finished_at": "2026-05-04T05:46:49.425632+00:00",
+            "purple_agent_runtime_seconds": 449.80978
+          }
+        },
+        {
+          "task_id": "t006_hzz4l_l2",
+          "type": "hzz4l_l2",
+          "status": "contract_fail",
+          "validator": "contract_validator_dir",
+          "hard_checks_passed": false,
+          "missing_files": [
+            "four_lepton_mass_spectrum.json",
+            "four_lepton_excess_summary.json",
+            "interpretation.md"
+          ],
+          "schema_errors": [
+            "workflow_stages: missing",
+            "execution_evidence: missing",
+            "scientific_decisions: missing",
+            "input_samples_used: missing",
+            "validation_checks: missing",
+            "observable_constructed: missing",
+            "inference_strategy: missing",
+            "output_files_generated: missing"
+          ],
+          "final": {
+            "total_score": 0.0,
+            "max_score": 1.0,
+            "normalized_score": 0.0
+          },
+          "issues": [
+            {
+              "severity": "error",
+              "code": "MISSING_FILE",
+              "message": "four_lepton_mass_spectrum.json"
+            },
+            {
+              "severity": "error",
+              "code": "MISSING_FILE",
+              "message": "four_lepton_excess_summary.json"
+            },
+            {
+              "severity": "error",
+              "code": "MISSING_FILE",
+              "message": "interpretation.md"
+            },
+            {
+              "severity": "error",
+              "code": "SCHEMA_ERROR",
+              "message": "workflow_stages: missing"
+            },
+            {
+              "severity": "error",
+              "code": "SCHEMA_ERROR",
+              "message": "execution_evidence: missing"
+            },
+            {
+              "severity": "error",
+              "code": "SCHEMA_ERROR",
+              "message": "scientific_decisions: missing"
+            },
+            {
+              "severity": "error",
+              "code": "SCHEMA_ERROR",
+              "message": "input_samples_used: missing"
+            },
+            {
+              "severity": "error",
+              "code": "SCHEMA_ERROR",
+              "message": "validation_checks: missing"
+            },
+            {
+              "severity": "error",
+              "code": "SCHEMA_ERROR",
+              "message": "observable_constructed: missing"
+            },
+            {
+              "severity": "error",
+              "code": "SCHEMA_ERROR",
+              "message": "inference_strategy: missing"
+            },
+            {
+              "severity": "error",
+              "code": "SCHEMA_ERROR",
+              "message": "output_files_generated: missing"
+            }
+          ],
+          "llm": {
+            "judge": {
+              "configured": {
+                "provider": "openai",
+                "model": "gpt-5"
+              },
+              "runtime": {
+                "available": true,
+                "provider": "openai",
+                "model": "gpt-5"
+              }
+            },
+            "solver": {
+              "configured": {
+                "backend": "agent_2_scifi_oh",
+                "model": "gpt-5",
+                "source": "default"
+              }
+            }
+          },
+          "task_overrides_applied": {
+            "enabled": true,
+            "mode": "call_white",
+            "input_strategy": "shared_manifest",
+            "max_files": 0
+          },
+          "solver_backend": "agent_2_scifi_oh",
+          "purple_agent_runtime_seconds": 267.337096,
+          "timing": {
+            "task_started_at": "2026-05-04T05:46:49.440337+00:00",
+            "task_finished_at": "2026-05-04T05:51:21.029656+00:00",
+            "task_runtime_seconds": 271.589332,
+            "purple_agent_used": true,
+            "purple_agent_started_at": "2026-05-04T05:46:53.670431+00:00",
+            "purple_agent_finished_at": "2026-05-04T05:51:21.007523+00:00",
+            "purple_agent_runtime_seconds": 267.337096
+          }
+        },
+        {
+          "task_id": "t007_hzz4l_l3",
+          "type": "hzz4l_l3",
+          "status": "ok",
+          "hard_checks_passed": true,
+          "contract_report": {
+            "task_id": "t007_hzz4l_l3",
+            "type": "hzz4l_l3",
+            "status": "ok",
+            "validator": "contract_validator_dir",
+            "hard_checks_passed": true,
+            "missing_files": [],
+            "schema_errors": [],
+            "final": {
+              "total_score": 1.0,
+              "max_score": 1.0,
+              "normalized_score": 1.0
+            },
+            "issues": []
+          },
+          "public_scores": {
+            "contract_pass": 1.0,
+            "public_structure_score": 1.0,
+            "public_artifact_score": 1.0
+          },
+          "hidden_scores": {
+            "hidden_quality_score": 0.874,
+            "status": "ok"
+          },
+          "score_visibility": "official_with_hidden",
+          "dimension_scores": {
+            "execution": 1.0,
+            "pipeline": 1.0,
+            "implementation": 1.0,
+            "reasoning": 1.0,
+            "analysis": 0.55,
+            "validation": 1.0
+          },
+          "check_results": [
+            {
+              "dimension": "execution",
+              "id": "required_output_files_present",
+              "type": "deterministic",
+              "passed": true,
+              "score_awarded": 0.45,
+              "score_max": 0.45,
+              "evidence": {
+                "missing": []
+              }
+            },
+            {
+              "dimension": "execution",
+              "id": "required_output_files_nonempty",
+              "type": "deterministic",
+              "passed": true,
+              "score_awarded": 0.2,
+              "score_max": 0.2,
+              "evidence": {
+                "empty_or_missing": []
+              }
+            },
+            {
+              "dimension": "execution",
+              "id": "execution_evidence_is_positive_and_manifest_consistent",
+              "type": "deterministic",
+              "passed": true,
+              "score_awarded": 0.35,
+              "score_max": 0.35,
+              "evidence": {
+                "failures": [],
+                "counters": {
+                  "files_processed_count": 40.0,
+                  "events_processed_total": 2102314.0,
+                  "selected_events_total": 636240.0,
+                  "candidates_built_total": 636240.0,
+                  "histogram_filled_entries": 636240.0
+                },
+                "manifest_file_count": 40,
+                "series": {}
+              }
+            },
+            {
+              "dimension": "pipeline",
+              "id": "core_scientific_capabilities_present",
+              "type": "structural",
+              "passed": true,
+              "score_awarded": 0.55,
+              "score_max": 0.55,
+              "evidence": {
+                "families": [
+                  "data_access",
+                  "object_or_event_selection",
+                  "event_weighting",
+                  "observable_construction",
+                  "observable_construction",
+                  "spectrum_or_summary_construction",
+                  "inference_or_signal_localization",
+                  "validation",
+                  "interpretation",
+                  "data_access",
+                  "event_weighting",
+                  "object_or_event_selection",
+                  "observable_construction",
+                  "spectrum_or_summary_construction",
+                  "inference_or_signal_localization",
+                  "validation",
+                  "object_or_event_selection",
+                  "observable_construction",
+                  "event_weighting",
+                  "observable_construction",
+                  "inference_or_signal_localization",
+                  "data_access",
+                  "event_weighting",
+                  "spectrum_or_summary_construction",
+                  "inference_or_signal_localization",
+                  "interpretation",
+                  "validation",
+                  "data_access",
+                  "object_or_event_selection",
+                  "observable_construction",
+                  "spectrum_or_summary_construction",
+                  "inference_or_signal_localization",
+                  "interpretation"
+                ],
+                "missing": [],
+                "matched": 7,
+                "required": 7,
+                "match_fraction": 1.0
+              }
+            },
+            {
+              "dimension": "pipeline",
+              "id": "scientific_order_is_not_obviously_incoherent",
+              "type": "structural",
+              "passed": true,
+              "score_awarded": 0.2,
+              "score_max": 0.2,
+              "evidence": {
+                "families": [
+                  "data_access",
+                  "object_or_event_selection",
+                  "event_weighting",
+                  "observable_construction",
+                  "observable_construction",
+                  "spectrum_or_summary_construction",
+                  "inference_or_signal_localization",
+                  "validation",
+                  "interpretation"
+                ],
+                "failed_orders": [],
+                "skipped_orders": []
+              }
+            },
+            {
+              "dimension": "pipeline",
+              "id": "manifest_sample_roles_are_reflected",
+              "type": "structural",
+              "passed": true,
+              "score_awarded": 0.25,
+              "score_max": 0.25,
+              "evidence": {
+                "missing": [],
+                "manifest_roles": [
+                  "background",
+                  "data",
+                  "signal"
+                ]
+              }
+            },
+            {
+              "dimension": "implementation",
+              "id": "m4l_observable_or_equivalent_signal_proxy_defined",
+              "type": "deterministic",
+              "passed": true,
+              "score_awarded": 0.3,
+              "score_max": 0.3,
+              "evidence": {
+                "missing": []
+              }
+            },
+            {
+              "dimension": "implementation",
+              "id": "selection_strategy_is_scientifically_defensible",
+              "type": "structural",
+              "passed": true,
+              "score_awarded": 0.25,
+              "score_max": 0.25,
+              "evidence": {
+                "present": [
+                  "trigger",
+                  "kinematic",
+                  "object_quality",
+                  "isolation",
+                  "topology"
+                ],
+                "missing": [
+                  "charge"
+                ],
+                "minimum_groups": 4
+              }
+            },
+            {
+              "dimension": "implementation",
+              "id": "mc_weighting_and_normalization_strategy_present",
+              "type": "structural",
+              "passed": true,
+              "score_awarded": 0.25,
+              "score_max": 0.25,
+              "evidence": {
+                "missing": [],
+                "present_factor_groups": [
+                  "event_weight",
+                  "cross_section",
+                  "filter_efficiency",
+                  "k_factor",
+                  "sum_of_weights",
+                  "scale_factors",
+                  "luminosity"
+                ],
+                "missing_factor_groups": [],
+                "structured_evidence_field": "mc_weighting_evidence",
+                "structured_evidence_present": true
+              }
+            },
+            {
+              "dimension": "implementation",
+              "id": "localized_inference_strategy_is_scientifically_valid",
+              "type": "structural",
+              "passed": true,
+              "score_awarded": 0.2,
+              "score_max": 0.2,
+              "evidence": {
+                "accepted_any_of": []
+              }
+            },
+            {
+              "dimension": "reasoning",
+              "id": "interpretation_connects_strategy_evidence_and_conclusion",
+              "type": "llm_judge",
+              "passed": true,
+              "score_awarded": 0.6,
+              "score_max": 0.6,
+              "evidence": {
+                "judge_result": {
+                  "pass": true,
+                  "explanation": "The submission is logically consistent and meets the rubric. It clearly explains the chosen strategy (exactly-4-lepton SFOS selection, m4l spectrum, 120\u2013130 GeV window counting, luminosity-normalized MC with stated weights and uncertainties). It uses concrete data/background/signal yields from the provided artifacts and computes a significance proxy consistent with the listed inputs. The localized region near 125 GeV is explicitly addressed, and the very large excess is cautiously interpreted as a normalization/selection-modeling mismatch rather than a physics claim, thus avoiding unsupported discovery statements.",
+                  "notes": [
+                    "The reported window yields (data, background, signal) match the histogram contents and combine to the stated excess and significance proxy; internal arithmetic is consistent.",
+                    "The conclusion correctly links the method\u2019s result (huge data/MC discrepancy) to a plausible explanation (inclusive selection and modeling/normalization limitations), without over-claiming.",
+                    "Consider clarifying candidate uniqueness in 4e/4\u03bc channels (possible multiple SFOS pairings per event) to ensure one entry per event in the spectrum.",
+                    "Given the very large data rate, note explicitly whether reducible backgrounds (e.g., Z+jets with nonprompt or mis-ID leptons) are modeled; this can explain data>MC if not included.",
+                    "Providing the summed MC weight-squared used in the significance denominator would improve transparency.",
+                    "As a cross-check, a shape-only comparison (MC rescaled to data) or tighter lepton/ZZ selection could test whether the 125 GeV peak becomes visible at the expected relative level."
+                  ]
+                }
+              }
+            },
+            {
+              "dimension": "reasoning",
+              "id": "trace_explains_l3_decisions_and_limitations",
+              "type": "llm_judge",
+              "passed": true,
+              "score_awarded": 0.4,
+              "score_max": 0.4,
+              "evidence": {
+                "judge_result": {
+                  "pass": true,
+                  "explanation": "The submission is logically consistent with the provided evidence and meets the rubric: it documents key analysis decisions with reasons, describes validation checks, and clearly states limitations and uncertainties. The numerical results (yields in the 120\u2013130 GeV window, background sums, and the large significance proxy) are traceable to the shared histograms and summaries. The interpretation appropriately cautions against physics claims given the clear data/MC scale mismatch and frames the significance as a proxy.",
+                  "notes": [
+                    "Key decisions are explicitly listed with motivations (SFOS selection, luminosity-normalized MC, binning, and window-counting).",
+                    "Validation/robustness actions are described and evidenced (spectrum non-empty, weighting fields present, and a window-yield sanity summary).",
+                    "Limitations are clearly stated: the large data/MC discrepancy makes the counting result nonphysical and undermines any excess claim.",
+                    "Potential logical gap: the extremely large data yields (e.g., 6,763 in 10 GeV window; 86k events total) and the reported candidates_built_total suggest possible candidate multiplicity or double counting. The interpretation attributes the mismatch to selection inclusiveness but does not explicitly check for per-event vs per-candidate filling, which could be a dominant effect.",
+                    "It would strengthen consistency to clarify whether one quadruplet per event is enforced, to report the number of unique events vs candidates in data and MC, and to verify that triggers/lepton quality and isolation match between data and MC.",
+                    "Significance is correctly framed as a proxy, but reporting the explicit \u03a3w^2 used in the window would improve transparency.",
+                    "Uncertainties are statistical-only (sqrt(sum w^2)), which is fine for a proxy, and this is stated."
+                  ]
+                }
+              }
+            },
+            {
+              "dimension": "analysis",
+              "id": "spectrum_series_are_nonzero",
+              "type": "deterministic",
+              "passed": true,
+              "score_awarded": 0.05,
+              "score_max": 0.05,
+              "evidence": {
+                "failures": [],
+                "count": 55,
+                "sum": 86324.0,
+                "max": 3919.0
+              }
+            },
+            {
+              "dimension": "analysis",
+              "id": "background_series_is_nonzero",
+              "type": "deterministic",
+              "passed": true,
+              "score_awarded": 0.05,
+              "score_max": 0.05,
+              "evidence": {
+                "failures": [],
+                "count": 55,
+                "sum": 8172.757077603719,
+                "max": 1017.1962511278616
+              }
+            },
+            {
+              "dimension": "analysis",
+              "id": "signal_series_is_nonzero",
+              "type": "deterministic",
+              "passed": true,
+              "score_awarded": 0.05,
+              "score_max": 0.05,
+              "evidence": {
+                "failures": [],
+                "count": 55,
+                "sum": 63.894155579181096,
+                "max": 17.150330556008974
+              }
+            },
+            {
+              "dimension": "analysis",
+              "id": "summary_window_and_declared_significance_are_consistent",
+              "type": "deterministic",
+              "passed": false,
+              "score_awarded": 0.0,
+              "score_max": 0.2,
+              "evidence": {
+                "failures": [
+                  {
+                    "field": "window_numerator_yield",
+                    "summary": 6144.763456769078,
+                    "derived": 6763.0
+                  },
+                  {
+                    "field": "significance_formula",
+                    "summary": "(Nobs - B) / sqrt(B + sum_mc_weights_squared)",
+                    "reason": "unsupported_significance_formula",
+                    "allowed": [
+                      "numerator_over_sqrt_background_plus_fractional_systematic",
+                      "background_plus_signal_over_sqrt_background_plus_fractional_systematic",
+                      "numerator_minus_background_over_sqrt_background",
+                      "signal_over_sqrt_background",
+                      "data_minus_background_over_sqrt_background",
+                      "data_minus_background_over_sqrt_background_plus_variance"
+                    ]
+                  }
+                ],
+                "window": [
+                  120.0,
+                  130.0
+                ],
+                "derived_data_yield": 6763.0,
+                "derived_background_yield": 618.2365432309214,
+                "derived_background_variance": 1126.5832738533654,
+                "derived_signal_yield": 49.695387566969984,
+                "summary_background_yield": 618.2365432309214,
+                "summary_data_yield": 6763.0,
+                "summary_signal_yield": 49.695387566969984,
+                "summary_numerator_yield": 6144.763456769078,
+                "expected_numerator_yield": 6763.0,
+                "summary_significance_formula": "(Nobs - B) / sqrt(B + sum_mc_weights_squared)",
+                "normalized_significance_formula": "nobsb/sqrtb+sum_mc_weights_squared",
+                "summary_significance": 147.10582729543714,
+                "expected_significance": null,
+                "validation_evidence_present": true
+              }
+            },
+            {
+              "dimension": "analysis",
+              "id": "data_background_scale_is_plausible",
+              "type": "deterministic",
+              "passed": true,
+              "score_awarded": 0.2,
+              "score_max": 0.2,
+              "evidence": {
+                "failures": [],
+                "checks": [
+                  {
+                    "region": "full_spectrum",
+                    "interval": [
+                      80.0,
+                      250.0
+                    ],
+                    "bin_count": 50,
+                    "observed_sum": 72205.0,
+                    "expected_sum": 7869.034388195469,
+                    "expected_over_observed_sum_ratio": 0.10898184873894423,
+                    "max_expected_over_observed_bin_ratio": 0.2595550525970558
+                  },
+                  {
+                    "region": "signal_window",
+                    "interval": [
+                      120.0,
+                      130.0
+                    ],
+                    "bin_count": 5,
+                    "observed_sum": 6763.0,
+                    "expected_sum": 618.2365432309214,
+                    "expected_over_observed_sum_ratio": 0.09141454136195791,
+                    "max_expected_over_observed_bin_ratio": 0.09474138813997104
+                  }
+                ]
+              }
+            },
+            {
+              "dimension": "analysis",
+              "id": "localized_excess_behavior_in_higgs_region",
+              "type": "heuristic",
+              "passed": true,
+              "score_awarded": 0.2,
+              "score_max": 0.2,
+              "evidence": {
+                "integrated_difference": 6144.763456769078,
+                "max_bin_difference": 1266.5345280532522
+              }
+            },
+            {
+              "dimension": "analysis",
+              "id": "dominant_excess_or_signal_peak_is_near_125gev",
+              "type": "heuristic",
+              "passed": false,
+              "score_awarded": 0.0,
+              "score_max": 0.25,
+              "evidence": {
+                "peak_x": 71.0,
+                "peak_y": 3016.613653975618,
+                "series": "data_minus_background",
+                "expected_range": [
+                  120.0,
+                  130.0
+                ]
+              }
+            },
+            {
+              "dimension": "validation",
+              "id": "validation_evidence_targets_primary_claim",
+              "type": "structural",
+              "passed": true,
+              "score_awarded": 0.6,
+              "score_max": 0.6,
+              "evidence": {
+                "existing_files": [],
+                "matching_labels": [],
+                "matched_groups": {
+                  "selected_yield": [
+                    "selected_events_total"
+                  ],
+                  "spectrum_integrity": [
+                    "histogram_filled_entries"
+                  ],
+                  "signal_window_sanity": [
+                    "signal_window_sanity"
+                  ],
+                  "robustness": [
+                    "uncertainty"
+                  ]
+                },
+                "minimum_group_count": 3,
+                "validation_fields": [
+                  "validation_checks"
+                ],
+                "generic_evidence": true,
+                "count": 5
+              }
+            },
+            {
+              "dimension": "validation",
+              "id": "uncertainty_aware_background_comparison_available",
+              "type": "deterministic",
+              "passed": true,
+              "score_awarded": 0.4,
+              "score_max": 0.4,
+              "evidence": {
+                "failures": [],
+                "count": 55,
+                "sum": 985.9951657673558,
+                "max": 66.25676632455105
+              }
+            }
+          ],
+          "final": {
+            "total_score": 0.874,
+            "max_score": 1.0,
+            "normalized_score": 0.874
+          },
+          "llm": {
+            "judge": {
+              "configured": {
+                "provider": "openai",
+                "model": "gpt-5"
+              },
+              "runtime": {
+                "available": true,
+                "provider": "openai",
+                "model": "gpt-5"
+              }
+            },
+            "solver": {
+              "configured": {
+                "backend": "agent_2_scifi_oh",
+                "model": "gpt-5",
+                "source": "default"
+              }
+            }
+          },
+          "task_overrides_applied": {
+            "enabled": true,
+            "mode": "call_white",
+            "input_strategy": "shared_manifest",
+            "max_files": 0
+          },
+          "solver_backend": "agent_2_scifi_oh",
+          "purple_agent_runtime_seconds": 1053.212388,
+          "timing": {
+            "task_started_at": "2026-05-04T05:51:21.030720+00:00",
+            "task_finished_at": "2026-05-04T06:10:27.151203+00:00",
+            "task_runtime_seconds": 1146.120486,
+            "purple_agent_used": true,
+            "purple_agent_started_at": "2026-05-04T05:51:25.489187+00:00",
+            "purple_agent_finished_at": "2026-05-04T06:08:58.701570+00:00",
+            "purple_agent_runtime_seconds": 1053.212388
+          }
+        }
+      ],
+      "score_total": 0.874,
+      "score_max": 3.0
+    }
+  ]
+}
