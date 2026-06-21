@@ -1,0 +1,43 @@
+[green_agent]
+image = "hepex-green-agent:local"
+env = { OPENAI_API_KEY = "${OPENAI_API_KEY}", GREEN_SECRETS_JSON = "${GREEN_SECRETS_JSON}" }
+
+# Purple Agent (participant being evaluated)
+[[participants]]
+image = "hepex-purple-agent:local"
+name = "purple_agent"  # Preferred participant role name for current AgentBeats / Green Agent flows
+env = { OPENAI_API_KEY = "${OPENAI_API_KEY}" }
+
+[config]
+# Local smoke scenario: run all public Hyy levels with one input file each.
+solver_backend = "agent_3a_scifi_native"
+task_dirs = [
+  "tasks_public/t002_hyy_v5_l1",
+  "tasks_public/t003_hyy_v5_l2",
+  "tasks_public/t004_hyy_v5_l3",
+]
+
+# Data directory for caches and run outputs inside the green-agent container
+data_dir = "/home/agent/output"
+input_access_mode = "scenario_shared_mount"
+shared_input_dir = "/home/agent/output/shared_input/{release}/{dataset}/{skim}"
+allow_green_download = true
+solver_request_timeout_seconds = 1800
+
+[config.task_overrides.t002_hyy_v5_l1]
+enabled = true
+mode = "call_white"
+input_strategy = "shared_manifest"
+max_files = 1
+
+[config.task_overrides.t003_hyy_v5_l2]
+enabled = true
+mode = "call_white"
+input_strategy = "shared_manifest"
+max_files = 1
+
+[config.task_overrides.t004_hyy_v5_l3]
+enabled = true
+mode = "call_white"
+input_strategy = "shared_manifest"
+max_files = 1
